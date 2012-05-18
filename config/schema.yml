@@ -1,0 +1,53 @@
+propel:
+
+  rc_address:
+    address_id:   { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    street:       { type: varchar(50), required: true }
+    post:         { type: varchar(8),  required: true }
+    city:         { type: varchar(50), required: true }
+    phone:        { type: varchar(25), required: true }
+
+  rc_account:
+    account_id:   { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    default_address_id: { type: integer, required: false, foreignTable: rc_address, foreignReference: address_id }
+    invoice_address_id: { type: integer, required: false, foreignTable: rc_address, foreignReference: address_id }
+    name:         { type: varchar(100), required: true }
+    nip:          { type: varchar(16), required: false }
+    www:          { type: varchar(16), required: false }
+    email:        { type: varchar(16), required: false }
+
+  rc_user_profile:
+    user_id:      { type: integer, required: true, primaryKey: true, foreignTable: sf_guard_user, foreignReference: id }
+    account_id:   { type: integer, required: false, foreignTable: rc_account, foreignReference: account_id }
+    title:        { type: varchar(10), required: true }
+    first_name:   { type: varchar(50), required: true }
+    last_name:    { type: varchar(50), required: true }
+
+  rc_invoice:
+    invoice_id:     { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    account_id:     { type: integer, required: true, foreignTable: rc_account, foreignReference: account_id }
+    type:           { type: integer, required: true, default: 0 }
+    number:         { type: integer, required: true }
+    pattern:        { type: varchar(30),  required: true }
+    message:        { type: varchar(30),  required: false }
+    seller_name:    { type: varchar(100), required: true }
+    seller_address: { type: varchar(200), required: true }
+    seller_nip:     { type: varchar(16),  required: true }
+    seller_bank:    { type: varchar(32),  required: true }
+    buyer_name:     { type: varchar(100), required: true }
+    buyer_address:  { type: varchar(200), required: true }
+    buyer_nip:      { type: varchar(16),  required: false }
+    created_at:     { type: timestamp, required: true }
+    issue_at:       { type: date, required: true }
+    sale_at:        { type: date, required: true }
+    payment_date:   { type: date, required: true }
+    payment_type:   { type: integer, required: true, default: 0 }
+
+  rc_invoice_item:
+    name:        { type: longvarchar, required: true }
+    qty:         { type: integer, required: true }
+    tax_rate:    { type: integer, required: true }
+    price:       { type: decimal, size: 10, scale: 2, required: true }
+    tax:         { type: decimal, size: 10, scale: 2, required: true }
+    cost:        { type: decimal, size: 10, scale: 2, required: true }
+
