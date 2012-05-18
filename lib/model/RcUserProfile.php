@@ -19,4 +19,9 @@
  */
 class RcUserProfile extends BaseRcUserProfile {
 
+  public function __toString() {
+    $name = trim(sprintf('%s %s %s', $this->getTitle(), $this->getFirstName(), $this->getLastName()));
+    if($name) return $name;
+    return $this->getsfGuardUser()->getUsername();
+  }
 } // RcUserProfile

@@ -18,7 +18,7 @@
           <?php echo link_to('Register', '@registration'); ?>&nbsp;<?php echo link_to('Log in', '@sf_guard_signin');?>
         <?php endif; ?>
       </span>
-      <h1><?php echo link_to('The Super Cloud', '@homepage'); ?></h1>
+      <h1><?php echo link_to('Ready4Cloud', '@homepage'); ?></h1>
       <?php include_partial('global/menu'); ?>
     </header>
 
@@ -28,7 +28,7 @@
     </div>
 
     <footer>
-      Copyright &copy; 2012 Super Cloud
+      Copyright &copy; 2012 Ready4Cloud
     </fotter>
 
   </body>

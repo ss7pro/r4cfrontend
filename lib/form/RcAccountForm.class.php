@@ -11,5 +11,9 @@ class RcAccountForm extends BaseRcAccountForm
 {
   public function configure()
   {
+    unset(
+      $this['default_address_id'],
+      $this['invoice_address_id']
+    );
   }
 }

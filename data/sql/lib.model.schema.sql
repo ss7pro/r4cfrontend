@@ -109,14 +109,19 @@ DROP TABLE IF EXISTS `rc_invoice_item`;
 
 CREATE TABLE `rc_invoice_item`
 (
+	`item_id` INTEGER NOT NULL AUTO_INCREMENT,
+	`invoice_id` INTEGER NOT NULL,
 	`name` TEXT NOT NULL,
 	`qty` INTEGER NOT NULL,
 	`tax_rate` INTEGER NOT NULL,
 	`price` DECIMAL(10,2) NOT NULL,
 	`tax` DECIMAL(10,2) NOT NULL,
 	`cost` DECIMAL(10,2) NOT NULL,
-	`id` INTEGER NOT NULL AUTO_INCREMENT,
-	PRIMARY KEY (`id`)
+	PRIMARY KEY (`item_id`),
+	INDEX `rc_invoice_item_FI_1` (`invoice_id`),
+	CONSTRAINT `rc_invoice_item_FK_1`
+		FOREIGN KEY (`invoice_id`)
+		REFERENCES `rc_invoice` (`invoice_id`)
 ) ENGINE=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier

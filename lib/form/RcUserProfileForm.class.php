@@ -11,5 +11,8 @@ class RcUserProfileForm extends BaseRcUserProfileForm
 {
   public function configure()
   {
+    unset(
+      $this['account_id']
+    );
   }
 }

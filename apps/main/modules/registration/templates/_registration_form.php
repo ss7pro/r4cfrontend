@@ -10,7 +10,7 @@
 <?php echo $form['profile']; ?>
 
 <h2>Your Company details</h2>
-<?php echo $form['company']; ?>
+<?php echo $form['account']; ?>
 
 <input type="submit" value="Register"/>
 
