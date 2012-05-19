@@ -1,18 +1,33 @@
-<?php echo $form->renderFormTag(url_for('@register')); ?>
+<div id="register">
+<?php echo $form->renderFormTag(url_for('@registration')); ?>
 
 <?php echo $form->renderGlobalErrors(); ?>
 <?php echo $form->renderHiddenFields(); ?>
 
-<h2>Login and Password</h2>
-<?php echo $form['login']; ?>
+<div class="left">
+<fieldset>
+  <h3>Account</h3>
+  <?php echo $form['login']; ?>
+  <?php echo $form['profile']; ?>
+  <h3>Address</h3>
+  <?php echo $form['address']; ?>
+</fieldset>
+</div>
 
-<h2>Your Name</h2>
-<?php echo $form['profile']; ?>
+<div class="right">
+<fieldset>
+  <h3>Company Details</h3>
+  <?php echo $form['account']; ?>
+  <h3>Company Address</h3>
+  <?php echo $form['company_address']; ?>
+</fieldset>
+</div>
 
-<h2>Your Company details</h2>
-<?php echo $form['account']; ?>
+<div class="clear"></div>
 
-<input type="submit" value="Register"/>
+<div class="center">
+  <input type="submit" value="Register"/>
+</div>
 
 </form>
-
+</div>

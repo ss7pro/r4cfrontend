@@ -1,24 +1,31 @@
+/* globals */
 html, body { font-family: helvetica,arial,sans; font-size: 11pt; }
 * { padding: 0; margin: 0 }
-
 .hidden { display: none; }
 .clear { clear: both; }
 .left { float: left; }
 .right { float: right; }
-
+.center { text-align: center; }
 .error_list { color: red; }
 .error_list li { list-style-type: none; margin: 2px 0 0 0; }
-
 .notice { margin: 4px 0; padding: 4px 4px 4px 30px; background: url(../images/tick.png) no-repeat 10px 4px; border: 1px solid #ddd; background-color: #ffc; }
 .error { margin: 4px 0; padding: 4px 4px 4px 30px; background: url(../images/error.png) no-repeat 10px 4px; border: 1px solid #ddd; background-color: #f33;  color: #fff; }
-
 a { text-decoration: none; }
+/* globals */
 
+/* layout */
 header { background: #000; color: #FFF; padding: 4px; }
 header a { color: #FFF; }
-
 #menu li { float: left; padding-right: 20px; }
-
 #content { padding: 4px; }
-
 footer { padding: 2px 0; font-size: 9pt; color: #666; text-align: center; border-top: 1px solid #DDD; }
+/* layout */
+
+/* registration page */
+#register { width: 720px; margin: 10px auto; }
+#register fieldset { padding: 0.2em; margin-bottom: 0.5em; border-color: #F0F0F0; border-radius: 5px; }
+#register th,
+#register td { padding: 2px; }
+#register th { width: 10em; text-align: right; }
+#register table input { width: 15em; }
+/* registration page */

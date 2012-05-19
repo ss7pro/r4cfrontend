@@ -14,5 +14,7 @@ class RcUserProfileForm extends BaseRcUserProfileForm
     unset(
       $this['account_id']
     );
+    $this->setWidget('title', new WidgetFormTitleChoice());
+    $this->setValidator('title', new ValidatorTitleChoice());
   }
 }

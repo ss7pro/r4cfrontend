@@ -33,6 +33,10 @@ class sfGuardUserAdminForm extends BasesfGuardUserForm
 
     $this->widgetSchema->moveField('password_again', 'after', 'password');
 
+    $this->widgetSchema->setLabels(array(
+      'username' => 'Login Email',
+    ));
+
     $this->mergePostValidator(new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'password_again', array(), array('invalid' => 'The two passwords must be the same.')));
 
     // profile form?

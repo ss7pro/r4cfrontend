@@ -5,7 +5,9 @@ class RegistrationForm extends BaseForm {
     $this->widgetSchema->setNameFormat('registration[%s]');
     $this->embedForm('login', new UserRegistrationForm());
     $this->embedForm('profile', new RcUserProfileForm());
+    $this->embedForm('address', new RcAddressForm());
     $this->embedForm('account', new RcAccountForm());
+    $this->embedForm('company_address', new RcAddressForm());
   }
 
   public function save($con = null) {
@@ -22,6 +24,8 @@ class RegistrationForm extends BaseForm {
       $user = $this->getEmbeddedForm('login')->getObject();
       $profile = $this->getEmbeddedForm('profile')->getObject();
       $company = $this->getEmbeddedForm('account')->getObject();
+      $addr = $this->getEmbeddedForm('address')->getObject();
+      $company_addr = $this->getEmbeddedForm('company_address')->getObject();
       
       $user->save($con);
       $profile->setsfGuardUser($user);

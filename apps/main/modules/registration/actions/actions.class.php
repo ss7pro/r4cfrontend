@@ -20,26 +20,19 @@ class registrationActions extends sfActions
       $this->redirect('@homepage');
     }
     $this->form = new RegistrationForm();
-  }
-
-  public function executeRegister(sfWebRequest $request) {
-    $this->forward404Unless($request->isMethod(sfRequest::POST));
-    if($this->getUser()->isAuthenticated()) {
-      $this->redirect('@homepage');
-    }
-    $this->form = new RegistrationForm();
-    $this->form->bindRequest($request);
-    if($this->form->isValid()) {
-      try {
-        $user = $this->form->save();
-        $this->getUser()->signin($user);
-      } catch(Exception $e) {
-        $this->getUser()->setFlash('error', get_class($e) . ': ' . $e->getMessage());
-        $this->redirect('@homepage');
+    if($request->isMethod(sfRequest::POST)) {
+      $this->form->bindRequest($request);
+      if($this->form->isValid()) {
+        try {
+          $user = $this->form->save();
+          $this->getUser()->signin($user);
+        } catch(Exception $e) {
+          $this->getUser()->setFlash('error', get_class($e) . ': ' . $e->getMessage());
+          $this->redirect('@homepage');
+        }
+        $this->getUser()->setFlash('notice', 'Account has been created successfully');
+        $this->redirect('@profilepage');
       }
-      $this->getUser()->setFlash('notice', 'Account has been created successfully');
-      $this->redirect('@homepage');
     }
-    $this->setTemplate('index');
   }
 }

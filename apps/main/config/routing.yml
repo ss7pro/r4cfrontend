@@ -5,9 +5,9 @@ registration:
   url:   /registration
   param: { module: registration, action: index }
 
-register:
-  url:   /register
-  param: { module: registration, action: register }
+profilepage:
+  url:   /profile
+  param: { module: profile, action: index }
 
 # default rules
 homepage:
