@@ -24,6 +24,7 @@ class sfGuardUserAdminForm extends BasesfGuardUserForm
     $this->widgetSchema['sf_guard_user_group_list']->setLabel('Groups');
     $this->widgetSchema['sf_guard_user_permission_list']->setLabel('Permissions');
 
+    $this->validatorSchema['username'] = new sfValidatorEmail(array(), array('invalid' => 'This is not valid email address'));
     $this->widgetSchema['password'] = new sfWidgetFormInputPassword();
     $this->widgetSchema['password']->setAttribute('autocomplete', 'off');
     $this->validatorSchema['password']->setOption('required', false);

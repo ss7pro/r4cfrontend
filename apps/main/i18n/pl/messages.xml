@@ -89,7 +89,7 @@
         <target>Ulica</target>
       </trans-unit>
       <trans-unit id="22">
-        <source>Post</source>
+        <source>Post code</source>
         <target>Kod pocztowy</target>
       </trans-unit>
       <trans-unit id="23">
@@ -123,6 +123,18 @@
       <trans-unit id="30">
         <source>sign in</source>
         <target>Zaloguj</target>
+      </trans-unit>
+      <trans-unit id="30">
+        <source>This is not valid email address</source>
+        <target>To nie jest pooprawny adres email</target>
+      </trans-unit>
+      <trans-unit id="30">
+        <source>An object with the same "%column%" already exist.</source>
+				<target>Obiekt z takim samym polem "%column%" już istnieje.</target>
+      </trans-unit>
+      <trans-unit id="31">
+        <source>Account with this email already exist</source>
+				<target>Konto z takim adresem już istnieje</target>
       </trans-unit>
 
     </body>

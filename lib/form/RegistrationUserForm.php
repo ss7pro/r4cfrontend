@@ -5,11 +5,11 @@
  *
  * @package    form
  */
-class UserRegistrationForm extends BasesfGuardUserForm
-{
-  public function configure()
-  {
+class RegistrationUserForm extends BasesfGuardUserForm {
+  public function configure() {
     $this->useFields(array('username', 'password'));
+
+    $this->validatorSchema['username'] = new sfValidatorEmail(array(), array('invalid' => 'This is not valid email address'));
 
     $this->widgetSchema['password'] = new sfWidgetFormInputPassword();
     $this->widgetSchema['password']->setAttribute('autocomplete', 'off');
@@ -25,6 +25,7 @@ class UserRegistrationForm extends BasesfGuardUserForm
       'username' => 'Login Email',
     ));
 
+    $this->getValidatorSchema()->getPostValidator()->setMessage('invalid', 'Account with this email already exist');
     $this->mergePostValidator(new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'password_again', array(), array('invalid' => 'Both password must be equal.')));
   }
 }

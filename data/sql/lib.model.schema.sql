@@ -12,10 +12,10 @@ DROP TABLE IF EXISTS `rc_address`;
 CREATE TABLE `rc_address`
 (
 	`address_id` INTEGER NOT NULL AUTO_INCREMENT,
-	`street` VARCHAR(50) NOT NULL,
-	`post` VARCHAR(8) NOT NULL,
-	`city` VARCHAR(50) NOT NULL,
-	`phone` VARCHAR(25) NOT NULL,
+	`street` VARCHAR(50),
+	`post_code` VARCHAR(8),
+	`city` VARCHAR(50),
+	`phone` VARCHAR(25),
 	PRIMARY KEY (`address_id`)
 ) ENGINE=InnoDB;
 
@@ -30,7 +30,7 @@ CREATE TABLE `rc_account`
 	`account_id` INTEGER NOT NULL AUTO_INCREMENT,
 	`default_address_id` INTEGER,
 	`invoice_address_id` INTEGER,
-	`name` VARCHAR(100) NOT NULL,
+	`name` VARCHAR(100),
 	`nip` VARCHAR(16),
 	`www` VARCHAR(16),
 	`email` VARCHAR(16),
@@ -55,7 +55,7 @@ CREATE TABLE `rc_user_profile`
 (
 	`user_id` INTEGER NOT NULL,
 	`account_id` INTEGER,
-	`title` VARCHAR(10) NOT NULL,
+	`title` VARCHAR(10),
 	`first_name` VARCHAR(50) NOT NULL,
 	`last_name` VARCHAR(50) NOT NULL,
 	PRIMARY KEY (`user_id`),

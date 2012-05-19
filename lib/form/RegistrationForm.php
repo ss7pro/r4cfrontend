@@ -1,13 +1,17 @@
 <?php 
+/**
+ * Main registration form
+ */
 class RegistrationForm extends BaseForm {
 
   public function configure() {
     $this->widgetSchema->setNameFormat('registration[%s]');
-    $this->embedForm('login', new UserRegistrationForm());
-    $this->embedForm('profile', new RcUserProfileForm());
-    $this->embedForm('address', new RcAddressForm());
-    $this->embedForm('account', new RcAccountForm());
-    $this->embedForm('company_address', new RcAddressForm());
+    //$this->getWidgetSchema()->setFormFormatterName('TableDownMsg');
+    $this->embedForm('login', new RegistrationUserForm());
+    $this->embedForm('profile', new RegistrationProfileForm());
+    $this->embedForm('account_address', new RegistrationAddressForm());
+    $this->embedForm('account', new RegistrationAccountForm());
+    $this->embedForm('invoice_address', new RegistrationAddressForm());
   }
 
   public function save($con = null) {
@@ -23,14 +27,19 @@ class RegistrationForm extends BaseForm {
 
       $user = $this->getEmbeddedForm('login')->getObject();
       $profile = $this->getEmbeddedForm('profile')->getObject();
-      $company = $this->getEmbeddedForm('account')->getObject();
-      $addr = $this->getEmbeddedForm('address')->getObject();
-      $company_addr = $this->getEmbeddedForm('company_address')->getObject();
+      $account = $this->getEmbeddedForm('account')->getObject();
+      $account_address = $this->getEmbeddedForm('account_address')->getObject();
+      $invoice_address = $this->getEmbeddedForm('invoice_address')->getObject();
       
       $user->save($con);
+
       $profile->setsfGuardUser($user);
+      $profile->setRcAccount($account);
+      $account->setRcAddressRelatedByDefaultAddressId($account_address);
+      $account->setRcAddressRelatedByInvoiceAddressId($invoice_address);
+
       $profile->save($con);
-      $company->save($con);
+
 
       $con->commit();
       return $user;

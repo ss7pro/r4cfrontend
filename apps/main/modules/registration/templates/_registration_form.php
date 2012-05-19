@@ -10,7 +10,7 @@
   <?php echo $form['login']; ?>
   <?php echo $form['profile']; ?>
   <h3><?php echo __('Address'); ?></h3>
-  <?php echo $form['address']; ?>
+  <?php echo $form['account_address']; ?>
 </fieldset>
 </div>
 
@@ -19,7 +19,7 @@
   <h3><?php echo __('Company Details'); ?></h3>
   <?php echo $form['account']; ?>
   <h3><?php echo __('Company Address'); ?></h3>
-  <?php echo $form['company_address']; ?>
+  <?php echo $form['invoice_address']; ?>
 </fieldset>
 </div>
 

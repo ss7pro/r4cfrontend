@@ -2,16 +2,16 @@ propel:
 
   rc_address:
     address_id:   { type: integer, required: true, primaryKey: true, autoIncrement: true }
-    street:       { type: varchar(50), required: true }
-    post:         { type: varchar(8),  required: true }
-    city:         { type: varchar(50), required: true }
-    phone:        { type: varchar(25), required: true }
+    street:       { type: varchar(50), required: false }
+    post_code:    { type: varchar(8),  required: false }
+    city:         { type: varchar(50), required: false }
+    phone:        { type: varchar(25), required: false }
 
   rc_account:
     account_id:   { type: integer, required: true, primaryKey: true, autoIncrement: true }
     default_address_id: { type: integer, required: false, foreignTable: rc_address, foreignReference: address_id }
     invoice_address_id: { type: integer, required: false, foreignTable: rc_address, foreignReference: address_id }
-    name:         { type: varchar(100), required: true }
+    name:         { type: varchar(100), required: false }
     nip:          { type: varchar(16), required: false }
     www:          { type: varchar(16), required: false }
     email:        { type: varchar(16), required: false }
@@ -19,7 +19,7 @@ propel:
   rc_user_profile:
     user_id:      { type: integer, required: true, primaryKey: true, foreignTable: sf_guard_user, foreignReference: id }
     account_id:   { type: integer, required: false, foreignTable: rc_account, foreignReference: account_id }
-    title:        { type: varchar(10), required: true }
+    title:        { type: varchar(10), required: false }
     first_name:   { type: varchar(50), required: true }
     last_name:    { type: varchar(50), required: true }
 
