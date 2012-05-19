@@ -22,10 +22,10 @@ footer { padding: 2px 0; font-size: 9pt; color: #666; text-align: center; border
 /* layout */
 
 /* registration page */
-#register { width: 720px; margin: 10px auto; }
+#register { width: 770px; margin: 10px auto; }
 #register fieldset { padding: 0.2em; margin-bottom: 0.5em; border-color: #F0F0F0; border-radius: 5px; }
 #register th,
 #register td { padding: 2px; }
-#register th { width: 10em; text-align: right; }
-#register table input { width: 15em; }
+#register th { width: 150px; text-align: right; }
+#register table input { width: 200px; }
 /* registration page */
