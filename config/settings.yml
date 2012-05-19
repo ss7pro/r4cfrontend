@@ -5,3 +5,6 @@ all:
   .settings:
 
     standard_helpers:       [ Partial, Cache, jQuery, I18N ]
+    i18n:                   true
+    default_culture:        pl_PL
+    charset:                utf-8

@@ -1,24 +1,24 @@
 <?php
 $menu = array(
-  'Ready4cloud' => array(
+  __('Ready4Cloud') => array(
     'url' => '@homepage'
   ),
-  'Profil' => array(
+  __('My Profile') => array(
     'url' => '@profilepage'
   ),
-  'Serwery' => array(
+  __('Servers') => array(
     'url' => 'server/index'
   ),
-  'Dyski' => array(
+  __('Disks') => array(
     'url' => 'drive/index'
   ),
-  'Firewall' => array(
+  __('Firewall') => array(
     'url' => 'firewall/index'
   ),
-  'Loadbalancer' => array(
+  __('Load Balancer') => array(
     'url' => 'loadbalance/index'
   ),
-  'Platnosci' => array(
+  __('Payments') => array(
     'url' => 'payment/index'
   ),
 );

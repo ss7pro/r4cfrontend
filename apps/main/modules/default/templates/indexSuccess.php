@@ -7,7 +7,7 @@
 <h1>Step 2: Register</h1>
 <p>
   If not yet registred, Lorem ipsum ...
-  <?php echo link_to('Register', '@registration');?></h3>
+  <?php echo link_to(__('Register'), '@registration');?></h3>
 </p>
 <?php endif; ?>
 

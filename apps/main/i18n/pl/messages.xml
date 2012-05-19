@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="EN" target-language="pl" datatype="plaintext" original="messages" date="2012-05-19T15:21:45Z" product-name="messages">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Ready4Cloud</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>My Profile</source>
+        <target>Mój Profil</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Servers</source>
+        <target>Servery</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Disks</source>
+        <target>Dyski</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Firewall</source>
+        <target>Firewall</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>Load Balancer</source>
+        <target>Load Balancer</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>Payments</source>
+        <target>Płatności</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Log out</source>
+        <target>Wyloguj</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Register</source>
+        <target>Zarejestruj</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Log in</source>
+        <target>Zaloguj</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>Account</source>
+        <target>Konto</target>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>Address</source>
+        <target>Adres</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>Company Details</source>
+        <target>Dane Firmy</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>Company Address</source>
+        <target>Adres Firmy</target>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>Login Email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>Password</source>
+        <target>Hasło</target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>Password again</source>
+        <target>Hasło ponownie</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>Title</source>
+        <target>Tytuł</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>First name</source>
+        <target>Imię</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>Last name</source>
+        <target>Nazwisko</target>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>Street</source>
+        <target>Ulica</target>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>Post</source>
+        <target>Kod pocztowy</target>
+      </trans-unit>
+      <trans-unit id="23">
+        <source>City</source>
+        <target>Miasto</target>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>Phone</source>
+        <target>Telefon</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Name</source>
+        <target>Nazwa</target>
+      </trans-unit>
+      <trans-unit id="26">
+        <source>Required.</source>
+        <target>Pole wymagane</target>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>Invalid.</source>
+        <target>Niepoprawna wartość</target>
+      </trans-unit>
+      <trans-unit id="28">
+        <source>Remember</source>
+        <target>Zapamiętaj</target>
+      </trans-unit>
+      <trans-unit id="29">
+        <source>Login</source>
+        <target>Zaloguj</target>
+      </trans-unit>
+      <trans-unit id="30">
+        <source>sign in</source>
+        <target>Zaloguj</target>
+      </trans-unit>
+
+    </body>
+  </file>
+</xliff>

@@ -1,5 +1,5 @@
 /* globals */
-html, body { font-family: helvetica,arial,sans; font-size: 11pt; }
+html, body { font-family: helvetica,arial,sans; font-size: 10pt; }
 * { padding: 0; margin: 0 }
 .hidden { display: none; }
 .clear { clear: both; }
@@ -11,6 +11,7 @@ html, body { font-family: helvetica,arial,sans; font-size: 11pt; }
 .notice { margin: 4px 0; padding: 4px 4px 4px 30px; background: url(../images/tick.png) no-repeat 10px 4px; border: 1px solid #ddd; background-color: #ffc; }
 .error { margin: 4px 0; padding: 4px 4px 4px 30px; background: url(../images/error.png) no-repeat 10px 4px; border: 1px solid #ddd; background-color: #f33;  color: #fff; }
 a { text-decoration: none; }
+th, td { vertical-align: top; }
 /* globals */
 
 /* layout */
