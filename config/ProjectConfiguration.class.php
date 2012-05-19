@@ -11,6 +11,7 @@ class ProjectConfiguration extends sfProjectConfiguration
     $this->enablePlugins('sfGuardPlugin');
     $this->enablePlugins('sfFormExtraPlugin');
     $this->enablePlugins('sfJqueryReloadedPlugin');
+    $this->enablePlugins('sfWebBrowserPlugin');
     $this->enablePlugins('sfAdminDashPlugin');
   }
 }
