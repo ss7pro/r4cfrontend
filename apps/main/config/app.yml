@@ -6,6 +6,8 @@ all:
   sf_guard_plugin:
     success_signin_url:    @profilepage
     success_signout_url:   @homepage
+    remember_cookie_name:  ready4cloud_remember
+    remember_key_expiration_age: 2592000
 
   system:
     languages: [ pl, en ]

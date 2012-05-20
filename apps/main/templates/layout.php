@@ -33,7 +33,7 @@
     </div>
 
     <footer>
-      Copyright &copy; 2012 Ready4Cloud,
+      Copyright &copy; 2012 Ready4Cloud&nbsp;
       <?php foreach(sfConfig::get('app_system_languages', array()) as $lang): ?>
         <?php echo link_to(image_tag('flag/' . $lang . '.png'), '@locale?lang=' . $lang); ?>
       <?php endforeach; ?>

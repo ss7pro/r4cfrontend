@@ -22,7 +22,7 @@ form th label { display: block; width: 120px; margin-right: 4px; }
 header { background: #000; color: #FFF; padding: 4px; }
 header a { color: #FFF; }
 #menu li { float: left; padding-right: 20px; }
-#content { padding: 4px; }
+#content { padding: 4px; min-height: 400px; }
 footer { padding: 2px 0; font-size: 9pt; color: #666; text-align: center; border-top: 1px solid #DDD; }
 /* layout */
 
@@ -32,5 +32,6 @@ footer { padding: 2px 0; font-size: 9pt; color: #666; text-align: center; border
 #register th,
 #register td { padding: 2px; }
 #register th { width: 150px; text-align: right; }
-#register table input { width: 200px; }
+#register table input[type=text],
+#register table input[type=password] { width: 200px; }
 /* registration page */
