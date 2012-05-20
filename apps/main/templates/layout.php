@@ -11,17 +11,20 @@
   <body>
 
     <header>
+      <h1><?php echo link_to('Ready4Cloud', '@homepage'); ?></h1>
       <span class="right">
         <?php if($sf_user->isAuthenticated()):?>
-          <?php echo $sf_user; ?>&nbsp;<?php echo link_to(__('Log out'), '@sf_guard_signout');?>
+          <?php echo __('Logged as') . ': "' . $sf_user . '"'; ?>&nbsp;|&nbsp;<?php echo link_to(__('Log out'), '@sf_guard_signout');?>
         <?php else: ?>
-          <?php echo link_to(__('Register'), '@registration'); ?>&nbsp;<?php echo link_to(__('Log in'), '@sf_guard_signin');?>
+          <?php echo link_to(__('Register'), '@registration'); ?>&nbsp;|&nbsp;<?php echo link_to(__('Log in'), '@sf_guard_signin');?>
         <?php endif; ?>
       </span>
-      <h1><?php echo link_to('Ready4Cloud', '@homepage'); ?></h1>
       <?php if($sf_user->isAuthenticated()):?>
-        <?php include_partial('global/menu'); ?>
+        <div class="left">
+          <?php include_partial('global/menu'); ?>
+        </div>
       <?php endif; ?>
+      <div class="clear"></div>
     </header>
 
     <div id="content">

@@ -3,29 +3,34 @@
 # # 020_articles.yml, etc) which will be loaded in alphabetical order.
 # # 
 # # See documentation for your ORM's *:data-load task for more information.
-# 
-# User:
-#   fabien:
-#     username: fabien
-#     password: changeme
-#     name:     Fabien Potencier
-#     email:    fabien.potencier@symfony-project.com
-#   kris:
-#     username: Kris.Wallsmith
-#     password: changeme
-#     name:     Kris Wallsmith
-#     email:    kris.wallsmith@symfony-project.com
+
+RcAddress:
+  default_address:
+    street: Some street
+    post_code: 12-345
+    city: Wrocław
+    phone: +48 123456768
+  invoice_address:
+    street: Some street
+    post_code: 12-345
+    city: Wrocław
 
 sfGuardUser:
   admin:
-    username: admin
+    username: admin@email.pl
     password: admin
     is_active: true
     is_super_admin: true
 
-CsUserProfile:
+RcProfile:
   admin:
-    user_id: admin
-    title: Pan
+    profile_id: admin
+    title: Mr
     first_name: Cloud
-    last_name: Admin
+    last_name: Administrator
+    company_name: Some Company Name
+    type: 1
+    default_address_id: default_address
+    invoice_address_id: invoice_address
+
+    

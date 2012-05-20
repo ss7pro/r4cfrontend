@@ -12,6 +12,10 @@ html, body { font-family: helvetica,arial,sans; font-size: 10pt; }
 .error { margin: 4px 0; padding: 4px 4px 4px 30px; background: url(../images/error.png) no-repeat 10px 4px; border: 1px solid #ddd; background-color: #f33;  color: #fff; }
 a { text-decoration: none; }
 th, td { vertical-align: top; }
+form tbody th { text-align: right; }
+form tfoot td { text-align: right; }
+form li { list-style-type: none; }
+form th label { display: block; width: 120px; margin-right: 4px; }
 /* globals */
 
 /* layout */

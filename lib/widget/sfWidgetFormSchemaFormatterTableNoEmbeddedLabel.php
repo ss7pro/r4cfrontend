@@ -16,11 +16,11 @@
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
  * @version    SVN: $Id: sfWidgetFormSchemaFormatterTable.class.php 5995 2007-11-13 15:50:03Z fabien $
  */
-class sfWidgetFormSchemaFormatterTableDownMsg extends sfWidgetFormSchemaFormatter
+class sfWidgetFormSchemaFormatterTableNoEmbeddedLabel extends sfWidgetFormSchemaFormatter
 {
   protected
-    $rowFormat       = "<tr>\n  <th>%label%</th>\n  <td>%field% %error% %help% %hidden_fields%</td>\n</tr>\n",
-    $errorRowFormat  = "<tr><td colspan=\"2\">\n%errors%</td></tr>\n",
+    $rowFormat       = "<tr>\n  <td>%field% %error% %help% %hidden_fields%</td>\n</tr>\n",
+    $errorRowFormat  = "<tr><td>\n%errors%</td></tr>\n",
     $helpFormat      = '%help%',
     $decoratorFormat = "<table>\n  %content%</table>";
 }
