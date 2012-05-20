@@ -2,19 +2,34 @@
 /**
  * Main registration form
  */
-class RegistrationForm extends BaseForm {
+class RegistrationForm extends BaseForm 
+{
+  public function configure()
+  {
+    $profile_fields = array(
+      'username', 'password', 'password_again', 
+      'title', 'first_name', 'last_name',
+      'type', 'company_name', 'nip', 'www'
+    );
+    $address_fields = array('street', 'post_code', 'city', 'phone');
 
-  public function configure() {
     $this->widgetSchema->setNameFormat('registration[%s]');
-    //$this->getWidgetSchema()->setFormFormatterName('TableDownMsg');
-    $this->embedForm('login', new RegistrationUserForm());
-    $this->embedForm('profile', new RegistrationProfileForm());
-    $this->embedForm('account_address', new RegistrationAddressForm());
-    $this->embedForm('account', new RegistrationAccountForm());
-    $this->embedForm('invoice_address', new RegistrationAddressForm());
+    
+    $profile = new UserAdminForm();
+    $profile->useFields($profile_fields);
+    $this->embedForm('profile', $profile);
+
+    $account_address = new RcAddressForm();
+    $account_address->useFields($address_fields);
+    $this->embedForm('account_address', $account_address);
+
+    $invoice_address = new RcAddressForm();
+    $invoice_address->useFields($address_fields);
+    $this->embedForm('invoice_address', $invoice_address);
   }
 
-  public function save($con = null) {
+  public function save($con = null)
+  {
     $values = $this->getValues();
 
     foreach($this->getEmbeddedForms() as $name => $form) {
@@ -25,21 +40,15 @@ class RegistrationForm extends BaseForm {
     try {
       $con->beginTransaction();
 
-      $user = $this->getEmbeddedForm('login')->getObject();
-      $profile = $this->getEmbeddedForm('profile')->getObject();
-      $account = $this->getEmbeddedForm('account')->getObject();
+      $user = $this->getEmbeddedForm('profile')->getObject();
       $account_address = $this->getEmbeddedForm('account_address')->getObject();
       $invoice_address = $this->getEmbeddedForm('invoice_address')->getObject();
       
+      $profile = $user->getProfile();
+      $profile->setRcAddressRelatedByDefaultAddressId($account_address);
+      $profile->setRcAddressRelatedByInvoiceAddressId($invoice_address);
+
       $user->save($con);
-
-      $profile->setsfGuardUser($user);
-      $profile->setRcAccount($account);
-      $account->setRcAddressRelatedByDefaultAddressId($account_address);
-      $account->setRcAddressRelatedByInvoiceAddressId($invoice_address);
-
-      $profile->save($con);
-
 
       $con->commit();
       return $user;

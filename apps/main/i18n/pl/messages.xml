@@ -53,15 +53,19 @@
         <target>Adres</target>
       </trans-unit>
       <trans-unit id="13">
-        <source>Company Details</source>
-        <target>Dane Firmy</target>
+        <source>Company name</source>
+        <target>Nazwa firmy</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>Company details</source>
+        <target>Dane firmy</target>
       </trans-unit>
       <trans-unit id="14">
-        <source>Company Address</source>
-        <target>Adres Firmy</target>
+        <source>Company address</source>
+        <target>Adres firmy</target>
       </trans-unit>
       <trans-unit id="15">
-        <source>Login Email</source>
+        <source>Login email</source>
         <target>Email</target>
       </trans-unit>
       <trans-unit id="16">
@@ -70,7 +74,7 @@
       </trans-unit>
       <trans-unit id="17">
         <source>Password again</source>
-        <target>Hasło ponownie</target>
+        <target>Powtórz hasło</target>
       </trans-unit>
       <trans-unit id="18">
         <source>Title</source>
@@ -133,10 +137,22 @@
 				<target>Obiekt z takim samym polem "%column%" już istnieje.</target>
       </trans-unit>
       <trans-unit id="31">
-        <source>Account with this email already exist</source>
-				<target>Konto z takim adresem już istnieje</target>
+        <source>Account with this email already exist.</source>
+				<target>Konto z takim adresem już istnieje.</target>
       </trans-unit>
 
+      <trans-unit>
+        <source>Account type</source>
+        <target>Typ konta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Private account</source>
+        <target>Osoba fizyczna</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Company account</source>
+        <target>Firma</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -7,25 +7,22 @@ propel:
     city:         { type: varchar(50), required: false }
     phone:        { type: varchar(25), required: false }
 
-  rc_account:
-    account_id:   { type: integer, required: true, primaryKey: true, autoIncrement: true }
+  rc_profile:
+    profile_id:   { type: integer, required: true, primaryKey: true, foreignTable: sf_guard_user, foreignReference: id }
     default_address_id: { type: integer, required: false, foreignTable: rc_address, foreignReference: address_id }
     invoice_address_id: { type: integer, required: false, foreignTable: rc_address, foreignReference: address_id }
-    name:         { type: varchar(100), required: false }
-    nip:          { type: varchar(16), required: false }
-    www:          { type: varchar(16), required: false }
-    email:        { type: varchar(16), required: false }
-
-  rc_user_profile:
-    user_id:      { type: integer, required: true, primaryKey: true, foreignTable: sf_guard_user, foreignReference: id }
-    account_id:   { type: integer, required: false, foreignTable: rc_account, foreignReference: account_id }
     title:        { type: varchar(10), required: false }
     first_name:   { type: varchar(50), required: true }
     last_name:    { type: varchar(50), required: true }
+    type:         { type: tinyint, required: true, default: 0 }
+    company_name: { type: varchar(100), required: false }
+    nip:          { type: varchar(16), required: false }
+    www:          { type: varchar(16), required: false }
+    client_id:    { type: varchar(64), required: false, index: true }
 
   rc_invoice:
     invoice_id:     { type: integer, required: true, primaryKey: true, autoIncrement: true }
-    account_id:     { type: integer, required: true, foreignTable: rc_account, foreignReference: account_id }
+    profile_id:     { type: integer, required: true, foreignTable: rc_profile, foreignReference: profile_id }
     type:           { type: integer, required: true, default: 0 }
     number:         { type: integer, required: true }
     pattern:        { type: varchar(30),  required: true }

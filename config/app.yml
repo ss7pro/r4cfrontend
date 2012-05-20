@@ -4,5 +4,5 @@
 # default values
 all:
   sf_guard_plugin:
-    profile_class:        RcUserProfile
-    profile_field_name:   user_id
+    profile_class:        RcProfile
+    profile_field_name:   profile_id

@@ -1,16 +1,15 @@
 <?php
 
 /**
- * RegistrationAccount form.
+ * RcProfile form.
  *
  * @package    ready4cloud
  * @subpackage form
  * @author     Roman Tatar <romantatar@gmail.com>
  */
-class RegistrationAccountForm extends BaseRcAccountForm
+class RcProfileForm extends BaseRcProfileForm
 {
   public function configure()
   {
-    $this->useFields(array('name', 'nip', 'www', 'email'));
   }
 }

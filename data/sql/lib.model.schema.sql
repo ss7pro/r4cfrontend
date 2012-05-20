@@ -20,52 +20,37 @@ CREATE TABLE `rc_address`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
--- rc_account
+-- rc_profile
 -- ---------------------------------------------------------------------
 
-DROP TABLE IF EXISTS `rc_account`;
+DROP TABLE IF EXISTS `rc_profile`;
 
-CREATE TABLE `rc_account`
+CREATE TABLE `rc_profile`
 (
-	`account_id` INTEGER NOT NULL AUTO_INCREMENT,
+	`profile_id` INTEGER NOT NULL,
 	`default_address_id` INTEGER,
 	`invoice_address_id` INTEGER,
-	`name` VARCHAR(100),
-	`nip` VARCHAR(16),
-	`www` VARCHAR(16),
-	`email` VARCHAR(16),
-	PRIMARY KEY (`account_id`),
-	INDEX `rc_account_FI_1` (`default_address_id`),
-	INDEX `rc_account_FI_2` (`invoice_address_id`),
-	CONSTRAINT `rc_account_FK_1`
-		FOREIGN KEY (`default_address_id`)
-		REFERENCES `rc_address` (`address_id`),
-	CONSTRAINT `rc_account_FK_2`
-		FOREIGN KEY (`invoice_address_id`)
-		REFERENCES `rc_address` (`address_id`)
-) ENGINE=InnoDB;
-
--- ---------------------------------------------------------------------
--- rc_user_profile
--- ---------------------------------------------------------------------
-
-DROP TABLE IF EXISTS `rc_user_profile`;
-
-CREATE TABLE `rc_user_profile`
-(
-	`user_id` INTEGER NOT NULL,
-	`account_id` INTEGER,
 	`title` VARCHAR(10),
 	`first_name` VARCHAR(50) NOT NULL,
 	`last_name` VARCHAR(50) NOT NULL,
-	PRIMARY KEY (`user_id`),
-	INDEX `rc_user_profile_FI_2` (`account_id`),
-	CONSTRAINT `rc_user_profile_FK_1`
-		FOREIGN KEY (`user_id`)
+	`type` TINYINT DEFAULT 0 NOT NULL,
+	`company_name` VARCHAR(100),
+	`nip` VARCHAR(16),
+	`www` VARCHAR(16),
+	`client_id` VARCHAR(64),
+	PRIMARY KEY (`profile_id`),
+	INDEX `rc_profile_I_1` (`client_id`),
+	INDEX `rc_profile_FI_2` (`default_address_id`),
+	INDEX `rc_profile_FI_3` (`invoice_address_id`),
+	CONSTRAINT `rc_profile_FK_1`
+		FOREIGN KEY (`profile_id`)
 		REFERENCES `sf_guard_user` (`id`),
-	CONSTRAINT `rc_user_profile_FK_2`
-		FOREIGN KEY (`account_id`)
-		REFERENCES `rc_account` (`account_id`)
+	CONSTRAINT `rc_profile_FK_2`
+		FOREIGN KEY (`default_address_id`)
+		REFERENCES `rc_address` (`address_id`),
+	CONSTRAINT `rc_profile_FK_3`
+		FOREIGN KEY (`invoice_address_id`)
+		REFERENCES `rc_address` (`address_id`)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -77,7 +62,7 @@ DROP TABLE IF EXISTS `rc_invoice`;
 CREATE TABLE `rc_invoice`
 (
 	`invoice_id` INTEGER NOT NULL AUTO_INCREMENT,
-	`account_id` INTEGER NOT NULL,
+	`profile_id` INTEGER NOT NULL,
 	`type` INTEGER DEFAULT 0 NOT NULL,
 	`number` INTEGER NOT NULL,
 	`pattern` VARCHAR(30) NOT NULL,
@@ -95,10 +80,10 @@ CREATE TABLE `rc_invoice`
 	`payment_date` DATE NOT NULL,
 	`payment_type` INTEGER DEFAULT 0 NOT NULL,
 	PRIMARY KEY (`invoice_id`),
-	INDEX `rc_invoice_FI_1` (`account_id`),
+	INDEX `rc_invoice_FI_1` (`profile_id`),
 	CONSTRAINT `rc_invoice_FK_1`
-		FOREIGN KEY (`account_id`)
-		REFERENCES `rc_account` (`account_id`)
+		FOREIGN KEY (`profile_id`)
+		REFERENCES `rc_profile` (`profile_id`)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------

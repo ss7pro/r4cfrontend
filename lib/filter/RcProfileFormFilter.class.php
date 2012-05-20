@@ -1,13 +1,13 @@
 <?php
 
 /**
- * RcUserProfile filter form.
+ * RcProfile filter form.
  *
  * @package    ready4cloud
  * @subpackage filter
  * @author     Roman Tatar <romantatar@gmail.com>
  */
-class RcUserProfileFormFilter extends BaseRcUserProfileFormFilter
+class RcProfileFormFilter extends BaseRcProfileFormFilter
 {
   public function configure()
   {
