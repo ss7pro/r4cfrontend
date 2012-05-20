@@ -153,6 +153,23 @@
         <source>Company account</source>
         <target>Firma</target>
       </trans-unit>
+
+      <trans-unit>
+        <source>Page not found</source>
+        <target>Strona niedostępna</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The requested page was not found.</source>
+        <target>Żądana strona nie została odnaleziona.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Module disabled</source>
+        <target>Moduł wyłaczony</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The requested page was temporarily disabled.</source>
+        <target>Żądana strona nie została czasowo wyłączona.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
