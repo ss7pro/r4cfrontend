@@ -13,13 +13,13 @@
     <header>
       <h1><?php echo link_to('Ready4Cloud', '@homepage'); ?></h1>
       <span class="right">
-        <?php if($sf_user->isAuthenticated()):?>
+        <?php if(false && $sf_user->isAuthenticated()):?>
           <?php echo __('Logged as') . ': "' . $sf_user . '"'; ?>&nbsp;|&nbsp;<?php echo link_to(__('Log out'), '@sf_guard_signout');?>
         <?php else: ?>
           <?php echo link_to(__('Register'), '@registration'); ?>&nbsp;|&nbsp;<?php echo link_to(__('Log in'), '@sf_guard_signin');?>
         <?php endif; ?>
       </span>
-      <?php if($sf_user->isAuthenticated()):?>
+      <?php if(false && $sf_user->isAuthenticated()):?>
         <div class="left">
           <?php include_partial('global/menu'); ?>
         </div>
@@ -33,8 +33,11 @@
     </div>
 
     <footer>
-      Copyright &copy; 2012 Ready4Cloud
-    </fotter>
+      Copyright &copy; 2012 Ready4Cloud,
+      <?php foreach(sfConfig::get('app_system_languages', array()) as $lang): ?>
+        <?php echo link_to(image_tag('flag/' . $lang . '.png'), '@locale?lang=' . $lang); ?>
+      <?php endforeach; ?>
+    </footer>
 
   </body>
 </html>

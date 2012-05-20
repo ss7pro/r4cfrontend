@@ -27,7 +27,8 @@ class registrationActions extends sfActions
           $user = $this->form->save();
           $this->getUser()->signin($user);
         } catch(Exception $e) {
-          $this->getUser()->setFlash('error', get_class($e) . ': ' . $e->getMessage());
+          $this->getLogger()->err('error', get_class($e) . ': ' . $e->getMessage());
+          $this->getUser()->setFlash('error', 'An error appear during registration');
           $this->redirect('@homepage');
         }
         $this->getUser()->setFlash('notice', 'Account has been created successfully');

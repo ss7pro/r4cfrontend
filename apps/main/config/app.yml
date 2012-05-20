@@ -6,3 +6,6 @@ all:
   sf_guard_plugin:
     success_signin_url:    @profilepage
     success_signout_url:   @homepage
+
+  system:
+    languages: [ pl, en ]

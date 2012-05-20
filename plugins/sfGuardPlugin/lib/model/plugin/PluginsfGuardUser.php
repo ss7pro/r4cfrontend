@@ -121,10 +121,12 @@ class PluginsfGuardUser extends BasesfGuardUser
       throw new sfException(sprintf('The user profile class "%s" does not contain a "%s" column.', $profileClass, $fieldName));
     }
 
-    $c = new Criteria();
-    $c->add($foreignKeyColumn, $this->getId());
-
-    $this->profile = call_user_func_array(array($profileClass.'Peer', 'doSelectOne'), array($c));
+    if(!$this->isNew())
+    {
+      $c = new Criteria();
+      $c->add($foreignKeyColumn, $this->getId());
+      $this->profile = call_user_func_array(array($profileClass.'Peer', 'doSelectOne'), array($c));
+    }
 
     if (!$this->profile)
     {

@@ -9,6 +9,10 @@ profilepage:
   url:   /profile
   param: { module: profile, action: index }
 
+locale:
+  url:   /locale/:lang
+  param: { module: locale, action: set }
+
 # default rules
 homepage:
   url:   /

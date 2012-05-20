@@ -14,10 +14,10 @@ class RegistrationForm extends BaseForm
     $address_fields = array('street', 'post_code', 'city', 'phone');
 
     $this->widgetSchema->setNameFormat('registration[%s]');
-    
-    $profile = new UserAdminForm();
-    $profile->useFields($profile_fields);
-    $this->embedForm('profile', $profile);
+
+    $profile_form = new UserAdminForm();
+    $profile_form->useFields($profile_fields);
+    $this->embedForm('profile', $profile_form);
 
     $account_address = new RcAddressForm();
     $account_address->useFields($address_fields);
