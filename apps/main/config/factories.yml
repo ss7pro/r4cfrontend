@@ -33,7 +33,7 @@ all:
     class: sfPatternRouting
     param:
       generate_shortest_url:            true
-      extra_parameters_as_query_string: truea
+      extra_parameters_as_query_string: true
   
   storage:
     class: sfSessionStorage
