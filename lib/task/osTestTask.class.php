@@ -10,9 +10,10 @@ class osTestTask extends sfBaseTask
     // ));
 
     // // add your own options here
-    // $this->addOptions(array(
-    //   new sfCommandOption('my_option', null, sfCommandOption::PARAMETER_REQUIRED, 'My option'),
-    // ));
+    $this->addOptions(array(
+       new sfCommandOption('application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name', 'main'),
+       new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
+    ));
 
     $this->namespace        = 'os';
     $this->name             = 'test';
@@ -27,148 +28,51 @@ EOF;
 
   protected function execute($arguments = array(), $options = array())
   {
-    $c = new OpenStackClient();
-    $c->call(new OpenStackCommandAuth('fred', 'Abrakadabra.2', 'fred'));
-
-    echo "Decoded response\n";
-    var_export($c->getResponse());
+    $c = new rtOpenStackClient();
+    print_r($c->call(new rtOpenStackCommandAuth('fred', 'Abrakadabra.2', 'fred')));
+    //$tenant_id = $c->getSession()->getTokenTenantId();
+    //print_r($c->call(new rtOpenStackCommandServersDetail($tenant_id)));
+    //print_r($c->call(new rtOpenStackCommandCheckClient('fred')));
+    print_r($c->call(new rtOpenStackCommandClientCreate('romek.1@email.pl', 'romek')));
     echo "\n";
   }
 }
 
-abstract class OpenStackCommand
+/*
+class OpenStackCommandTenants extends OpenStackCommand
 {
-  abstract public function getUri();
-  abstract public function getMethod();
-  abstract public function getParams();
-
-  public function getHost() { return '178.239.138.10'; }
-  public function getPort() { return 5000; }
-  public function getUrl()  { return sprintf('http://%s:%d%s', $this->getHost(), $this->getPort(), $this->getUri()); }
-  public function getHeaders() { return array(); }
+  public function __construct() {}
+  public function getPort()   { return 8090; }
+  public function getUri()    { return '/v2.0/tenants'; }
+  public function getMethod() { return OpenStackClient::GET; }
+  public function getParams() { return array(); }
 }
 
-class OpenStackCommandAuth extends OpenStackCommand
+class OpenStackCommandInfo extends OpenStackCommand
 {
-  public function __construct($username, $password, $tenant) {
-    $this->username = $username;
-    $this->password = $password;
-    $this->tenant   = $tenant;
-  }
-  public function getUri() { return '/v2.0/tokens'; }
-  public function getMethod() { return OpenStackClient::POST; }
-  public function getParams() {
-    return array(
-      'auth' => array(
-        'passwordCredentials' => array(
-          'username' => $this->username,
-          'password' => $this->password,
-        )
-      ),
-      'tenantName' => $this->tenant
-    );
-  }
+  public function __construct() {}
+  public function getPort()   { return 8090; }
+  public function getUri()    { return '/v1.1'; }
+  public function getMethod() { return OpenStackClient::GET; }
+  public function getParams() { return array(); }
 }
 
-class OpenStackClient
+class OpenStackCommandTokensEndpoints extends OpenStackCommand
 {
-  const GET = 'GET';
-  const PUT = 'PUT';
-  const POST = 'POST';
-  const DELETE = 'DELETE';
-
-  private $client = null;
-  private $headers = array(
-    'Content-Type' => 'application/json',
-    'Accept' => 'application/json'
-  );
-
-  public function __construct()
-  {
-    $this->client = new sfWebBrowser();
+  public function __construct($token) {
+    $this->token = $token;
   }
-
-  public function call($url, $method = self::GET, array $params = null, array $headers = array())
-  {
-    if($url instanceof OpenStackCommand) {
-      $this->call($url->getUrl(), $url->getMethod(), $url->getParams(), $url->getHeaders());
-      return;
-    }
-
-    if($params !== null) {
-      if($method == self::GET) {
-        $url .= '?' . http_build_query($params);
-        $params = '';
-      } else {
-        $params = json_encode($params);
-      }
-    }
-    $headers['Content-Length'] = strlen($params);
-    $headers = array_merge($this->headers, $headers);
-
-    echo 'Request: ';
-    var_export(array_merge(array($method => $url), $headers));
-    echo "\n";
-    echo $params;
-    echo "\n";
-    echo "\n";
-    
-    $this->client->call($url, $method, $params, $headers);
-    
-    echo 'Response: ';
-    $rh = $this->client->getResponseHeaders();
-    $rh[$this->getResponseCode()] = $this->getResponseMessage();
-    var_export($rh);
-    echo "\n";
-    echo json_encode($this->client->getResponseText());
-    echo "\n";
-  }
-
-  public function getResponseCode()
-  {
-    return $this->client->getResponseCode();
-  }
-
-  public function getResponseMessage()
-  {
-    return $this->client->getResponseMessage();
-  }
-
-  public function getResponseText()
-  {
-    return $this->client->getResponseText();
-  }
-  
-  public function getResponseHeader($header)
-  {
-    return $this->client->getResponseHeader($header);
-  }
-
-  public function getResponse()
-  {
-    if($this->getResponseHeader('Content-Type') != 'application/json') {
-      throw new InvalidArgumentException(trim($this->getResponseText()), $this->getResponseCode());
-    }
-    return json_decode($this->client->getResponseText(), true);
-  }
-
-  public function get($url, array $params = null, array $headers = array())
-  {
-    $this->call($url, self::GET, $params, $headers);
-  }
-
-  public function post($url, array $params = null, array $headers = array())
-  {
-    $this->call($url, self::POST, $params, $headers);
-  }
-
-  public function put($url, array $params = null, array $headers = array())
-  {
-    $this->call($url, self::PUT, $params, $headers);
-  }
-
-  public function delete($url, array $params = null, array $headers = array())
-  {
-    $this->call($url, self::DELETE, $params, $headers);
-  }
+  public function getUri()    { return '/v2.0/tokens/' . $this->token . '/endpoints'; }
+  public function getMethod() { return OpenStackClient::GET; }
+  public function getParams() { return array(); }
 }
+
+class OpenStackCommandVersions extends OpenStackCommand
+{
+  public function __construct() {}
+  public function getPort()   { return 8090; }
+  public function getUri()    { return '/'; }
+  public function getMethod() { return OpenStackClient::GET; }
+  public function getParams() { return array(); }
+}
+ */
