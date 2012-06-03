@@ -1,39 +1,40 @@
 <?php
 
-class osTestTask extends sfBaseTask
+class osTestTask extends osBaseTask
 {
   protected function configure()
   {
-    // // add your own arguments here
-    // $this->addArguments(array(
-    //   new sfCommandArgument('my_arg', sfCommandArgument::REQUIRED, 'My argument'),
-    // ));
+    parent::configure();
 
-    // // add your own options here
+    // add your own arguments here
+    $this->addArguments(array(
+      //new sfCommandArgument('my_arg', sfCommandArgument::REQUIRED, 'My argument'),
+    ));
+
+    // add your own options here
     $this->addOptions(array(
-       new sfCommandOption('application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name', 'main'),
-       new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
+      new sfCommandOption('tenant-name', 'n', sfCommandOption::PARAMETER_REQUIRED, 'The connection name'),
     ));
 
     $this->namespace        = 'os';
     $this->name             = 'test';
-    $this->briefDescription = '';
+    $this->briefDescription = 'openstack - custom test api';
     $this->detailedDescription = <<<EOF
-The [os:test|INFO] task does things.
+The [os:test|INFO] task test openstack api.
 Call it with:
 
-  [php symfony os:test|INFO]
+  [php symfony os:test... |INFO]
 EOF;
   }
 
-  protected function execute($arguments = array(), $options = array())
+  protected function exec($arguments = array(), $options = array())
   {
     $c = new rtOpenStackClient();
     print_r($c->call(new rtOpenStackCommandAuth('fred', 'Abrakadabra.2', 'fred')));
     //$tenant_id = $c->getSession()->getTokenTenantId();
     //print_r($c->call(new rtOpenStackCommandServersDetail($tenant_id)));
     //print_r($c->call(new rtOpenStackCommandCheckClient('fred')));
-    print_r($c->call(new rtOpenStackCommandClientCreate('romek.1@email.pl', 'romek')));
+    //print_r($c->call(new rtOpenStackCommandClientCreate('romek.1@email.pl', 'romek')));
     echo "\n";
   }
 }
