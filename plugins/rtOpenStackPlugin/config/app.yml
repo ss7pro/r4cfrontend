@@ -1,6 +1,6 @@
 all:
   openstack_plugin:
-    servers:
+    presets:
       auth:
         host: 178.239.138.10
         port: 5000

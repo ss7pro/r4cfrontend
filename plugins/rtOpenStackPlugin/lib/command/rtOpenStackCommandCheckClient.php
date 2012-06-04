@@ -3,7 +3,7 @@ class rtOpenStackCommandCheckClient extends rtOpenStackCommand
 {
   public function __construct($client)
   {
-    $this->setName('client');
+    $this->setPreset('client');
     $this->setMethod(sfRequest::POST);
     $this->setUri('/check/client');
     $this->setParams(array(
@@ -11,6 +11,5 @@ class rtOpenStackCommandCheckClient extends rtOpenStackCommand
         'name' => $client
       )
     ));
-    parent::__construct();
   }
 }

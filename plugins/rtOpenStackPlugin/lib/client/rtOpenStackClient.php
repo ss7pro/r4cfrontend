@@ -37,35 +37,33 @@ class rtOpenStackClient
 
   public function call(rtOpenStackCommand $c)
   {
-    return $c->exec($this);
+    return $c->execute($this);
   }
 
-  public function exec($url, $method = self::GET, array $params = null, array $user_headers = array())
+  public function execute($url, $method = self::GET, array $params = array(), array $headers = array())
   {
-    if(!empty($params)) {
-      if($method == sfRequest::GET) {
-        $url .= '?' . http_build_query($params);
-        $params = '';
-      } else {
-        $params = $this->encode($params);
-      }
+    if (empty($params)) {
+      $params = '';
+    } else if (in_array($method, array(sfRequest::GET, sfRequest::HEAD))) {
+      $url .= ((false !== strpos($url, '?')) ? '&' : '?') . http_build_query($params, '', '&');
+      $params = '';
+    } else {
+      $params = $this->encode($params);
     }
 
-    $headers = $this->headers;
-    if(is_string($params)) {
-      $headers['Content-Length'] = strlen($params);
-    }
+    $headers['Content-Length'] = strlen($params);
     if($this->getSession()->isAuthenticated()) {
       $headers['X-Auth-Token'] = $this->getSession()->getTokenId();
     }
-    $headers = array_merge($headers, $user_headers);
+    $headers = array_merge($this->headers, $headers);
 
     $log = $method . ' ' . $url;
     try {
       $this->getBrowser()->call($url, $method, $params, $headers);
-      $this->log($log . ': ' . $this->getResponseCode());
+      $this->log($log . ': ' . $this->getResponseCode() . ' ' . $this->getResponseMessage());
     } catch(Exception $e) {
-      $this->log($log . ':' . $this->getResponseCode() . ' ' . $this->getResponseMessage() . ' (' . get_class($e) . ' ' . $e->getMessage() . ')', sfLogger::ERR);
+      $msg = ', ' . get_class($e) . ': ' . $e->getMessage() . '/';
+      $this->log($log . ': ' . $this->getResponseCode() . ' ' . $this->getResponseMessage() . $msg, sfLogger::ERR);
       throw $e;
     }
 
@@ -119,22 +117,22 @@ class rtOpenStackClient
     return $this->getBrowser()->getResponseHeaders();
   }
 
-  public function get($url, array $params = null, array $headers = array())
+  public function get($url, array $params = array(), array $headers = array())
   {
     return $this->exec($url, sfRequest::GET, $params, $headers);
   }
 
-  public function post($url, array $params = null, array $headers = array())
+  public function post($url, array $params = array(), array $headers = array())
   {
     return $this->exec($url, sfRequest::POST, $params, $headers);
   }
 
-  public function put($url, array $params = null, array $headers = array())
+  public function put($url, array $params = array(), array $headers = array())
   {
     return $this->exec($url, sfRequest::PUT, $params, $headers);
   }
 
-  public function delete($url, array $params = null, array $headers = array())
+  public function delete($url, array $params = array(), array $headers = array())
   {
     return $this->exec($url, sfRequest::DELETE, $params, $headers);
   }

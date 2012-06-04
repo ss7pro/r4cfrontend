@@ -2,90 +2,79 @@
 abstract class rtOpenStackCommand
 {
   private
-    $name,
-    $config,
-    $method,
-    $uri,
-    $params = array(),
-    $headers = array();
+    $_preset,
+    $_method,
+    $_uri,
+    $_params = array(),
+    $_headers = array();
 
-  public function __construct()
-  {
-    $config = sfConfig::get('app_openstack_plugin_servers', array());
-    $name = $this->getName();
-    if(!$name) throw new InvalidArgumentException('Config name is not set');
-    if(!isset($config[$name])) throw new InvalidArgumentException('Config for "' . $name . '" is not defined');
-    $this->config = $config[$name];
-  }
+  abstract public function configure(rtOpenStackClient $client);
 
   public function getUri()
   {
-    return $this->uri;
+    return $this->_uri;
   }
 
   public function setUri($uri)
   {
-    $this->uri = $uri;
+    $this->_uri = $uri;
   }
 
   public function getMethod()
   {
-    return $this->method;
+    return $this->_method;
   }
 
   public function setMethod($method)
   {
-    $this->method = $method;
+    $this->_method = $method;
   }
 
-  public function getName()
+  public function getPreset()
   {
-    return $this->name;
+    return $this->_preset;
   }
 
-  public function setName($name)
+  public function setPreset($preset)
   {
-    $this->name = $name;
+    $this->_preset = $preset;
   }
 
   public function getParams() 
   {
-    return $this->params;
+    return $this->_params;
   }
 
   public function setParams(array $params)
   {
-    $this->params = $params;
+    $this->_params = $params;
   }
 
-  public function getHost()
-  {
-    return $this->config['host'];
-  }
-  
-  public function getPort()
-  {
-    return $this->config['port'];
-  }
-    
   public function getHeaders()
   {
-    return $this->headers;
+    return $this->_headers;
+  }
+
+  public function setHeader($name, $value)
+  {
+    $this->_headers[$name] = $value;
   }
 
   public function setHeaders(array $headers)
   {
-    $this->headers = $headers;
+    $this->_headers = $headers;
   }
 
-  public function getUrl()
+  public function generateUrl()
   {
-    return sprintf('http://%s:%d%s', $this->getHost(), $this->getPort(), $this->getUri());
+    $config = rtOpenStackConfig::instance($this->getPreset());
+    return sprintf('http://%s:%d%s', $config->getHost(), $config->getPort(), $this->getUri());
   }
-  
-  public function exec(rtOpenStackClient $client)
+
+  public function execute(rtOpenStackClient $client)
   {
-    $client->exec($this->getUrl(), $this->getMethod(), $this->getParams(), $this->getHeaders());
+    $this->configure($client);
+    $client->execute($this->generateUrl(), $this->getMethod(), $this->getParams(), $this->getHeaders());
     return $this->handleResponse($client);
   }
 

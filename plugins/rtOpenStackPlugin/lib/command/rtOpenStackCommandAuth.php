@@ -1,29 +1,34 @@
 <?php
 class rtOpenStackCommandAuth extends rtOpenStackCommand
 {
-  public function __construct($username, $password, $tenant)
+  public function __construct($username, $password, $tenantName = null, $tenantId = null)
   {
-    $this->setName('auth');
+    $this->setPreset('auth');
     $this->setMethod(sfRequest::POST);
     $this->setUri('/v2.0/tokens');
-    $this->setParams(array(
+    $params = array(
       'auth' => array(
         'passwordCredentials' => array(
           'username' => $username,
-          'password' => $password,
-        ),
-        'tenantName' => $tenant
-      ),
-    ));
-    parent::__construct();
+          'password' => $password
+        )
+      )
+    );
+    if($tenantName) {
+      $params['auth']['tenantName'] = $tenantName;
+    }
+    if($tenantId) {
+      $params['auth']['tenantId'] = $tenantId;
+    }
+    $this->setParams($params);
   }
 
   public function handleResponse(rtOpenStackClient $client) { 
-    $r = parent::handleResponse($client);
-    if(isset($r['access'])) {
-      $client->getSession()->setAccess($r['access']);
+    $response = parent::handleResponse($client);
+    if(isset($response['access'])) {
+      $client->getSession()->setAccess($response['access']);
     }
-    return $r;
+    return $response;
   }
 }
 

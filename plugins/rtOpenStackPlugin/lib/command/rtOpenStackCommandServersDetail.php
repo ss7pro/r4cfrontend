@@ -1,11 +1,23 @@
 <?php
 class rtOpenStackCommandServersDetail extends rtOpenStackCommand
 {
-  public function __construct($tenant_id)
+  private $tenant_id;
+
+  public function __construct($tenant_id = null)
   {
-    $this->setName('server');
+    $this->tenanat_id = $tenant_id;
+  }
+
+  /**
+   * @param rtOpenStackClient $client
+   */
+  public function configure(rtOpenStackClient $client)
+  {
+    if (!$this->tenant_id) {
+      $this->tenant_id = $client->getSession()->getTenantId();
+    }
+    $this->setPreset('server');
     $this->setMethod(sfRequest::GET);
-    $this->setUri(sprintf('/v2/%s/servers/detail', $tenant_id));
-    parent::__construct();
+    $this->setUri(sprintf('/v2/%s/servers/detail', $this->tenant_id));
   }
 }

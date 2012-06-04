@@ -3,7 +3,7 @@ class rtOpenStackCommandClientCreate extends rtOpenStackCommand
 {
   public function __construct($username, $password)
   {
-    $this->setName('client');
+    $this->setPreset('client');
     $this->setMethod(sfRequest::POST);
     $this->setUri('/client/add');
     $this->setParams(array(
@@ -12,6 +12,5 @@ class rtOpenStackCommandClientCreate extends rtOpenStackCommand
         'password' => $password,
       )
     ));
-    parent::__construct();
   }
 }
