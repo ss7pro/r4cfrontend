@@ -9,10 +9,10 @@ class rtOpenStackClient
     'Accept'       => 'application/json'
   );
 
-  public function __construct()
+  public function __construct(rtOpenStackSession $session = null)
   {
+    $this->setSession($session !== null ? $session : new rtOpenStackSession());
     $this->setBrowser(new sfWebBrowser());
-    $this->setSession(new rtOpenStackSession());
   }
 
   public function getBrowser()

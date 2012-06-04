@@ -6,9 +6,32 @@ abstract class rtOpenStackCommand
     $_method,
     $_uri,
     $_params = array(),
-    $_headers = array();
+    $_headers = array(),
+    $_options = array(),
+    $_require = array();
+
+  public final function __construct($options)
+  {
+    $this->_options = $options;
+  }
 
   abstract public function configure(rtOpenStackClient $client);
+
+  public function get($name, $default = null)
+  {
+    return isset($this->_options[$name]) ? $this->_options[$name] : $default;
+  }
+
+  public function set($name, $value)
+  {
+    $this->_options[$name] = $value;
+    return $this;
+  }
+
+  public function addRequired($name)
+  {
+    $this->_require[$name] = true;
+  }
 
   public function getUri()
   {
@@ -74,7 +97,13 @@ abstract class rtOpenStackCommand
   public function execute(rtOpenStackClient $client)
   {
     $this->configure($client);
+
+    $diff = array_diff(array_keys($this->_require), array_keys(array_filter($this->_options)));
+    if(!empty($diff)) {
+      throw new InvalidArgumentException("Required options not set: " . implode(', ', $diff));
+    }
     $client->execute($this->generateUrl(), $this->getMethod(), $this->getParams(), $this->getHeaders());
+
     return $this->handleResponse($client);
   }
 

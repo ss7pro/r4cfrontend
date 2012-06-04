@@ -1,14 +1,16 @@
 <?php
 class rtOpenStackCommandCheckClient extends rtOpenStackCommand
 {
-  public function __construct($client)
+  public function configure(rtOpenStackClient $client)
   {
+    $this->addRequired('client');
+
     $this->setPreset('client');
     $this->setMethod(sfRequest::POST);
     $this->setUri('/check/client');
     $this->setParams(array(
       'client' => array(
-        'name' => $client
+        'name' => $this->get('client')
       )
     ));
   }
