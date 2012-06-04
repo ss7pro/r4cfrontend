@@ -10,7 +10,7 @@ abstract class rtOpenStackCommand
     $_options = array(),
     $_require = array();
 
-  public final function __construct($options)
+  public final function __construct(array $options = array())
   {
     $this->_options = $options;
   }

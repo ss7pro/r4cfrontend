@@ -29,8 +29,14 @@ EOF;
 
   protected function exec($arguments = array(), $options = array())
   {
+    $params = array(
+      'user' => 'fred',
+      'pass' => 'Abrakadabra.2',
+      'tenant-name' => 'fred',
+    );
+
     $c = new rtOpenStackClient();
-    print_r($c->call(new rtOpenStackCommandAuth('fred', 'Abrakadabra.2', 'fred')));
+    print_r($c->call(new rtOpenStackCommandAuth($params)));
     //$tenant_id = $c->getSession()->getTokenTenantId();
     //print_r($c->call(new rtOpenStackCommandServersDetail($tenant_id)));
     //print_r($c->call(new rtOpenStackCommandCheckClient('fred')));

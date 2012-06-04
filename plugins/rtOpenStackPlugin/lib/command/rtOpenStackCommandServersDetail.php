@@ -8,6 +8,6 @@ class rtOpenStackCommandServersDetail extends rtOpenStackCommand
   {
     $this->setPreset('server');
     $this->setMethod(sfRequest::GET);
-    $this->setUri(sprintf('/v2/%s/servers/detail', $this->get('tenant_id', $client->getSession()->getTenantId())));
+    $this->setUri(sprintf('/v2/%s/servers/detail', $this->get('tenant_id', $client->getSession()->getTokenTenantId())));
   }
 }

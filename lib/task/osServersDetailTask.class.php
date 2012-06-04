@@ -13,7 +13,8 @@ class osServersDetailTask extends osBaseTask
 
     // // add your own options here
     $this->addOptions(array(
-      new sfCommandOption('tenant-name', 'n', sfCommandOption::PARAMETER_REQUIRED, 'The connection name'),
+      new sfCommandOption('tenant-name', 'n', sfCommandOption::PARAMETER_OPTIONAL, 'Tenant name'),
+      new sfCommandOption('tenant-id', 'i', sfCommandOption::PARAMETER_OPTIONAL, 'Tenand id'),
     ));
 
     $this->namespace        = 'os';
@@ -29,10 +30,15 @@ EOF;
 
   protected function exec($arguments = array(), $options = array())
   {
+    $params = array(
+      'user' => $options['user'], 
+      'pass' => $options['pass'], 
+      'tenant-name' => $options['tenant-name'],
+      'tenant-id' => $options['tenant-id'],
+    );
     $c = new rtOpenStackClient();
-    $c->call(new rtOpenStackCommandAuth($options['user'], $options['pass'], $options['tenant-name']));
-    $tenant_id = $c->getSession()->getTokenTenantId();
-    var_export($c->call(new rtOpenStackCommandServersDetail($tenant_id)));
+    $c->call(new rtOpenStackCommandAuth($params));
+    var_export($c->call(new rtOpenStackCommandServersDetail()));
     echo "\n";
   }
 }
