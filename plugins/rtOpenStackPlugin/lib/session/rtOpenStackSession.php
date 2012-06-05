@@ -22,7 +22,7 @@ class rtOpenStackSession
   {
     if(empty($this->access)) return false;
     if(!($expires = $this->getTokenExpires())) return false;
-    return time() > strtotime($expires);
+    return strtotime($expires) > time();
   }
 
   public function getTokenExpires()
