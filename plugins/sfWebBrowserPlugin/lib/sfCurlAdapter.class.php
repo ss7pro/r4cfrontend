@@ -200,6 +200,10 @@ class sfCurlAdapter
         }
       }
     }
+    else
+    {
+      curl_setopt($this->curl, CURLOPT_POSTFIELDS, null);
+    }
 
     // handle any request method
     curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, $method);
