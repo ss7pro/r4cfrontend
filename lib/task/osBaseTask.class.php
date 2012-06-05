@@ -37,19 +37,23 @@ EOF;
     $dbm = new sfDatabaseManager($this->configuration);
     $this->con = $dbm->getDatabase($options['connection'])->getConnection();
 
-    if(!isset($options['tenant-name'])) $options['tenant-name'] = 'fred';
-    if(!isset($options['user'])) $options['user'] = 'fred';
-    if(!isset($options['pass'])) $options['pass'] = 'Abrakadabra.2';
-
-    $this->exec($arguments, $options);
+    //if(!isset($options['tenant-name'])) $options['tenant-name'] = 'fred';
+    //if(!isset($options['user'])) $options['user'] = 'fred';
+    //if(!isset($options['pass'])) $options['pass'] = 'Abrakadabra.2';
+    try {
+      $this->exec($arguments, $options);
+    } catch(Exception $e) {
+      echo $e->getTraceAsString();
+      throw $e;
+    }
   }
 
   protected function auth(rtOpenStackClient $client, $options)
   {
     $params = array(
-      'user' => $options['user'], 
-      'pass' => $options['pass'], 
-      'tenant-name' => $options['tenant-name'],
+      'user'        => isset($options['user'])        ? $options['user']        : 'fred', 
+      'pass'        => isset($options['pass'])        ? $options['pass']        : 'Abrakadabra.2', 
+      'tenant-name' => isset($options['tenant-name']) ? $options['tenant-name'] : 'fred',
     );
     $client->call(new rtOpenStackCommandAuth($params));
   }

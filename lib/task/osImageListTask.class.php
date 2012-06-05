@@ -1,6 +1,6 @@
 <?php
 
-class osTestTask extends osBaseTask
+class osImageListTask extends osBaseTask
 {
   protected function configure()
   {
@@ -17,7 +17,7 @@ class osTestTask extends osBaseTask
     ));
 
     $this->namespace        = 'os';
-    $this->name             = 'test';
+    $this->name             = 'image-list';
     $this->briefDescription = 'openstack - custom test api';
     $this->detailedDescription = <<<EOF
 The [os:test|INFO] task test openstack api.
@@ -31,16 +31,7 @@ EOF;
   {
     $c = new rtOpenStackClient();
     $this->auth($c, $options);
-    //print_r($c->call(new rtOpenStackCommandCheckClient(array(
-    //  'client' => 'fred'
-    //))));
-    //print_r($c->call(new rtOpenStackCommandClientCreate(array(
-    //  'user' => 'romek-1@email.pl', 
-    //  'pass' => 'romek'
-    //))));
-    //print_r($c->call(new rtOpenStackCommandFlavorList()));
     print_r($c->call(new rtOpenStackCommandImageList()));
-
     echo "\n";
   }
 }

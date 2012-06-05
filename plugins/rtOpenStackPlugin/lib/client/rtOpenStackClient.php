@@ -23,6 +23,8 @@ class rtOpenStackClient
   public function setBrowser(sfWebBrowser $browser)
   {
     $this->browser = $browser;
+    $this->browser->setUserAgent('ready4cloud-client');
+    return $this;
   }
 
   public function getSession()
@@ -33,6 +35,7 @@ class rtOpenStackClient
   public function setSession(rtOpenStackSession $session)
   {
     $this->session = $session;
+    return $this;
   }
 
   public function call(rtOpenStackCommand $c)
