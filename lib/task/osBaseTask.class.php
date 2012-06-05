@@ -11,10 +11,11 @@ abstract class osBaseTask extends sfBaseTask
 
     $this->addOptions(array(
       new sfCommandOption('application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name', 'main'),
-      new sfCommandOption('env', null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
-      new sfCommandOption('connection', null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'propel'),
-      new sfCommandOption('user', 'u', sfCommandOption::PARAMETER_REQUIRED, 'The connection name'),
-      new sfCommandOption('pass', 'p', sfCommandOption::PARAMETER_REQUIRED, 'The connection name'),
+      new sfCommandOption('env',         null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
+      new sfCommandOption('connection',  null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'propel'),
+      new sfCommandOption('user',         'u', sfCommandOption::PARAMETER_REQUIRED, 'User name'),
+      new sfCommandOption('pass',         'p', sfCommandOption::PARAMETER_REQUIRED, 'Password'),
+      new sfCommandOption('tenant-name',  'n', sfCommandOption::PARAMETER_OPTIONAL, 'Tenant name'),
     ));
 
     $this->namespace        = 'os';
@@ -35,6 +36,21 @@ EOF;
     sfContext::createInstance($this->configuration);
     $dbm = new sfDatabaseManager($this->configuration);
     $this->con = $dbm->getDatabase($options['connection'])->getConnection();
+
+    if(!isset($options['tenant-name'])) $options['tenant-name'] = 'fred';
+    if(!isset($options['user'])) $options['user'] = 'fred';
+    if(!isset($options['pass'])) $options['pass'] = 'Abrakadabra.2';
+
     $this->exec($arguments, $options);
+  }
+
+  protected function auth(rtOpenStackClient $client, $options)
+  {
+    $params = array(
+      'user' => $options['user'], 
+      'pass' => $options['pass'], 
+      'tenant-name' => $options['tenant-name'],
+    );
+    $client->call(new rtOpenStackCommandAuth($params));
   }
 }

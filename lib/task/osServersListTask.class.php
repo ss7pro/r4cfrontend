@@ -1,6 +1,6 @@
 <?php
 
-class osServersDetailTask extends osBaseTask
+class osServersListTask extends osBaseTask
 {
   protected function configure()
   {
@@ -17,7 +17,7 @@ class osServersDetailTask extends osBaseTask
     ));
 
     $this->namespace        = 'os';
-    $this->name             = 'servers-detail';
+    $this->name             = 'servers-list';
     $this->briefDescription = 'openstack - servers detail test';
     $this->detailedDescription = <<<EOF
 The [os:test|INFO] task get servers details.
@@ -31,7 +31,7 @@ EOF;
   {
     $c = new rtOpenStackClient();
     $this->auth($c, $options);
-    var_export($c->call(new rtOpenStackCommandServersDetail()));
+    var_export($c->call(new rtOpenStackCommandServers()));
     echo "\n";
   }
 }
