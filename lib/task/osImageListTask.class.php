@@ -31,7 +31,14 @@ EOF;
   {
     $c = new rtOpenStackClient();
     $this->auth($c, $options);
-    print_r($c->call(new rtOpenStackCommandImageList()));
+
+
+    $columns = array('id', 'name', 'status', 'progress', 'minRam', 'minDisk');
+    $p = new SimpleCliPrinter($columns);
+
+    $r = $c->call(new rtOpenStackCommandImageList());
+    //var_dump($r['images']);
+    $p->render($r['images']);
     echo "\n";
   }
 }

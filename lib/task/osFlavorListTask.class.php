@@ -31,7 +31,12 @@ EOF;
   {
     $c = new rtOpenStackClient();
     $this->auth($c, $options);
-    print_r($c->call(new rtOpenStackCommandFlavorList()));
+
+    $columns = array('id', 'name', 'vcpus', 'ram', 'disk', 'swap');
+    $p = new SimpleCliPrinter($columns);
+    $result = $c->call(new rtOpenStackCommandFlavorList());
+    //var_dump($result['flavors']);
+    $p->render($result['flavors']);
     echo "\n";
   }
 }
