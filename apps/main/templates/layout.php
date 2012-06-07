@@ -13,7 +13,7 @@
     <header>
       <h1><?php echo link_to('Ready4Cloud', '@homepage'); ?></h1>
       <span class="right">
-        <?php if(false && $sf_user->isAuthenticated()):?>
+        <?php if($sf_user->isAuthenticated()):?>
           <?php echo __('Logged as') . ': "' . $sf_user . '"'; ?>&nbsp;|&nbsp;<?php echo link_to(__('Log out'), '@sf_guard_signout');?>
         <?php else: ?>
           <?php echo link_to(__('Register'), '@registration'); ?>&nbsp;|&nbsp;<?php echo link_to(__('Log in'), '@sf_guard_signin');?>
