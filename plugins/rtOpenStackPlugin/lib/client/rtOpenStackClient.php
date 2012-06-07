@@ -15,6 +15,17 @@ class rtOpenStackClient
     $this->setBrowser(new sfWebBrowser());
   }
 
+  private static $instance = array();
+
+  public static function factory($name = 'default')
+  {
+    if(!isset(self::$instance[$name])) {
+      $session = new rtOpenStackSession($name);
+      self::$instance[$name] = new self($session);
+    }
+    return self::$instance[$name];
+  }
+
   public function getBrowser()
   {
     return $this->browser;
@@ -118,26 +129,6 @@ class rtOpenStackClient
   public function getResponseHeaders()
   {
     return $this->getBrowser()->getResponseHeaders();
-  }
-
-  public function get($url, array $params = array(), array $headers = array())
-  {
-    return $this->exec($url, sfRequest::GET, $params, $headers);
-  }
-
-  public function post($url, array $params = array(), array $headers = array())
-  {
-    return $this->exec($url, sfRequest::POST, $params, $headers);
-  }
-
-  public function put($url, array $params = array(), array $headers = array())
-  {
-    return $this->exec($url, sfRequest::PUT, $params, $headers);
-  }
-
-  public function delete($url, array $params = array(), array $headers = array())
-  {
-    return $this->exec($url, sfRequest::DELETE, $params, $headers);
   }
 
   protected function log($msg, $level = sfLogger::INFO)

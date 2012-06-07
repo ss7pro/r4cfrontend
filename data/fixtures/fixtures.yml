@@ -17,8 +17,8 @@ RcAddress:
 
 sfGuardUser:
   admin:
-    username: admin@email.pl
-    password: admin
+    username: fred
+    password: fred
     is_active: true
     is_super_admin: true
 

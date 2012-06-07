@@ -1,16 +1,40 @@
 <?php
 class rtOpenStackSession
 {
+  const ATTR_NS   = 'plugin/rtOpenStackSession';
+
   private $access = null;
+  private $name   = null;
+  private $user   = null;
+
+  public function __construct($name = 'default')
+  {
+    $this->name = $name;
+    $this->user = $this->getsfUser();
+    if($this->user) {
+      if($this->user->hasAttribute($this->name, self::ATTR_NS)) {
+        $this->access = $this->user->getAttribute($this->name, null, self::ATTR_NS);
+      }
+    }
+  }
 
   public function setAccess($access)
   {
+    if($this->user) {
+      $this->user->setAttribute($this->name, $access, self::ATTR_NS);
+    }
     $this->access = $access;
   }
 
   public function getAccess()
   {
     return $this->access;
+  }
+
+  private function getsfUser()
+  {
+    if(!sfContext::hasInstance()) return null;
+    return sfContext::getInstance()->getUser();
   }
 
   public function isAuthenticated()

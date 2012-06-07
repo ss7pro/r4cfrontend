@@ -48,7 +48,7 @@ class sfGuardValidatorUser extends sfValidatorBase {
             $password = $values[$this->getOption('password_field')];
 
             // user exists?
-            if ($user = sfGuardUserPeer::retrieveByUsernameActiveAndNotActive($username)) {
+            if ($user = sfGuardUserPeer::retrieveByUsername($username)) {
                 // password is ok?
                 if ($user->checkPassword($password)) {
                     //if (!$user->getIsActive()) {

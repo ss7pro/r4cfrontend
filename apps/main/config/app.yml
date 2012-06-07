@@ -8,6 +8,7 @@ all:
     success_signout_url:   @homepage
     remember_cookie_name:  ready4cloud_remember
     remember_key_expiration_age: 2592000
+    check_password_callable: [ rtOpenStackAuth, checkPassword ]
 
   system:
     languages: [ pl, en ]

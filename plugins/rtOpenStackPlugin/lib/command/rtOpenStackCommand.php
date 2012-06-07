@@ -94,14 +94,17 @@ abstract class rtOpenStackCommand
     return sprintf('http://%s:%d%s', $config->getHost(), $config->getPort(), $this->getUri());
   }
 
-  public function execute(rtOpenStackClient $client)
+  public function execute(rtOpenStackClient $client = null)
   {
+    $client = $client ? $client : rtOpenStackClient::factory();
+
     $this->configure($client);
 
     $diff = array_diff(array_keys($this->_require), array_keys(array_filter($this->_options)));
     if(!empty($diff)) {
       throw new InvalidArgumentException("Required options not set: " . implode(', ', $diff));
     }
+
     $client->execute($this->generateUrl(), $this->getMethod(), $this->getParams(), $this->getHeaders());
 
     return $this->handleResponse($client);
