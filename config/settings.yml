@@ -8,3 +8,4 @@ all:
     i18n:                   true
     charset:                utf-8
     default_culture:        pl_PL
+    default_timezone:       Europe/Warsaw
