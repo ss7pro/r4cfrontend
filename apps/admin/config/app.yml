@@ -3,6 +3,15 @@
 
 # default values
 all:
+  sf_guard_plugin:
+    success_signin_url:    @homepage
+    success_signout_url:   @homepage
+    remember_cookie_name:  ready4cloud_admin_remember
+    remember_key_expiration_age: 2592000
+    check_password_callable: [ rtOpenStackAuth, checkPassword ]
+
+  system:
+    languages: [ pl, en ]
 
   sf_admin_dash:
     web_dir:                      /sfAdminDashPlugin
@@ -19,5 +28,5 @@ all:
       Companies:
         items:
           List:
-            url:    @cs_company
+            url:    default/index
             image:  users.png

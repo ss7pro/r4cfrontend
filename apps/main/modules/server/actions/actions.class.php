@@ -28,8 +28,40 @@ class serverActions extends sfActions
     if($request->isMethod(sfRequest::POST)) {
       $this->form->bindRequest($request);
       if($this->form->isValid()) {
-        $this->form->save();
+        try {
+          $this->form->save();
+        } catch(Exception $e) {
+          $this->getLogger()->err(get_class($e) . ': ' . $e->getMessage());
+        }
+        //TODO: ajax support
+        $this->redirect('server/index');
       }
     }
+  }
+
+  public function executeDelete(sfWebRequest $request)
+  {
+    $this->forward404Unless($request->isMethod(sfRequest::POST));
+    $this->forward404Unless($server_id = $request->getParameter('id'));
+
+    $cmd = new rtOpenStackCommandServers();
+    $servers = $cmd->execute();
+    $found = false;
+    foreach($servers['servers'] as $s) {
+      if($s['id'] == $server_id) {
+        $found = true;
+        break;
+      }
+    }
+    $this->forward404Unless($found);
+
+    try {
+      $cmd = new rtOpenStackCommandServerDelete(array('id' => $server_id));
+      $cmd->execute();
+    } catch(Exception $e) {
+      $this->getLogger()->err(get_class($e) . ': ' . $e->getMessage());
+    }
+
+    $this->redirect('server/index');
   }
 }

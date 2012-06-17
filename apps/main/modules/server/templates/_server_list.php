@@ -1,5 +1,5 @@
 <?php use_helper('RcDate'); ?>
-<h1><?php echo _('Server List'); ?></h1>
+<h1><?php echo __('Server List'); ?></h1>
 
 <table>
 <thead>
@@ -12,6 +12,7 @@
   <th>image</th>
   <th>created</th>
   <th>updated</th>
+  <th>action</th>
 </tr>
 </thead>
 <tbody>
@@ -25,6 +26,9 @@
   <td><?php echo $s['image']['id'];?></td>
   <td><?php echo rc_format_datetime($s['created']);?></td>
   <td><?php echo rc_format_datetime($s['updated']);?></td>
+  <td>
+    <?php echo link_to('delete', 'server/delete?id=' . $s['id'], array('method' => 'post', 'confirm' => 'Are you siure?'));?>
+  </td>
 </tr>
 <?php endforeach; ?>
 </tbody>
