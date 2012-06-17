@@ -10,12 +10,12 @@ abstract class osBaseTask extends sfBaseTask
     // ));
 
     $this->addOptions(array(
-      new sfCommandOption('application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name', 'main'),
-      new sfCommandOption('env',         null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', 'dev'),
+      new sfCommandOption('application', null, sfCommandOption::PARAMETER_REQUIRED, 'The application name', ProjectConfiguration::APP),
+      new sfCommandOption('env',         null, sfCommandOption::PARAMETER_REQUIRED, 'The environment', ProjectConfiguration::ENV),
       new sfCommandOption('connection',  null, sfCommandOption::PARAMETER_REQUIRED, 'The connection name', 'propel'),
-      new sfCommandOption('user',         'u', sfCommandOption::PARAMETER_REQUIRED, 'User name'),
-      new sfCommandOption('pass',         'p', sfCommandOption::PARAMETER_REQUIRED, 'Password'),
-      new sfCommandOption('tenant-name',  'n', sfCommandOption::PARAMETER_OPTIONAL, 'Tenant name'),
+      new sfCommandOption('user',         'u', sfCommandOption::PARAMETER_REQUIRED, 'Auth User Name'),
+      new sfCommandOption('pass',         'p', sfCommandOption::PARAMETER_REQUIRED, 'Auth Password'),
+      new sfCommandOption('tenant-name',  'n', sfCommandOption::PARAMETER_OPTIONAL, 'Auth Tenant Name'),
     ));
 
     $this->namespace        = 'os';
@@ -37,9 +37,6 @@ EOF;
     $dbm = new sfDatabaseManager($this->configuration);
     $this->con = $dbm->getDatabase($options['connection'])->getConnection();
 
-    //if(!isset($options['tenant-name'])) $options['tenant-name'] = 'fred';
-    //if(!isset($options['user'])) $options['user'] = 'fred';
-    //if(!isset($options['pass'])) $options['pass'] = 'Abrakadabra.2';
     try {
       $this->exec($arguments, $options);
     } catch(Exception $e) {
@@ -50,10 +47,11 @@ EOF;
 
   protected function auth(rtOpenStackClient $client, $options)
   {
+    $config = rtOpenStackConfig::getConfiguration();
     $params = array(
-      'user'        => isset($options['user'])        ? $options['user']        : 'fred', 
-      'pass'        => isset($options['pass'])        ? $options['pass']        : 'Abrakadabra.2', 
-      'tenant-name' => isset($options['tenant-name']) ? $options['tenant-name'] : 'fred',
+      'user'        => isset($options['user'])        ? $options['user']        : $config['admin']['user'], 
+      'pass'        => isset($options['pass'])        ? $options['pass']        : $config['admin']['pass'], 
+      'tenant-name' => isset($options['tenant-name']) ? $options['tenant-name'] : $config['admin']['tenant_name'],
     );
     $client->call(new rtOpenStackCommandAuth($params));
   }

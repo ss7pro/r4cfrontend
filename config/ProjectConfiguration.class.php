@@ -6,6 +6,9 @@ sfCoreAutoload::register();
 
 class ProjectConfiguration extends sfProjectConfiguration
 {
+  const APP = 'main';
+  const ENV = 'prod';
+
   public function setup()
   {
     $this->enablePlugins('sfPropelORMPlugin');

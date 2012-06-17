@@ -3,6 +3,8 @@ class rtOpenStackConfig
 {
   private static $instance = array();
 
+  private static $file = 'config/openstack.yml';
+
   private function __construct($options)
   {
     $this->options = $options;
@@ -11,7 +13,10 @@ class rtOpenStackConfig
   public static function instance($preset)
   {
     if (!isset(self::$instance[$preset])) {
-      $config = sfConfig::get('app_openstack_plugin_presets', array());
+
+      $config = self::getConfiguration();
+      $config = $config['presets'];
+
       if(!$preset) {
         throw new InvalidArgumentException('Config preset name is not set');
       }
@@ -31,5 +36,15 @@ class rtOpenStackConfig
   public function getPort()
   {
     return $this->options['port'];
+  }
+
+  public static function getConfiguration()
+  {
+    static $config = null;
+    if($config === null) {
+      $config = include(sfContext::getInstance()->getConfigCache()->checkConfig(self::$file));
+      $config = sfYamlConfigHandler::flattenConfigurationWithEnvironment($config);
+    }
+    return $config;
   }
 }

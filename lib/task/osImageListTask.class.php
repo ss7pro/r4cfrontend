@@ -20,10 +20,10 @@ class osImageListTask extends osBaseTask
     $this->name             = 'image-list';
     $this->briefDescription = 'openstack - custom test api';
     $this->detailedDescription = <<<EOF
-The [os:test|INFO] task test openstack api.
+The [os:test|INFO] task list openstack images.
 Call it with:
 
-  [php symfony os:test... |INFO]
+  [php symfony os:image-list... |INFO]
 EOF;
   }
 
@@ -32,12 +32,12 @@ EOF;
     $c = new rtOpenStackClient();
     $this->auth($c, $options);
 
-
     $columns = array('id', 'name', 'status', 'progress', 'minRam', 'minDisk');
     $p = new SimpleCliPrinter($columns);
 
     $r = $c->call(new rtOpenStackCommandImageList());
-    //var_dump($r['images']);
+    //print_r($r['images']);
+    //echo "\n";
     $p->render($r['images']);
     echo "\n";
   }

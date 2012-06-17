@@ -1,13 +1,2 @@
 all:
-  openstack_plugin:
-    presets:
-      auth:
-        host: 178.239.138.10
-        port: 5000
-      client:
-        host: 178.239.138.10
-        port: 8090
-      server:
-        host: 178.239.138.10
-        port: 8774
 
