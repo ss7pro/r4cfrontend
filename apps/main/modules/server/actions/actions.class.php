@@ -21,4 +21,15 @@ class serverActions extends sfActions
     $res = $cmd->execute();
     $this->servers = $res['servers'];
   }
+
+  public function executeCreate(sfWebRequest $request)
+  {
+    $this->form = new rtOpenStackServerCreateForm();
+    if($request->isMethod(sfRequest::POST)) {
+      $this->form->bindRequest($request);
+      if($this->form->isValid()) {
+        $this->form->save();
+      }
+    }
+  }
 }

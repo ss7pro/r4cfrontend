@@ -3,7 +3,7 @@
 /**
  * Base project form.
  * 
- * @package    solidpm
+ * @package    cloud
  * @subpackage form
  * @author     Roman Tatar <romantatar@gmail.com> 
  * @version    SVN: $Id: BaseForm.class.php 20147 2009-07-13 11:46:57Z FabianLange $
