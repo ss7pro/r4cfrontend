@@ -1,31 +1,25 @@
 <?php
-class rtOpenStackCommandAuth extends rtOpenStackCommand
+class rtOpenStackCommandToken extends rtOpenStackCommand
 {
   /**
    * @param rtOpenStackClient $client
    */
   public function configure(rtOpenStackClient $client)
   {
-    $this->addRequired('user');
-    $this->addRequired('pass');
+    $this->addRequired('tenant-id');
+    $this->addRequired('token');
 
     $this->setPreset('auth');
     $this->setMethod(sfRequest::POST);
     $this->setUri('/v2.0/tokens');
     $params = array(
       'auth' => array(
-        'passwordCredentials' => array(
-          'username' => $this->get('user'),
-          'password' => $this->get('pass')
-        )
+        'tenantId' => $this->get('tenant-id'),
+        'token' => array(
+          'id' => $this->get('token'),
+        ),
       )
     );
-    if ($this->get('tenant-name')) {
-      $params['auth']['tenantName'] = $this->get('tenant-name');
-    }
-    if ($this->get('tenant-id')) {
-      $params['auth']['tenantId'] = $this->get('tenant-id');
-    }
     $this->setParams($params);
   }
 
@@ -42,4 +36,3 @@ class rtOpenStackCommandAuth extends rtOpenStackCommand
     return $response;
   }
 }
-

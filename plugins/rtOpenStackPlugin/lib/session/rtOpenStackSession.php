@@ -3,9 +3,10 @@ class rtOpenStackSession
 {
   const ATTR_NS   = 'plugin/rtOpenStackSession';
 
-  private $access = null;
-  private $name   = null;
-  private $user   = null;
+  private $access  = null;
+  private $tenants = null;
+  private $name    = null;
+  private $user    = null;
 
   public function __construct($name = 'default')
   {
@@ -18,12 +19,22 @@ class rtOpenStackSession
     }
   }
 
-  public function setAccess($access)
+  public function setAccess(array $access)
   {
     if($this->user) {
       $this->user->setAttribute($this->name, $access, self::ATTR_NS);
     }
     $this->access = $access;
+  }
+
+  public function getTenants()
+  {
+    return $this->tenants;
+  }
+
+  public function setTenants(array $tenants)
+  {
+    $this->tenants = $tenants;
   }
 
   public function getAccess()
@@ -85,6 +96,31 @@ class rtOpenStackSession
 
   public function getServiceCatalog()
   {
-    return isset($this->access['serviceCatalog']) ? $this->access['serviceCatalog'] : null;
+    return isset($this->access['serviceCatalog']) ? $this->access['serviceCatalog'] : array();
+  }
+
+  public function getEndpoints()
+  {
+    $result = array();
+    foreach($this->getServiceCatalog() as $cat)
+    {
+      $t = $cat['type'];
+      foreach($cat['endpoints'] as $ep)
+      {
+        $r = $ep['region'];
+        $result[$t][$r] = $ep;
+      }
+    }
+    return $result;
+  }
+
+  public function getEndpoint($type, $region = null)
+  {
+    $enspoints = $this->getEndpoints();
+    if($region === null)
+    {
+      return $endpoints[$type];
+    }
+    return $endpoints[$type][$region];
   }
 }

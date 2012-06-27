@@ -18,7 +18,7 @@ class osClientCreateTask extends osBaseTask
     ));
 
     $this->namespace        = 'os';
-    $this->name             = 'create-client';
+    $this->name             = 'client-create';
     $this->briefDescription = 'openstack - create client';
     $this->detailedDescription = <<<EOF
 The [os:client-create|INFO] task create openstack client.
@@ -32,12 +32,13 @@ EOF;
   {
     $config = rtOpenStackConfig::getConfiguration();
     $token = $config['admin']['auth_token'];
-    $c = new rtOpenStackClient();
-    print_r($c->call(new rtOpenStackCommandClientCreate(array(
+    $c =new rtOpenStackCommandClientCreate(array(
       'user' => $arguments['username'], 
       'pass' => $arguments['password'],
       'auth-token' => $token
-    ))));
+    ));
+    $r = $c->execute();
+    print_r($r);
 
     echo "\n";
   }

@@ -50,10 +50,19 @@ class RegistrationForm extends BaseForm
 
       $user->save($con);
 
+      $config = rtOpenStackConfig::getConfiguration();
+      $cmd = new rtOpenStackCommandClientCreate(array(
+        'user' => $values['profile']['username'],
+        'pass' => $values['profile']['password'],
+        'auth-token' => $config['admin']['auth_token'],
+      ));
+      $cmd->execute();
+
       $con->commit();
       return $user;
     } catch(Exception $e) {
       $con->rollBack();
+      echo $e->getTraceAsString(); exit;
       throw $e;
     }
   }
