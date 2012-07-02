@@ -24,7 +24,7 @@ class registrationActions extends sfActions
       $this->form->bindRequest($request);
       if($this->form->isValid()) {
         try {
-          $user = $this->form->save();
+          list($user, $resp) = $this->form->save();
           $this->getUser()->signin($user);
         } catch(Exception $e) {
           $this->getLogger()->err(get_class($e) . ': ' . $e->getMessage());
@@ -35,5 +35,26 @@ class registrationActions extends sfActions
         $this->redirect('@profilepage');
       }
     }
+  }
+
+  public function executeRegister(sfWebRequest $request) {
+    $this->forward404Unless($request->isMethod(sfRequest::POST));
+    $this->form = new RegistrationForm(array(), array(), false);
+    $this->form->bindRequest($request);
+    if($this->form->isValid()) {
+      try {
+        list($user, $resp) = $this->form->save();
+        $result['response'] = $resp;
+        $result['user'] = $user->toArray();
+      } catch(Exception $e) {
+        $this->getResponse()->setStatusCode(400);
+        $result['errors'] = array('global' => $e->getMessage());
+      }
+    } else {
+      $this->getResponse()->setStatusCode(400);
+      $result['errors'] = $this->form->getAllErrors();
+    }
+    $this->getResponse()->setContentType('application/json');
+    return $this->renderText(json_encode($result));
   }
 }

@@ -56,14 +56,92 @@ class RegistrationForm extends BaseForm
         'pass' => $values['profile']['password'],
         'auth-token' => $config['admin']['auth_token'],
       ));
-      $cmd->execute();
+      $response = $cmd->execute();
 
       $con->commit();
-      return $user;
+
+      return array($user, $response);
+
     } catch(Exception $e) {
       $con->rollBack();
-      echo $e->getTraceAsString(); exit;
+      //echo $e->getTraceAsString(); exit;
       throw $e;
     }
   }
+
+  public function getAllErrors()
+  {
+    $errors = array('global' => array());
+    foreach($this->getGlobalErrors() as $name => $error) {
+      $errors['global'][$name] = (string)$error;
+    }
+    $errors['fields'] = $this->unnestErrors($this->getErrorSchema(), 'registration');
+    return $errors;
+  }
+
+  protected function unnestErrors($errors, $prefix = '')
+  {
+    $newErrors = array();
+
+    foreach ($errors as $name => $error)
+    {
+      if ($error instanceof ArrayAccess || is_array($error))
+      {
+        $newErrors = array_merge($newErrors, $this->unnestErrors($error, ($prefix ? $prefix . '[' . $name . ']' : $name)));
+      }
+      else
+      {
+        if ($error instanceof sfValidatorError)
+        {
+          $err = $this->translate($error->getMessageFormat(), $error->getArguments());
+        }
+        else
+        {
+          $err = $this->translate($error);
+        }
+
+        if (!is_integer($name))
+        {
+          $n = $prefix ? $prefix . '[' . $name . ']' : $name;
+          $newErrors[$n] = (string)$err;
+        }
+        else
+        {
+          $newErrors[] = (string)$err;
+        }
+      }
+    }
+
+    return $newErrors;
+  }
+
+  public function translate($subject, $parameters = array())
+  {
+    if (false === $subject)
+    {
+      return false;
+    }
+
+    foreach ($parameters as $key => $value)
+    {
+      if (is_object($value) && method_exists($value, '__toString'))
+      {
+        $parameters[$key] = $value->__toString();
+      }
+    }
+
+    return strtr($subject, $parameters);
+
+  }
+
+  public function getNamedErrorRowFormatInARow()
+  {
+    return "%name% %error%";
+  }
+
+  public function getErrorRowFormatInARow()
+  {
+    return "%error%";
+  }
+
 }
