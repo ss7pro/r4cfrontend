@@ -8,13 +8,8 @@ class UserAdminForm extends sfGuardUserAdminForm
     $this->setWidget('title', new WidgetFormTitleChoice());
     $this->setValidator('title', new ValidatorTitleChoice());
 
-    $types = array(0 => 'Private account', 1 => 'Company account');
-    $this->setWidget('type', new sfWidgetFormChoice(array('choices' => $types, 'expanded' => true)));
-    $this->setValidator('type', new sfValidatorChoice(array('choices' => array_keys($types))));
-
     $this->widgetSchema->setLabels(array(
       'username' => 'Login email',
-      'type' => 'Account type',
     ));
 
     $this->validatorSchema->setPostValidator(new sfValidatorPropelUnique(array('model' => 'sfGuardUser', 'column' => array('username')), array('invalid' => 'Account with this email already exist.')));

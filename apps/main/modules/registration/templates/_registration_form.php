@@ -8,6 +8,8 @@
 <fieldset>
   <h3><?php echo __('Account');?></h3>
   <?php echo $form['profile']; ?>
+  <h3><?php echo __('Company');?></h3>
+  <?php echo $form['tenant']; ?>
 </fieldset>
 </div>
 

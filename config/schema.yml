@@ -7,18 +7,23 @@ propel:
     city:         { type: varchar(50), required: false }
     phone:        { type: varchar(25), required: false }
 
-  rc_profile:
-    profile_id:   { type: integer, required: true, primaryKey: true, foreignTable: sf_guard_user, foreignReference: id }
+  rc_tenant:
+    tenant_id:      { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    type:           { type: tinyint, required: true, default: 0 }
+    company_name:   { type: varchar(100), required: false }
+    nip:            { type: varchar(16),  required: false }
+    www:            { type: varchar(16),  required: false }
     default_address_id: { type: integer, required: false, foreignTable: rc_address, foreignReference: address_id }
     invoice_address_id: { type: integer, required: false, foreignTable: rc_address, foreignReference: address_id }
+    api_id:         { type: varchar(100), required: false }
+    api_name:       { type: varchar(100), required: false }
+
+  rc_profile:
+    profile_id:   { type: integer, required: true, primaryKey: true, foreignTable: sf_guard_user, foreignReference: id }
+    tenant_id:    { type: integer, required: false, foreignTable: rc_tenant, foreignReference: tenant_id }
     title:        { type: varchar(10), required: false }
     first_name:   { type: varchar(50), required: true }
     last_name:    { type: varchar(50), required: true }
-    type:         { type: tinyint, required: true, default: 0 }
-    company_name: { type: varchar(100), required: false }
-    nip:          { type: varchar(16), required: false }
-    www:          { type: varchar(16), required: false }
-    client_id:    { type: varchar(64), required: false, index: true }
 
   rc_invoice:
     invoice_id:     { type: integer, required: true, primaryKey: true, autoIncrement: true }

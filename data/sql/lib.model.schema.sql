@@ -20,6 +20,34 @@ CREATE TABLE `rc_address`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
+-- rc_tenant
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rc_tenant`;
+
+CREATE TABLE `rc_tenant`
+(
+	`tenant_id` INTEGER NOT NULL AUTO_INCREMENT,
+	`type` TINYINT DEFAULT 0 NOT NULL,
+	`company_name` VARCHAR(100),
+	`nip` VARCHAR(16),
+	`www` VARCHAR(16),
+	`default_address_id` INTEGER,
+	`invoice_address_id` INTEGER,
+	`api_id` VARCHAR(100),
+	`api_name` VARCHAR(100),
+	PRIMARY KEY (`tenant_id`),
+	INDEX `rc_tenant_FI_1` (`default_address_id`),
+	INDEX `rc_tenant_FI_2` (`invoice_address_id`),
+	CONSTRAINT `rc_tenant_FK_1`
+		FOREIGN KEY (`default_address_id`)
+		REFERENCES `rc_address` (`address_id`),
+	CONSTRAINT `rc_tenant_FK_2`
+		FOREIGN KEY (`invoice_address_id`)
+		REFERENCES `rc_address` (`address_id`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- rc_profile
 -- ---------------------------------------------------------------------
 
@@ -28,29 +56,18 @@ DROP TABLE IF EXISTS `rc_profile`;
 CREATE TABLE `rc_profile`
 (
 	`profile_id` INTEGER NOT NULL,
-	`default_address_id` INTEGER,
-	`invoice_address_id` INTEGER,
+	`tenant_id` INTEGER,
 	`title` VARCHAR(10),
 	`first_name` VARCHAR(50) NOT NULL,
 	`last_name` VARCHAR(50) NOT NULL,
-	`type` TINYINT DEFAULT 0 NOT NULL,
-	`company_name` VARCHAR(100),
-	`nip` VARCHAR(16),
-	`www` VARCHAR(16),
-	`client_id` VARCHAR(64),
 	PRIMARY KEY (`profile_id`),
-	INDEX `rc_profile_I_1` (`client_id`),
-	INDEX `rc_profile_FI_2` (`default_address_id`),
-	INDEX `rc_profile_FI_3` (`invoice_address_id`),
+	INDEX `rc_profile_FI_2` (`tenant_id`),
 	CONSTRAINT `rc_profile_FK_1`
 		FOREIGN KEY (`profile_id`)
 		REFERENCES `sf_guard_user` (`id`),
 	CONSTRAINT `rc_profile_FK_2`
-		FOREIGN KEY (`default_address_id`)
-		REFERENCES `rc_address` (`address_id`),
-	CONSTRAINT `rc_profile_FK_3`
-		FOREIGN KEY (`invoice_address_id`)
-		REFERENCES `rc_address` (`address_id`)
+		FOREIGN KEY (`tenant_id`)
+		REFERENCES `rc_tenant` (`tenant_id`)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------

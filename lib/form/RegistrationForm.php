@@ -1,6 +1,19 @@
 <?php 
 /**
  * Main registration form
+ *
+ * Array
+ * (
+ *     [user] => Array
+ *     (
+ *         [tenantId] => ecf89d114d57410ca23ea9cafd79d537
+ *         [password] => $6$rounds=40000$Yvd2kM9K4uum/AQQ$0rQPrJuRfXCnx4U6w/GK9/mLk1//QoP58tOD/eVMc7bglAaGrdgqFeBSkq8I464eN4zyLaVA8GW/q3Ywb2r0T/
+ *         [enabled] => 1
+ *         [id] => a4f2cb6c641c4497ac222294be8d49c1
+ *         [name] => aa
+ *     )
+ * )
+ *
  */
 class RegistrationForm extends BaseForm 
 {
@@ -9,6 +22,8 @@ class RegistrationForm extends BaseForm
     $profile_fields = array(
       'username', 'password', 'password_again', 
       'title', 'first_name', 'last_name',
+    );
+    $tenant_fields = array(
       'type', 'company_name', 'nip', 'www'
     );
     $address_fields = array('street', 'post_code', 'city', 'phone');
@@ -18,6 +33,10 @@ class RegistrationForm extends BaseForm
     $profile_form = new UserAdminForm();
     $profile_form->useFields($profile_fields);
     $this->embedForm('profile', $profile_form);
+
+    $tenant_form = new RcTenantForm();
+    $tenant_form->useFields($tenant_fields);
+    $this->embedForm('tenant', $tenant_form);
 
     $account_address = new RcAddressForm();
     $account_address->useFields($address_fields);
@@ -41,14 +60,15 @@ class RegistrationForm extends BaseForm
       $con->beginTransaction();
 
       $user = $this->getEmbeddedForm('profile')->getObject();
+      $tenant = $this->getEmbeddedForm('tenant')->getObject();
       $account_address = $this->getEmbeddedForm('account_address')->getObject();
       $invoice_address = $this->getEmbeddedForm('invoice_address')->getObject();
-      
-      $profile = $user->getProfile();
-      $profile->setRcAddressRelatedByDefaultAddressId($account_address);
-      $profile->setRcAddressRelatedByInvoiceAddressId($invoice_address);
 
-      $user->save($con);
+      $profile = $user->getProfile();
+      $profile->setRcTenant($tenant);
+      $tenant->setRcAddressRelatedByDefaultAddressId($account_address);
+      $tenant->setRcAddressRelatedByInvoiceAddressId($invoice_address);
+
 
       $config = rtOpenStackConfig::getConfiguration();
       $cmd = new rtOpenStackCommandClientCreate(array(
@@ -57,6 +77,15 @@ class RegistrationForm extends BaseForm
         'auth-token' => $config['admin']['auth_token'],
       ));
       $response = $cmd->execute();
+
+      if(empty($response['user']) || empty($response['user']['tenantId'])) {
+        throw new DomainException('Invalid Api response: ' . json_encode($response));
+      }
+
+      $tenant->setApiId($response['user']['tenantId']);
+      $tenant->setApiName($response['user']['name']);
+
+      $user->save($con);
 
       $con->commit();
 

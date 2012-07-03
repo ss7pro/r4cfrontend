@@ -16,21 +16,25 @@ RcAddress:
     city: Wrocław
 
 sfGuardUser:
-  admin:
+  fred:
     username: fred
     password: fred
     is_active: true
     is_super_admin: true
 
+RcTenant:
+  fred:
+    type: 1
+    company_name: Some Company Name
+    default_address_id: default_address
+    invoice_address_id: invoice_address
+
 RcProfile:
-  admin:
-    profile_id: admin
+  fred:
+    profile_id: fred
+    tenant_id: fred
     title: Mr
     first_name: Cloud
     last_name: Administrator
-    company_name: Some Company Name
-    type: 1
-    default_address_id: default_address
-    invoice_address_id: invoice_address
 
     
