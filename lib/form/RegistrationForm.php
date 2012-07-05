@@ -32,6 +32,7 @@ class RegistrationForm extends BaseForm
 
     $profile_form = new UserAdminForm();
     $profile_form->useFields($profile_fields);
+    $profile_form->getValidator('password')->setOption('required', true);
     $this->embedForm('profile', $profile_form);
 
     $tenant_form = new RcTenantForm();
@@ -51,13 +52,13 @@ class RegistrationForm extends BaseForm
   {
     $values = $this->getValues();
 
-    foreach($this->getEmbeddedForms() as $name => $form) {
-      $form->updateObject($values[$name]);
-    }
-
     $con = $con ? $con : Propel::getConnection();
     try {
       $con->beginTransaction();
+
+      foreach($this->getEmbeddedForms() as $name => $form) {
+        $form->updateObject($values[$name]);
+      }
 
       $user = $this->getEmbeddedForm('profile')->getObject();
       $tenant = $this->getEmbeddedForm('tenant')->getObject();
@@ -68,7 +69,6 @@ class RegistrationForm extends BaseForm
       $profile->setRcTenant($tenant);
       $tenant->setRcAddressRelatedByDefaultAddressId($account_address);
       $tenant->setRcAddressRelatedByInvoiceAddressId($invoice_address);
-
 
       $config = rtOpenStackConfig::getConfiguration();
       $cmd = new rtOpenStackCommandClientCreate(array(
@@ -93,7 +93,6 @@ class RegistrationForm extends BaseForm
 
     } catch(Exception $e) {
       $con->rollBack();
-      //echo $e->getTraceAsString(); exit;
       throw $e;
     }
   }

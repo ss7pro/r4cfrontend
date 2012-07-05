@@ -41,9 +41,11 @@ class registrationActions extends sfActions
     $this->forward404Unless($request->isMethod(sfRequest::POST));
     $this->form = new RegistrationForm(array(), array(), false);
     $this->form->bindRequest($request);
+    $result = array('status' => 'FAIL');
     if($this->form->isValid()) {
       try {
         list($user, $resp) = $this->form->save();
+        $result['status'] = 'OK';
         $result['response'] = $resp;
         $result['user'] = $user->toArray();
       } catch(Exception $e) {
