@@ -23,6 +23,8 @@
 </div>
 
 <div class="clear"></div>
+<?php echo $form['captcha']->renderError(); ?>
+<?php echo $form['captcha']->render(); ?>
 
 <div class="center">
   <input type="submit" value="<?php echo __('Register'); ?>"/>

@@ -46,6 +46,26 @@ class RegistrationForm extends BaseForm
     $invoice_address = new RcAddressForm();
     $invoice_address->useFields($address_fields);
     $this->embedForm('invoice_address', $invoice_address);
+
+    $this->setWidget('captcha', new sfWidgetFormReCaptcha(array(
+      'public_key' => sfConfig::get('app_recaptcha_private_key', '6LffzNMSAAAAAGDlUb8oV2G4QceRErUZfXNwGc9A'),
+      'use_ssl' => false,
+    )));
+
+    $this->setValidator('captcha', new sfValidatorReCaptcha(array(
+      'private_key' => sfConfig::get('app_recaptcha_private_key', '6LffzNMSAAAAABpqXUCfmyfz6-M4Q71DeEfGHSxo'),
+    )));
+  }
+
+  public function bindRequest(sfWebRequest $request)
+  {
+    $params = $request->getParameter($this->getName()); 
+    $params['captcha'] = array(
+      'recaptcha_challenge_field' => $request->getParameter('recaptcha_challenge_field'),
+      'recaptcha_response_field'  => $request->getParameter('recaptcha_response_field'),
+    );
+    $request->setParameter($this->getName(), $params);
+    parent::bindRequest($request);
   }
 
   public function save($con = null)
