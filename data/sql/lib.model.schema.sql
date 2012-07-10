@@ -126,5 +126,26 @@ CREATE TABLE `rc_invoice_item`
 		REFERENCES `rc_invoice` (`invoice_id`)
 ) ENGINE=InnoDB;
 
+-- ---------------------------------------------------------------------
+-- rc_promo_code
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rc_promo_code`;
+
+CREATE TABLE `rc_promo_code`
+(
+	`code_id` INTEGER NOT NULL AUTO_INCREMENT,
+	`code` VARCHAR(16) NOT NULL,
+	`expired_at` DATETIME,
+	`used_at` DATETIME,
+	`used_by` INTEGER,
+	PRIMARY KEY (`code_id`),
+	UNIQUE INDEX `rc_promo_code_U_1` (`code`),
+	INDEX `rc_promo_code_FI_1` (`used_by`),
+	CONSTRAINT `rc_promo_code_FK_1`
+		FOREIGN KEY (`used_by`)
+		REFERENCES `rc_tenant` (`tenant_id`)
+) ENGINE=InnoDB;
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

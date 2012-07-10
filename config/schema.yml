@@ -55,3 +55,10 @@ propel:
     tax:         { type: decimal, size: 10, scale: 2, required: true }
     cost:        { type: decimal, size: 10, scale: 2, required: true }
 
+  rc_promo_code:
+    code_id:     { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    code:        { type: varchar(16), required: true, index: unique }
+    expired_at:  { type: timestamp, required: false }
+    used_at:     { type: timestamp, required: false }
+    used_by:     { type: integer, required: false, foreignTable: rc_tenant, foreignReference: tenant_id }
+    

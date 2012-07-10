@@ -28,6 +28,8 @@ RcTenant:
     company_name: Some Company Name
     default_address_id: default_address
     invoice_address_id: invoice_address
+    api_id: c326af2af2e341eba6d6e9ae1f2c5fbb
+    api_name: fred
 
 RcProfile:
   fred:
