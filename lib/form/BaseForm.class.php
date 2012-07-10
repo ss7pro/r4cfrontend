@@ -10,11 +10,29 @@
  */
 class BaseForm extends sfFormSymfony
 {
-  public function bindRequest(sfWebRequest $request) {
-    return $this->bind(
-      $request->getParameter($this->getName()), 
-      $request->getFiles($this->getName())
-    );
+  public function bindRequest(sfWebRequest $request)
+  {
+    if($name = $this->getName()) {
+      return $this->bind(
+        $request->getParameter($name), 
+        $request->getFiles($name)
+      );
+    } else {
+      return $this->bind(
+        $request->getParameterHolder()->getAll(), 
+        $request->getFiles()
+      );
+    }
+  }
+
+  public function bindJSONRequest(sfWebRequest $request)
+  {
+    $data = json_decode($request->getContent(), true);
+    if($name = $this->getName()) {
+      return $this->bind(array($name => $data));
+    } else {
+      return $this->bind($data);
+    }
   }
 
   public function getAllErrors()
