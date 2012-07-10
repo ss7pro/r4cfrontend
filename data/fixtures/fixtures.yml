@@ -39,4 +39,23 @@ RcProfile:
     first_name: Cloud
     last_name: Administrator
 
+RcPromoCode:
+  RcPromoCode_1:
+    code: 1234
+  RcPromoCode_2:
+    code: 2345
+  RcPromoCode_3:
+    code: 3456
+  RcPromoCode_4:
+    code: qwer
+  RcPromoCode_5:
+    code: wert
+  RcPromoCode_6:
+    code: asdf
+  RcPromoCode_7:
+    code: sdfg
+  RcPromoCode_8:
+    code: zxcv
+  RcPromoCode_9:
+    code: xcvb
     
