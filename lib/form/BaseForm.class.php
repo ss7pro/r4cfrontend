@@ -41,7 +41,7 @@ class BaseForm extends sfFormSymfony
     foreach($this->getGlobalErrors() as $name => $error) {
       $errors['global'][$name] = (string)$error;
     }
-    $errors['fields'] = $this->unnestErrors($this->getErrorSchema(), 'registration');
+    $errors['fields'] = $this->unnestErrors($this->getErrorSchema(), $this->getName());
     return $errors;
   }
 
