@@ -42,20 +42,29 @@ RcProfile:
 RcPromoCode:
   RcPromoCode_1:
     code: 1234
+    value: 10.00
   RcPromoCode_2:
     code: 2345
+    value: 10.00
   RcPromoCode_3:
     code: 3456
+    value: 10.00
   RcPromoCode_4:
     code: qwer
+    value: 10.00
   RcPromoCode_5:
     code: wert
+    value: 10.00
   RcPromoCode_6:
     code: asdf
+    value: 10.00
   RcPromoCode_7:
     code: sdfg
+    value: 10.00
   RcPromoCode_8:
     code: zxcv
+    value: 10.00
   RcPromoCode_9:
     code: xcvb
+    value: 10.00
     

@@ -136,6 +136,7 @@ CREATE TABLE `rc_promo_code`
 (
 	`code_id` INTEGER NOT NULL AUTO_INCREMENT,
 	`code` VARCHAR(16) NOT NULL,
+	`value` DECIMAL(10,2) NOT NULL,
 	`expired_at` DATETIME,
 	`used_at` DATETIME,
 	`used_by` INTEGER,
