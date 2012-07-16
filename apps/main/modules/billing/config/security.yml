@@ -1,0 +1,5 @@
+all:
+  is_secure: true
+
+promo_code:
+  is_secure: false
