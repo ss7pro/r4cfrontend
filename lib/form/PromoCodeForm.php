@@ -37,33 +37,38 @@ class PromoCodeForm extends BaseForm
   {
     $con = $con ? $con : Propel::getConnection();
     try {
-      //$con->beginTransaction();
+      $con->beginTransaction();
 
       $tenant = $this->getRcTenant();
       $code = $this->getRcPromoCode();
       $code->setUsedAt(time());
       $code->setRcTenant($tenant);
 
-      //$code->save($con);
+      $code->save($con);
 
-      $config = rtOpenStackConfig::getConfiguration();
+      $client = rtOpenStackClient::factory();
+      $config = rtOpenStackConfig::getConfiguration('topup');
       $c = new rtOpenStackCommandAuth(array(
-        'user' => $config['topup']['user'],
-        'pass' => $config['topup']['user'],
-        'tenant-name' => $config['topup']['tenant_name'],
+        'user'        => $config['user'],
+        'pass'        => $config['pass'],
+        'tenant-name' => $config['tenant_name'],
       ));
-      $c->execute();
+      $c->execute($client);
+
+      if(!$client->getSession()->isAuthenticated()) {
+        throw new InvalidArgumentException('Invalid username or password');
+      }
 
       $c = new rtOpenStackCommandClientTopup(array(
         'tenant_id' => $tenant->getApiId(),
-        'amount' => $code->getValue(),
+        'amount'    => $code->getValue(),
         'reference' => array('source' => 'r4cfrontend'),
       ));
-      $c->execute();
+      $c->execute($client);
 
-      //$con->commit();
+      $con->commit();
     } catch(Exception $e) {
-      //$con->rollBack();
+      $con->rollBack();
       throw $e;
     }
     return $code;
