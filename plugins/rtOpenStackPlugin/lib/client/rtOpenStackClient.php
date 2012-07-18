@@ -66,7 +66,7 @@ class rtOpenStackClient
     }
 
     $headers['Content-Length'] = strlen($params);
-    if($this->getSession()->isAuthenticated()) {
+    if(!isset($headers['X-Auth-Token']) && $this->getSession()->isAuthenticated()) {
       $headers['X-Auth-Token'] = $this->getSession()->getTokenId();
     }
     $headers = array_merge($this->headers, $headers);
@@ -90,8 +90,11 @@ class rtOpenStackClient
       throw new InvalidArgumentException(trim($this->getResponseText()), $this->getResponseCode());
     }
     $response = $this->decode($this->getBrowser()->getResponseText());
-    if(isset($response['error'])) {
+    if(isset($response['error']) && isset($response['error']['message'])) {
       throw new InvalidArgumentException($response['error']['message'], $response['error']['code']);
+    }
+    if(isset($response['error']) && isset($response['error']['msg'])) {
+      throw new InvalidArgumentException($response['error']['msg'], (int)@$response['error']['code']);
     }
     return $response;
   }

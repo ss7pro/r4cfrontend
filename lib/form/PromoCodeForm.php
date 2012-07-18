@@ -44,9 +44,23 @@ class PromoCodeForm extends BaseForm
       $code->setUsedAt(time());
       $code->setRcTenant($tenant);
 
-      //TODO: charge account here
-
       //$code->save($con);
+
+      $config = rtOpenStackConfig::getConfiguration();
+      $c = new rtOpenStackCommandAuth(array(
+        'user' => $config['topup']['user'],
+        'pass' => $config['topup']['user'],
+        'tenant-name' => $config['topup']['tenant_name'],
+      ));
+      $c->execute();
+
+      $c = new rtOpenStackCommandClientTopup(array(
+        'tenant_id' => $tenant->getApiId(),
+        'amount' => $code->getValue(),
+        'reference' => array('source' => 'r4cfrontend'),
+      ));
+      $c->execute();
+
       //$con->commit();
     } catch(Exception $e) {
       //$con->rollBack();

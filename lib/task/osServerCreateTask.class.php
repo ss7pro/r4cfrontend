@@ -31,9 +31,9 @@ EOF;
 
   protected function exec($arguments = array(), $options = array())
   {
-    $c = new rtOpenStackClient();
-    $this->auth($c, $options);
-    var_export($c->call(new rtOpenStackCommandServerCreate($arguments)));
+    $this->auth($options);
+    $c = new rtOpenStackCommandServerCreate($arguments);
+    print_r($c->execute());
     echo "\n";
   }
 }

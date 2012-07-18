@@ -38,13 +38,14 @@ class rtOpenStackConfig
     return $this->options['port'];
   }
 
-  public static function getConfiguration()
+  public static function getConfiguration($section = null)
   {
     static $config = null;
     if($config === null) {
       $config = include(sfContext::getInstance()->getConfigCache()->checkConfig(self::$file));
       $config = sfYamlConfigHandler::flattenConfigurationWithEnvironment($config);
     }
-    return $config;
+    if($section === null) return $config;
+    return isset($config[$section]) ? $config[$section] : null;
   }
 }

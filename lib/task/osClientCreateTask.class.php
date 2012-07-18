@@ -30,8 +30,8 @@ EOF;
 
   protected function exec($arguments = array(), $options = array())
   {
-    $config = rtOpenStackConfig::getConfiguration();
-    $token = $config['admin']['auth_token'];
+    $config = rtOpenStackConfig::getConfiguration('admin');
+    $token = $config['auth_token'];
     $c =new rtOpenStackCommandClientCreate(array(
       'user' => $arguments['username'], 
       'pass' => $arguments['password'],

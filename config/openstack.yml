@@ -12,9 +12,16 @@ all:
     server:
       host: 178.239.138.10
       port: 8774
+    topup:
+      host: 178.239.138.10
+      port: 8095
   admin:
     auth_token:  VvpMBCV6x6WL087Q70wi2Lti0wkiNGoX
+    tenant_name: fred
     user:        fred
     pass:        Abrakadabra.2
-    tenant_name: fred
+  topup:
+    tenant_name: frontend001
+    user:        frontend001
+    pass:        8cfICqis2yGPC5L3
 

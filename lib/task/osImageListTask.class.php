@@ -29,15 +29,11 @@ EOF;
 
   protected function exec($arguments = array(), $options = array())
   {
-    $c = new rtOpenStackClient();
-    $this->auth($c, $options);
-
+    $this->auth($options);
     $columns = array('id', 'name', 'status', 'progress', 'minRam', 'minDisk');
     $p = new SimpleCliPrinter($columns);
-
-    $r = $c->call(new rtOpenStackCommandImageList());
-    //print_r($r['images']);
-    //echo "\n";
+    $c = new rtOpenStackCommandImageList();
+    $r = $c->execute();
     $p->render($r['images']);
     echo "\n";
   }

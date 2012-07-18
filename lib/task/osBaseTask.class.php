@@ -40,19 +40,31 @@ EOF;
     try {
       $this->exec($arguments, $options);
     } catch(Exception $e) {
+      echo get_class($e) . ': ' . $e->getMessage() . "\n";
       echo $e->getTraceAsString();
       throw $e;
     }
   }
 
-  protected function auth(rtOpenStackClient $client, $options)
+  protected function auth($options = null, rtOpenStackClient $client = null)
   {
-    $config = rtOpenStackConfig::getConfiguration();
+    $section = 'admin';
+    if($options === null) {
+      $options = array();
+    } else if(is_string($options)) {
+      $section = $options;
+      $options = array();
+    }
+
+    $config = rtOpenStackConfig::getConfiguration($section);
     $params = array(
-      'user'        => isset($options['user'])        ? $options['user']        : $config['admin']['user'], 
-      'pass'        => isset($options['pass'])        ? $options['pass']        : $config['admin']['pass'], 
-      'tenant-name' => isset($options['tenant-name']) ? $options['tenant-name'] : $config['admin']['tenant_name'],
+      'user'        => isset($options['user'])        ? $options['user']        : $config['user'], 
+      'pass'        => isset($options['pass'])        ? $options['pass']        : $config['pass'], 
+      'tenant-name' => isset($options['tenant-name']) ? $options['tenant-name'] : $config['tenant_name'],
     );
-    $client->call(new rtOpenStackCommandAuth($params));
+
+    $client = $client ? $client : rtOpenStackClient::factory();
+    $c = new rtOpenStackCommandAuth($params);
+    $c->execute($client);
   }
 }

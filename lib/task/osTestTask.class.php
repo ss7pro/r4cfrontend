@@ -29,8 +29,7 @@ EOF;
 
   protected function exec($arguments = array(), $options = array())
   {
-    $c = new rtOpenStackClient();
-    $this->auth($c, $options);
+    $this->auth($options);
     //print_r($c->call(new rtOpenStackCommandCheckClient(array(
     //  'client' => 'fred'
     //))));
@@ -39,8 +38,8 @@ EOF;
     //  'pass' => 'romek'
     //))));
     //print_r($c->call(new rtOpenStackCommandFlavorList()));
-    print_r($c->call(new rtOpenStackCommandImageList()));
-
+    $c = new rtOpenStackCommandImageList();
+    print_r($c->execute());
     echo "\n";
   }
 }

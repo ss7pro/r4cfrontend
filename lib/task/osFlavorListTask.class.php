@@ -29,14 +29,12 @@ EOF;
 
   protected function exec($arguments = array(), $options = array())
   {
-    $c = new rtOpenStackClient();
-    $this->auth($c, $options);
-
+    $this->auth($options);
     $columns = array('id', 'name', 'vcpus', 'ram', 'disk', 'swap');
     $p = new SimpleCliPrinter($columns);
-    $result = $c->call(new rtOpenStackCommandFlavorList());
-    //var_dump($result['flavors']);
-    $p->render($result['flavors']);
+    $c = new rtOpenStackCommandFlavorList();
+    $r = $c->execute();
+    $p->render($r['flavors']);
     echo "\n";
   }
 }
