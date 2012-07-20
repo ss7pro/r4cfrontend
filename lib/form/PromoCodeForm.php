@@ -62,7 +62,10 @@ class PromoCodeForm extends BaseForm
       $c = new rtOpenStackCommandClientTopup(array(
         'tenant_id' => $tenant->getApiId(),
         'amount'    => $code->getValue(),
-        'reference' => array('source' => 'r4cfrontend'),
+        'reference' => array(
+          'source' => 'r4cfrontend',
+          'code'   => $code->getCode(),
+        ),
       ));
       $c->execute($client);
 
