@@ -11,6 +11,8 @@ class ProjectConfiguration extends sfProjectConfiguration
 
   public function setup()
   {
+    $this->dispatcher->connect('component.method_not_found', array('ResponseContent', 'listenToComponentMethodNotFoundEvent'));
+
     $this->enablePlugins('sfPropelORMPlugin');
     $this->enablePlugins('sfGuardPlugin');
     $this->enablePlugins('sfFormExtraPlugin');

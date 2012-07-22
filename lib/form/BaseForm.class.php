@@ -28,11 +28,18 @@ class BaseForm extends sfFormSymfony
   public function bindJSONRequest(sfWebRequest $request)
   {
     $data = json_decode($request->getContent(), true);
-    if($name = $this->getName()) {
-      return $this->bind(array($name => $data));
-    } else {
-      return $this->bind($data);
+    return $this->bind($data);
+  }
+
+  public function getObjectArray()
+  {
+    $prefix = $this->getName();
+    $ret = array();
+    foreach($this->getObject()->toArray(BasePeer::TYPE_FIELDNAME) as $key => $value) {
+      $key = $prefix ? $prefix . '[' . $key . ']' : $key;
+      $ret[$key] = $value;
     }
+    return $ret;
   }
 
   public function getAllErrors()

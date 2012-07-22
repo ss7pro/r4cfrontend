@@ -29,13 +29,13 @@ CREATE TABLE `rc_tenant`
 (
 	`tenant_id` INTEGER NOT NULL AUTO_INCREMENT,
 	`type` TINYINT DEFAULT 0 NOT NULL,
-	`company_name` VARCHAR(100),
+	`company_name` VARCHAR(99),
 	`nip` VARCHAR(16),
 	`www` VARCHAR(16),
 	`default_address_id` INTEGER,
 	`invoice_address_id` INTEGER,
-	`api_id` VARCHAR(100),
-	`api_name` VARCHAR(100),
+	`api_id` VARCHAR(99),
+	`api_name` VARCHAR(99),
 	PRIMARY KEY (`tenant_id`),
 	INDEX `rc_tenant_FI_1` (`default_address_id`),
 	INDEX `rc_tenant_FI_2` (`invoice_address_id`),
@@ -146,6 +146,84 @@ CREATE TABLE `rc_promo_code`
 	CONSTRAINT `rc_promo_code_FK_1`
 		FOREIGN KEY (`used_by`)
 		REFERENCES `rc_tenant` (`tenant_id`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- rc_payment
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rc_payment`;
+
+CREATE TABLE `rc_payment`
+(
+	`payment_id` INTEGER NOT NULL AUTO_INCREMENT,
+	`tenant_id` INTEGER NOT NULL,
+	`tenant_api_id` VARCHAR(50) NOT NULL,
+	`session_id` VARCHAR(50) NOT NULL,
+	`pos_id` INTEGER NOT NULL,
+	`amount` INTEGER NOT NULL,
+	`first_name` VARCHAR(50) NOT NULL,
+	`last_name` VARCHAR(50) NOT NULL,
+	`email` VARCHAR(50) NOT NULL,
+	`phone` VARCHAR(25),
+	`invoice` TINYINT(1) DEFAULT 0 NOT NULL,
+	`company_name` VARCHAR(99),
+	`street` VARCHAR(50),
+	`post_code` VARCHAR(8),
+	`city` VARCHAR(50),
+	`nip` VARCHAR(16),
+	`desc` VARCHAR(255),
+	`client_ip` VARCHAR(16),
+	`created_at` DATETIME NOT NULL,
+	PRIMARY KEY (`payment_id`),
+	UNIQUE INDEX `rc_payment_U_1` (`session_id`),
+	INDEX `rc_payment_FI_1` (`tenant_id`),
+	CONSTRAINT `rc_payment_FK_1`
+		FOREIGN KEY (`tenant_id`)
+		REFERENCES `rc_tenant` (`tenant_id`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- rc_transaction
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rc_transaction`;
+
+CREATE TABLE `rc_transaction`
+(
+	`transaction_id` INTEGER NOT NULL,
+	`trans_id` VARCHAR(50),
+	`pay_type` VARCHAR(8),
+	`status` INTEGER DEFAULT 0 NOT NULL,
+	`create_at` DATETIME,
+	`init_at` DATETIME,
+	`sent_at` DATETIME,
+	`recv_at` DATETIME,
+	`cancel_at` DATETIME,
+	PRIMARY KEY (`transaction_id`),
+	CONSTRAINT `rc_transaction_FK_1`
+		FOREIGN KEY (`transaction_id`)
+		REFERENCES `rc_payment` (`payment_id`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- rc_transaction_log
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rc_transaction_log`;
+
+CREATE TABLE `rc_transaction_log`
+(
+	`log_id` INTEGER NOT NULL AUTO_INCREMENT,
+	`payment_id` INTEGER NOT NULL,
+	`created_at` DATETIME NOT NULL,
+	`status` INTEGER NOT NULL,
+	`message` TEXT,
+	PRIMARY KEY (`log_id`),
+	INDEX `rc_transaction_log_FI_1` (`payment_id`),
+	CONSTRAINT `rc_transaction_log_FK_1`
+		FOREIGN KEY (`payment_id`)
+		REFERENCES `rc_transaction` (`transaction_id`)
 ) ENGINE=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier

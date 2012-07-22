@@ -1,6 +1,15 @@
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
+payment:
+  class: sfPropelRouteCollection
+  options:
+    model:                RcPayment
+    module:               payment
+    prefix_path:          /payment
+    column:               payment_id
+    with_wildcard_routes: false
+
 registration:
   url:   /registration
   param: { module: registration, action: index }
