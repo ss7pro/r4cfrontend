@@ -13,7 +13,7 @@ all:
       pos_auth_key:   "B5uVJZS"
       sign_key:       "a4fb776b079802685212f5504f553256"
       verify_key:     "d593435e49bf4e383beec60f730761ff"
-      url:            "https://platnosci.pl"
+      url:            "https://www.platnosci.pl"
       encoding:       "UTF"  # UTF | ISO | WIN
 
 dev:

@@ -15,7 +15,7 @@ class rtPayuConfig extends sfParameterHolder
     $pos = $this->getOption('pos_id');
     $enc = $this->getOption('encoding');
     $sig = substr($this->getOption('sign_key'), 0, 2);
-    return sprintf('%s/paygw/%s/%s/%s/paytype.js', $url, $enc, $pos, $sig);
+    return sprintf('%s/paygw/%s/js/%s/%s/paytype.js', $url, $enc, $pos, $sig);
   }
 
   public function getPaymentUrl()
