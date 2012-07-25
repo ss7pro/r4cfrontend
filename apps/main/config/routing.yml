@@ -9,6 +9,7 @@ payment:
     prefix_path:          /payment
     column:               payment_id
     with_wildcard_routes: false
+    collection_actions:   { report: get }
 
 registration:
   url:   /registration

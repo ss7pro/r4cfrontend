@@ -1,0 +1,25 @@
+all:
+  current: sandbox
+  pos:
+    sandbox:
+      pos_id:         "38713"
+      pos_auth_key:   "jv727n7"
+      sign_key:       "b67d3a1f0eb8c02f7ed4445b6971a87b"
+      verify_key:     "f10c01f1b541717f73fdff94f7ea0f89"
+      url:            "https://sandbox.payu.pl"
+      encoding:       "UTF"  # UTF | ISO | WIN
+    production:
+      pos_id:         "90471"
+      pos_auth_key:   "B5uVJZS"
+      sign_key:       "a4fb776b079802685212f5504f553256"
+      verify_key:     "d593435e49bf4e383beec60f730761ff"
+      url:            "https://platnosci.pl"
+      encoding:       "UTF"  # UTF | ISO | WIN
+
+dev:
+  current: sandbox
+
+prod:
+  current: sandbox
+
+  

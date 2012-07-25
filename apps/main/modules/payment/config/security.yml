@@ -4,3 +4,5 @@ all:
 create:
   is_secure: false
 
+report:
+  is_secure: false

@@ -21,9 +21,12 @@ class paymentActions extends sfActions
     $this->getLogger()->log(json_encode(array($this->form->getName(), $this->form->getValues())));
     if($this->form->isValid())
     {
+      $con = Propel::getConnection();
       try
       {
-        $payment = $this->form->save();
+        $con->beginTransaction();
+        $payment = $this->form->save($con);
+        $con->commit();
         $response = array();
         $result['status'] = 'OK';
         $result['response'] = $this->form->getObjectArray();
@@ -31,6 +34,7 @@ class paymentActions extends sfActions
       }
       catch(Exception $e)
       {
+        $con->rollBack();
         $result['errors'] = array('global' => $e->getMessage());
         return $this->renderResponse(new JSONResponse($result, 400));
       }

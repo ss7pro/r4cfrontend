@@ -19,6 +19,7 @@ class ProjectConfiguration extends sfProjectConfiguration
     $this->enablePlugins('sfJqueryReloadedPlugin');
     $this->enablePlugins('sfWebBrowserPlugin');
     $this->enablePlugins('rtOpenStackPlugin');
+    $this->enablePlugins('rtPayuPlugin');
     $this->enablePlugins('sfAdminDashPlugin');
   }
 }

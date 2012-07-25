@@ -13,8 +13,11 @@ class PaymentForm extends RcPaymentForm
   {
     parent::configure();
 
-    $this->setOption('pos_id', 38713);
-    $this->setOption('pos_auth_key', 'jV727n7');
+    $conf = rtPayuConfig::instance();
+    $this->setOption('pos_id', $conf->getOption('pos_id'));
+    $this->setOption('pos_auth_key', $conf->getOption('pos_auth_key'));
+    $this->setOption('pay_type_url', $conf->getPayTypeUrl());
+    $this->setOption('payment_url', $conf->getPaymentUrl());
 
     unset(
       $this['tenant_id'],
@@ -44,6 +47,8 @@ class PaymentForm extends RcPaymentForm
   {
     $ret = parent::getObjectArray();
     $ret['pos_auth_key'] = $this->getOption('pos_auth_key');
+    $ret['pay_type_url'] = $this->getOption('pay_type_url');
+    $ret['payment_url'] = $this->getOption('payment_url');
     return $ret;
   }
 }
