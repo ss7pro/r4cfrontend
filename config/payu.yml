@@ -3,7 +3,7 @@ all:
   pos:
     sandbox:
       pos_id:         "38713"
-      pos_auth_key:   "jv727n7"
+      pos_auth_key:   "jV727n7"
       sign_key:       "b67d3a1f0eb8c02f7ed4445b6971a87b"
       verify_key:     "f10c01f1b541717f73fdff94f7ea0f89"
       url:            "https://sandbox.payu.pl"
@@ -18,6 +18,7 @@ all:
 
 dev:
   current: sandbox
+  #current: production
 
 prod:
   current: sandbox

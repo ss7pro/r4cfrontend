@@ -35,9 +35,13 @@ class PaymentForm extends RcPaymentForm
 
   protected function doUpdateObject($values)
   {
+    $trns = new RtPayuTransaction();
+
     parent::doUpdateObject($values);
 
     $obj = $this->getObject();
+
+    $obj->setRtPayuTransaction($trns);
     $obj->setClientIp($this->getOption('client_ip'));
     $obj->setPosId($this->getOption('pos_id'));
     $obj->setDesc('Płatność za usługi, kwota: ' . $obj->getAmount());

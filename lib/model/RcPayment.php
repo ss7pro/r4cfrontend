@@ -26,9 +26,6 @@ class RcPayment extends BaseRcPayment
     $tenant = RcTenantQuery::create()->findOneByApiId($this->getTenantApiId());
     $this->setRcTenant($tenant);
 
-    $trans = new RcTransaction();
-    $trans->setRcPayment($this);
-
     return true;
   }
 

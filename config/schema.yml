@@ -64,7 +64,7 @@ propel:
     used_by:     { type: integer, required: false, foreignTable: rc_tenant, foreignReference: tenant_id }
     
   rc_payment:
-    payment_id:   { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    payment_id:   { type: integer, required: true, primaryKey: true, foreignTable: rt_payu_transaction, foreignReference: transaction_id }
     tenant_id:    { type: integer, required: true, foreignTable: rc_tenant, foreignReference: tenant_id }
     tenant_api_id: { type: varchar(50), required: true }
     session_id:   { type: varchar(50), required: true, index: unique }
@@ -84,21 +84,4 @@ propel:
     client_ip:    { type: varchar(16), required: false }
     created_at:   { type: timestamp, required: true }
 
-  rc_transaction:
-    transaction_id: { type: integer, required: true, primaryKey: true, foreignTable: rc_payment, foreignReference: payment_id }
-    trans_id:    { type: varchar(50), required: false }
-    pay_type:    { type: varchar(8), required: false }
-    status:      { type: integer,   required: true, default: 0 }
-    create_at:   { type: timestamp, required: false }
-    init_at:     { type: timestamp, required: false }
-    sent_at:     { type: timestamp, required: false }
-    recv_at:     { type: timestamp, required: false }
-    cancel_at:   { type: timestamp, required: false }
-
-  rc_transaction_log:
-    log_id:      { type: integer, required: true, primaryKey: true, autoIncrement: true }
-    payment_id:  { type: integer, required: true, foreignTable: rc_transaction, foreignReference: transaction_id }
-    created_at:  { type: timestamp, required: true }
-    status:      { type: integer, required: true }
-    message:     { type: longvarchar, required: false }
 

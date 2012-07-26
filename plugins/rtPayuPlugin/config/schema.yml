@@ -1,0 +1,22 @@
+propel:
+  _attributes:      { package: plugins.rtPayuPlugin.lib.model }
+
+  rt_payu_transaction:
+    transaction_id: { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    trans_id:    { type: varchar(50), required: false }
+    pay_type:    { type: varchar(8), required: false }
+    status:      { type: integer,   required: true, default: 0 }
+    create_at:   { type: timestamp, required: false }
+    init_at:     { type: timestamp, required: false }
+    sent_at:     { type: timestamp, required: false }
+    recv_at:     { type: timestamp, required: false }
+    cancel_at:   { type: timestamp, required: false }
+
+  rt_payu_transaction_log:
+    log_id:      { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    transaction_id:  { type: integer, required: true, foreignTable: rt_payu_transaction, foreignReference: transaction_id }
+    created_at:  { type: timestamp, required: true }
+    status:      { type: integer, required: true }
+    message:     { type: longvarchar, required: false }
+  
+
