@@ -3,6 +3,7 @@ class BasertPayuActions extends sfActions
 {
   public function executeNotify(sfWebRequest $request)
   {
+    sfConfig::set('sf_web_debug', false);
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
     try
@@ -20,7 +21,7 @@ class BasertPayuActions extends sfActions
     }
     catch(Exception $e)
     {
-      $this->getLogger()->err('PAYMENT STATUS NOTIFY ERROR: ' . . get_class($e) . ': ' . $e->getMessage());
+      $this->getLogger()->err('PAYMENT STATUS NOTIFY ERROR: ' . get_class($e) . ': ' . $e->getMessage());
       return $this->renderText('FAIL');
     }
 
