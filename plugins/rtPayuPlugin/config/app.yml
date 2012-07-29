@@ -1,3 +1,4 @@
 all:
   rt_payu_plugin:
     route_url: /payment/notify
+    notify_callback: ~

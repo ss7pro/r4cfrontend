@@ -3,35 +3,33 @@ class rtPayuConfig extends sfParameterHolder
 {
   const FILE_NAME = 'config/payu.yml';
 
-  public function getOption($name) {
-    $curr = $this->get('current');
-    $pos = $this->get('pos');
-    return $pos[$curr][$name];
+  public function getOption($name, $pos_id = null) {
+    $pos_id = $pos_id ? $pos_id : $this->get('current');
+    $config = $this->get('pos');
+    return $config[$pos_id][$name];
   }
 
-  public function getPayTypeUrl()
+  public function getPayTypeUrl($pos_id = null)
   {
-    $url = $this->getOption('url');
-    $pos = $this->getOption('pos_id');
-    $enc = $this->getOption('encoding');
-    $sig = substr($this->getOption('sign_key'), 0, 2);
+    $url = $this->getOption('url', $pos_id);
+    $pos = $this->getOption('pos_id', $pos_id);
+    $enc = $this->getOption('encoding', $pos_id);
+    $sig = substr($this->getOption('sign_key', $pos_id), 0, 2);
     return sprintf('%s/paygw/%s/js/%s/%s/paytype.js', $url, $enc, $pos, $sig);
   }
 
-  public function getPaymentUrl()
+  public function getPaymentUrl($pos_id = null)
   {
-    $url = $this->getOption('url');
-    $enc = $this->getOption('encoding');
+    $url = $this->getOption('url', $pos_id);
+    $enc = $this->getOption('encoding', $pos_id);
     return sprintf('%s/paygw/%s/NewPayment', $url, $enc);
   }
 
-  public function getPosOption($pos_id, $name)
+  public function getPaymentStatusUrl($pos_id = null)
   {
-    foreach($this->get('pos') as $pos)
-    {
-      if($pos['pos_id'] == $pos_id) return $pos[$name];
-    }
-    return null;
+    $url = $this->getOption('url', $pos_id);
+    $enc = $this->getOption('encoding', $pos_id);
+    return sprintf('%s/paygw/%s/Payment/get/xml', $url, $enc);
   }
 
   public static function instance()

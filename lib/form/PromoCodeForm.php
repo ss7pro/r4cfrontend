@@ -46,28 +46,11 @@ class PromoCodeForm extends BaseForm
 
       $code->save($con);
 
-      $client = rtOpenStackClient::factory();
-      $config = rtOpenStackConfig::getConfiguration('topup');
-      $c = new rtOpenStackCommandAuth(array(
-        'user'        => $config['user'],
-        'pass'        => $config['pass'],
-        'tenant-name' => $config['tenant_name'],
+      $service = new BilingService();
+      $service->topup($tenant, $code->getValue(), array(
+        'source' => 'r4cfrontend',
+        'promo_code' => $code->getCode()
       ));
-      $c->execute($client);
-
-      if(!$client->getSession()->isAuthenticated()) {
-        throw new InvalidArgumentException('Invalid username or password');
-      }
-
-      $c = new rtOpenStackCommandClientTopup(array(
-        'tenant_id' => $tenant->getApiId(),
-        'amount'    => $code->getValue(),
-        'reference' => array(
-          'source' => 'r4cfrontend',
-          'code'   => $code->getCode(),
-        ),
-      ));
-      $c->execute($client);
 
       $con->commit();
     } catch(Exception $e) {

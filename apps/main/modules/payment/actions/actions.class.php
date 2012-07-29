@@ -18,7 +18,7 @@ class paymentActions extends sfActions
 
     $this->form->bindJSONRequest($request);
     $result = array('status' => 'FAIL');
-    $this->getLogger()->log(json_encode(array($this->form->getName(), $this->form->getValues())));
+    $this->getLogger()->notice('NEW PAYMENT: ' . json_encode($this->form->getValues()));
     if($this->form->isValid())
     {
       $con = Propel::getConnection();
@@ -41,21 +41,5 @@ class paymentActions extends sfActions
     }
     $result['errors'] = $this->form->getAllErrors();
     return $this->renderResponse(new JSONResponse($result, 400));
-  }
-
-  public function executeReport(sfWebRequest $request)
-  {
-    $params = $request->getRequestParameters();
-    $this->getLogger()->notice('PAYMENT REPORT: ' . json_encode($params));
-  }
-
-  public function executeSuccess(sfWebRequest $request)
-  {
-    return $this->renderText('PAYMENT SUCCESS');
-  }
-
-  public function executeError(sfWebRequest $request)
-  {
-    return $this->renderText('PAYMENT ERROR');
   }
 }

@@ -12,6 +12,8 @@ DROP TABLE IF EXISTS `rt_payu_transaction`;
 CREATE TABLE `rt_payu_transaction`
 (
 	`transaction_id` INTEGER NOT NULL AUTO_INCREMENT,
+	`pos_id` INTEGER NOT NULL,
+	`session_id` VARCHAR(50) NOT NULL,
 	`trans_id` VARCHAR(50),
 	`pay_type` VARCHAR(8),
 	`status` INTEGER DEFAULT 0 NOT NULL,
@@ -20,7 +22,8 @@ CREATE TABLE `rt_payu_transaction`
 	`sent_at` DATETIME,
 	`recv_at` DATETIME,
 	`cancel_at` DATETIME,
-	PRIMARY KEY (`transaction_id`)
+	PRIMARY KEY (`transaction_id`),
+	UNIQUE INDEX `pos_session_uq` (`pos_id`, `session_id`)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------

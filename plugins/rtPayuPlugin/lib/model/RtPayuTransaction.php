@@ -17,6 +17,23 @@
  *
  * @package    propel.generator.plugins.rtPayuPlugin.lib.model
  */
-class RtPayuTransaction extends BaseRtPayuTransaction {
+class RtPayuTransaction extends BaseRtPayuTransaction
+{
+  public function preInsert(PropelPDO $con = null)
+  {
+    $this->setSessionId($this->generateSessionId());
+    return true;
+  }
 
+  private function generateSessionId()
+  {
+    do {
+      $session_id = md5(time() . mt_rand());
+      $trans = RtPayuTransactionQuery::create()
+        ->filterByPosId($this->getPosId())
+        ->findOneBySessionId($session_id);
+
+      if(!$trans) return $session_id;
+    } while(true);
+  }
 } // RtPayuTransaction

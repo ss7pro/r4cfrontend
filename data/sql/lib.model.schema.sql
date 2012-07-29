@@ -159,8 +159,6 @@ CREATE TABLE `rc_payment`
 	`payment_id` INTEGER NOT NULL,
 	`tenant_id` INTEGER NOT NULL,
 	`tenant_api_id` VARCHAR(50) NOT NULL,
-	`session_id` VARCHAR(50) NOT NULL,
-	`pos_id` INTEGER NOT NULL,
 	`amount` INTEGER NOT NULL,
 	`first_name` VARCHAR(50) NOT NULL,
 	`last_name` VARCHAR(50) NOT NULL,
@@ -176,7 +174,6 @@ CREATE TABLE `rc_payment`
 	`client_ip` VARCHAR(16),
 	`created_at` DATETIME NOT NULL,
 	PRIMARY KEY (`payment_id`),
-	UNIQUE INDEX `rc_payment_U_1` (`session_id`),
 	INDEX `rc_payment_FI_2` (`tenant_id`),
 	CONSTRAINT `rc_payment_FK_1`
 		FOREIGN KEY (`payment_id`)

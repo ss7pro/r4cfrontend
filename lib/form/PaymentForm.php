@@ -21,10 +21,8 @@ class PaymentForm extends RcPaymentForm
 
     unset(
       $this['tenant_id'],
-      $this['session_id'],
       $this['client_ip'],
       $this['desc'],
-      $this['pos_id'],
       $this['created_at']
     );
     $this->localCSRFSecret = false;
@@ -36,23 +34,27 @@ class PaymentForm extends RcPaymentForm
   protected function doUpdateObject($values)
   {
     $trns = new RtPayuTransaction();
+    $trns->setPosId($this->getOption('pos_id'));
 
     parent::doUpdateObject($values);
 
     $obj = $this->getObject();
-
+    $tenant = RcTenantQuery::create()->findOneByApiId($obj->getTenantApiId());
+    $obj->setRcTenant($tenant);
     $obj->setRtPayuTransaction($trns);
     $obj->setClientIp($this->getOption('client_ip'));
-    $obj->setPosId($this->getOption('pos_id'));
-    $obj->setDesc('Płatność za usługi, kwota: ' . $obj->getAmount());
+    $obj->setDesc('Płatność za usługi, kwota: ' . sprintf("%.2f", $obj->getAmount() / 100));
   }
 
   public function getObjectArray()
   {
     $ret = parent::getObjectArray();
+    $trns = $this->getObject()->getRtPayuTransaction();
     $ret['pos_auth_key'] = $this->getOption('pos_auth_key');
     $ret['pay_type_url'] = $this->getOption('pay_type_url');
     $ret['payment_url'] = $this->getOption('payment_url');
+    $ret['session_id'] = $trns->getSessionId();
+    $ret['pos_id'] = $trns->getPosId();
     return $ret;
   }
 }

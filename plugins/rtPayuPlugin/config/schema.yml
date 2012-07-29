@@ -3,6 +3,8 @@ propel:
 
   rt_payu_transaction:
     transaction_id: { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    pos_id:      { type: integer, required: true }
+    session_id:  { type: varchar(50), required: true }
     trans_id:    { type: varchar(50), required: false }
     pay_type:    { type: varchar(8), required: false }
     status:      { type: integer,   required: true, default: 0 }
@@ -11,6 +13,8 @@ propel:
     sent_at:     { type: timestamp, required: false }
     recv_at:     { type: timestamp, required: false }
     cancel_at:   { type: timestamp, required: false }
+    _uniques:
+      pos_session_uq: [ pos_id, session_id ]
 
   rt_payu_transaction_log:
     log_id:      { type: integer, required: true, primaryKey: true, autoIncrement: true }

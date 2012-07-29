@@ -19,23 +19,4 @@
  */
 class RcPayment extends BaseRcPayment
 {
-  public function preInsert(PropelPDO $con = null)
-  {
-    $this->setSessionId($this->generateSessionId());
-
-    $tenant = RcTenantQuery::create()->findOneByApiId($this->getTenantApiId());
-    $this->setRcTenant($tenant);
-
-    return true;
-  }
-
-  private function generateSessionId()
-  {
-    do {
-      $session_id = md5(time());
-      $payment = RcPaymentQuery::create()->findOneBySessionId($session_id);
-      if(!$payment) return $session_id;
-    } while(true);
-  }
-
 } // RcPayment

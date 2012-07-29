@@ -27,8 +27,8 @@ class rtPayuTransactionEvent
   public function __toString()
   {
     $vars = get_object_vars($this);
-    $vars[] = 0 + $this->isValid();
-    return implode(':', $vars);
+    $vars['valid'] = $this->isValid();
+    return json_encode($vars);
   }
 
   public function getPosId()
@@ -48,12 +48,12 @@ class rtPayuTransactionEvent
 
   public function isValid()
   {
-    return $this->sig == $this->calcSignature();
+    return $this->sig == $this->makeSig();
   }
 
-  private function calcSignature()
+  private function makeSig()
   {
-    $key = rtPayuConfig::instance()->getPosOption($this->pos_id, 'verify_key');
+    $key = rtPayuConfig::instance()->getOption('verify_key', $this->pos_id);
     return md5($this->pos_id . $this->session_id . $this->ts . $key);
   }
 }

@@ -6,3 +6,6 @@ all:
   sf_guard_plugin:
     profile_class:        RcProfile
     profile_field_name:   profile_id
+  rt_payu_plugin:
+    route_url: /payment/notify
+    notify_callback: [ BilingService, notify ]
