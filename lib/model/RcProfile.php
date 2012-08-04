@@ -30,4 +30,9 @@ class RcProfile extends BaseRcProfile
   {
     return $this->getsfGuardUser()->getUsername();
   }
+
+  public function preInsert(PropelPDO $con = null)
+  {
+    if(!$this->getApiId()) $this->setApiId('invalid_' . time());
+  }
 } // RcProfile

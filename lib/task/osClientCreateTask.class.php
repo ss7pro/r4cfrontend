@@ -24,7 +24,7 @@ class osClientCreateTask extends osBaseTask
 The [os:client-create|INFO] task create openstack client.
 Call it with:
 
-  [php symfony os:test... |INFO]
+  [php symfony os:client-create... |INFO]
 EOF;
   }
 

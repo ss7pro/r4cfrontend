@@ -65,6 +65,6 @@ EOF;
 
     $client = $client ? $client : rtOpenStackClient::factory();
     $c = new rtOpenStackCommandAuth($params);
-    $c->execute($client);
+    return $c->execute($client);
   }
 }

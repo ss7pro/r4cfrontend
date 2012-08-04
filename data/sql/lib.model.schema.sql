@@ -34,9 +34,10 @@ CREATE TABLE `rc_tenant`
 	`www` VARCHAR(16),
 	`default_address_id` INTEGER,
 	`invoice_address_id` INTEGER,
-	`api_id` VARCHAR(99),
+	`api_id` VARCHAR(99) NOT NULL,
 	`api_name` VARCHAR(99),
 	PRIMARY KEY (`tenant_id`),
+	UNIQUE INDEX `rc_tenant_U_1` (`api_id`),
 	INDEX `rc_tenant_FI_1` (`default_address_id`),
 	INDEX `rc_tenant_FI_2` (`invoice_address_id`),
 	CONSTRAINT `rc_tenant_FK_1`
@@ -60,7 +61,9 @@ CREATE TABLE `rc_profile`
 	`title` VARCHAR(10),
 	`first_name` VARCHAR(50) NOT NULL,
 	`last_name` VARCHAR(50) NOT NULL,
+	`api_id` VARCHAR(99) NOT NULL,
 	PRIMARY KEY (`profile_id`),
+	UNIQUE INDEX `rc_profile_U_1` (`api_id`),
 	INDEX `rc_profile_FI_2` (`tenant_id`),
 	CONSTRAINT `rc_profile_FK_1`
 		FOREIGN KEY (`profile_id`)

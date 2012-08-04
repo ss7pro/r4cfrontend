@@ -15,7 +15,7 @@ propel:
     www:            { type: varchar(16), required: false }
     default_address_id: { type: integer, required: false, foreignTable: rc_address, foreignReference: address_id }
     invoice_address_id: { type: integer, required: false, foreignTable: rc_address, foreignReference: address_id }
-    api_id:         { type: varchar(99), required: false }
+    api_id:         { type: varchar(99), required: true, index: unique }
     api_name:       { type: varchar(99), required: false }
 
   rc_profile:
@@ -24,6 +24,7 @@ propel:
     title:        { type: varchar(10), required: false }
     first_name:   { type: varchar(50), required: true }
     last_name:    { type: varchar(50), required: true }
+    api_id:       { type: varchar(99), required: true, index: unique }
 
   rc_invoice:
     invoice_id:     { type: integer, required: true, primaryKey: true, autoIncrement: true }

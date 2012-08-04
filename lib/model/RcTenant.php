@@ -27,4 +27,9 @@ class RcTenant extends BaseRcTenant
       return $this->getApiName();
     }
   }
+
+  public function preInsert(PropelPDO $con = null)
+  {
+    if(!$this->getApiId()) $this->setApiId('invalid_' . time());
+  }
 } // RcTenant

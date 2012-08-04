@@ -102,6 +102,7 @@ class RegistrationForm extends BaseForm
         throw new DomainException('Invalid Api response: ' . json_encode($response));
       }
 
+      $profile->setApiId($response['user']['id']);
       $tenant->setApiId($response['user']['tenantId']);
       $tenant->setApiName($response['user']['name']);
 
