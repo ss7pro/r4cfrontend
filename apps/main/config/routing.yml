@@ -9,15 +9,21 @@ payment:
     prefix_path:          /payment
     column:               payment_id
     with_wildcard_routes: false
-    collection_actions:   { report: get }
+
+profile:
+  class: sfPropelRouteCollection
+  options:
+    model:                RcProfile
+    column:               api_id
+    module:               profile
+    prefix_path:          /profile
+    with_wildcard_routes: false
+  requirements:
+    api_id: '[0-9a-f]+'
 
 registration:
   url:   /registration
   param: { module: registration, action: index }
-
-profilepage:
-  url:   /profile
-  param: { module: profile, action: index }
 
 locale:
   url:   /locale/:lang

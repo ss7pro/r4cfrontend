@@ -44,9 +44,14 @@ class BaseForm extends sfFormSymfony
   public function getObjectArray()
   {
     $prefix = $this->getName();
-    $ret = self::objectToArray($this->getObject(), $prefix);
+    $ret = array();
+    if($this instanceof sfFormObject) {
+      $ret = self::objectToArray($this->getObject(), $prefix);
+    }
     foreach($this->getEmbeddedForms() as $name => $form) {
-      $ret += self::objectToArray($form->getObject(), $prefix . '[' . $name . ']');
+      if($form instanceof sfFormObject) {
+        $ret += self::objectToArray($form->getObject(), $prefix . '[' . $name . ']');
+      }
     }
     return $ret;
   }

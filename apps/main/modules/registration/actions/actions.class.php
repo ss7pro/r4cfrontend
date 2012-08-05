@@ -44,10 +44,8 @@ class registrationActions extends sfActions
     $result = array('status' => 'FAIL');
     if($this->form->isValid()) {
       try {
-        list($user, $resp) = $this->form->save();
+        $this->form->save();
         $result['status'] = 'OK';
-        $result['response'] = $resp;
-        $result['user'] = $user->toArray();
       } catch(Exception $e) {
         $this->getResponse()->setStatusCode(400);
         $result['errors'] = array('global' => $e->getMessage());

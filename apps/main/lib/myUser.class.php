@@ -11,4 +11,15 @@ class myUser extends sfGuardSecurityUser
   {
     return $this->getProfile()->getEmail();
   }
+
+  public function getOsSession()
+  {
+    return rtOpenStackClient::factory()->getSession();
+  }
+
+  public function getOsUserId()
+  {
+    $session = $this->getOsSession();
+    return $session->getUserId();
+  }
 }

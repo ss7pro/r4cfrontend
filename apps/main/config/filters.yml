@@ -4,6 +4,8 @@
 rendering: ~
 remember_me:
   class: sfGuardRememberMeFilter
+openstack_auth:
+  class: rtOpenStackAuthFilter
 
 security:  ~
 

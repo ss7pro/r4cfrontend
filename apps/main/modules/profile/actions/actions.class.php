@@ -10,11 +10,48 @@
  */
 class profileActions extends sfActions
 {
-  public function executeIndex(sfWebRequest $request)
+
+  public function executeShow(sfWebRequest $request)
+  {
+    $profile = $this->getRoute()->getObject();
+    $this->forward404Unless($profile->getApiId() == $this->getUser()->getOsUserId());
+
+    $json = new RcProfileJson($profile);
+    return $this->renderResponse(new JSONResponse($json->toArray()));
+  }
+
+  public function executeUpdate(sfWebRequest $request)
+  {
+    $profile = $this->getRoute()->getObject();
+    $this->forward404Unless($profile->getApiId() == $this->getUser()->getOsUserId());
+
+    $user = $profile->getsfGuardUser();
+    $form = new ProfileForm(array(), array('user' => $user), false);
+    $form->bindJSONRequest($request);
+    if($form->isValid())
+    {
+      try
+      {
+        $profile = $form->save();
+        $json = new RcProfileJson($profile);
+        return $this->renderResponse(new JSONResponse($json->toArray()));
+      }
+      catch(Exception $e)
+      {
+        $result = array('errors' => array(
+          'global' => $e->getMessage()
+        ));
+        return $this->renderResponse(new JSONResponse($result, 400));
+      }
+    }
+    return $this->renderResponse(new JSONResponse($form->getAllErrors(), 400));
+  }
+
+  public function executeIndexOld(sfWebRequest $request)
   {
   }
 
-  public function executeEdit(sfWebRequest $request)
+  public function executeEditForm(sfWebRequest $request)
   {
     $user = $this->getUser()->getGuardUser();
     $this->form = new ProfileEditForm(array(), array('user' => $user));
