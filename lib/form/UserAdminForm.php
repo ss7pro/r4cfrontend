@@ -14,6 +14,10 @@ class UserAdminForm extends sfGuardUserAdminForm
 
     $this->validatorSchema->setPostValidator(new sfValidatorPropelUnique(array('model' => 'sfGuardUser', 'column' => array('username')), array('invalid' => 'Account with this email already exist.')));
     $this->mergePostValidator(new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'password_again', array(), array('invalid' => 'The two passwords must be the same.')));
+    if($this->getObject()->isNew())
+    {
+      $this->mergePostValidator(new rtOpenStackUniqueClientValidator(array('field' => 'username')));
+    }
   }
 
   public function updateObject($values = null)
