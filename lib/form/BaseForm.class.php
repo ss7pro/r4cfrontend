@@ -28,14 +28,32 @@ class BaseForm extends sfFormSymfony
   public function bindJSONRequest(sfWebRequest $request)
   {
     $data = json_decode($request->getContent(), true);
+    if(is_array($data))
+    {
+      $url = '';
+      foreach($data as $key => $val)
+      {
+        if($url) $url .= '&';
+        $url .= $key . '=' . rawurlencode($val);
+      } 
+      parse_str($url, $data);
+    }
     return $this->bind($data);
   }
 
   public function getObjectArray()
   {
     $prefix = $this->getName();
-    $ret = array();
-    foreach($this->getObject()->toArray(BasePeer::TYPE_FIELDNAME) as $key => $value) {
+    $ret = self::objectToArray($this->getObject(), $prefix);
+    foreach($this->getEmbeddedForms() as $name => $form) {
+      $ret += self::objectToArray($form->getObject(), $prefix . '[' . $name . ']');
+    }
+    return $ret;
+  }
+
+  private static function objectToArray($object, $prefix = null)
+  {
+    foreach($object->toArray(BasePeer::TYPE_FIELDNAME) as $key => $value) {
       $key = $prefix ? $prefix . '[' . $key . ']' : $key;
       $ret[$key] = $value;
     }
@@ -48,44 +66,39 @@ class BaseForm extends sfFormSymfony
     foreach($this->getGlobalErrors() as $name => $error) {
       $errors['global'][$name] = (string)$error;
     }
-    $errors['fields'] = $this->unnestErrors($this->getErrorSchema(), $this->getName());
+    $errors['fields'] = $this->flatenErrors($this->getErrorSchema(), $this->getName());
     return $errors;
   }
 
-  protected function unnestErrors($errors, $prefix = '')
+  protected function flatenErrors($errors, $prefix = '') 
   {
-    $newErrors = array();
-
-    foreach ($errors as $name => $error)
+    $result = array();
+    if ($errors instanceof ArrayAccess || is_array($errors))
     {
-      if ($error instanceof ArrayAccess || is_array($error))
+      foreach ($errors as $name => $error)
       {
-        $newErrors = array_merge($newErrors, $this->unnestErrors($error, ($prefix ? $prefix . '[' . $name . ']' : $name)));
-      }
-      else
-      {
-        if ($error instanceof sfValidatorError)
+        if(is_integer($name))
         {
-          $err = $this->translate($error->getMessageFormat(), $error->getArguments());
+          $tmp = $this->flatenErrors($error, $prefix);
         }
         else
         {
-          $err = $this->translate($error);
+          $name = $prefix ? $prefix . '[' . $name . ']' : $name;
+          $tmp = $this->flatenErrors($error, $name);
         }
-
-        if (!is_integer($name))
-        {
-          $n = $prefix ? $prefix . '[' . $name . ']' : $name;
-          $newErrors[$n] = (string)$err;
-        }
-        else
-        {
-          $newErrors[] = (string)$err;
-        }
+        //$result = array_merge($result, $tmp);
+        $result += $tmp;
       }
     }
-
-    return $newErrors;
+    else if ($errors instanceof sfValidatorError)
+    {
+      $result[$prefix] = $this->translate($errors->getMessageFormat(), $errors->getArguments());
+    }
+    else
+    {
+      $result[$prefix] = $this->translate($errors);
+    }
+    return $result;
   }
 
   public function translate($subject, $parameters = array())
@@ -104,15 +117,5 @@ class BaseForm extends sfFormSymfony
     }
 
     return strtr($subject, $parameters);
-  }
-
-  public function getNamedErrorRowFormatInARow()
-  {
-    return "%name% %error%";
-  }
-
-  public function getErrorRowFormatInARow()
-  {
-    return "%error%";
   }
 }

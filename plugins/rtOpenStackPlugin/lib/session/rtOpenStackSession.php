@@ -94,6 +94,12 @@ class rtOpenStackSession
     return isset($this->access['user']) ? $this->access['user'] : null;
   }
 
+  public function getUserId()
+  {
+    if(!($user = $this->getUser())) return null;
+    return isset($user['id']) ? $user['id'] : null;
+  }
+
   public function getServiceCatalog()
   {
     return isset($this->access['serviceCatalog']) ? $this->access['serviceCatalog'] : array();

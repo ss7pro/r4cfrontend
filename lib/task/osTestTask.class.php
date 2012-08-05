@@ -8,7 +8,7 @@ class osTestTask extends osBaseTask
 
     // add your own arguments here
     $this->addArguments(array(
-      //new sfCommandArgument('my_arg', sfCommandArgument::REQUIRED, 'My argument'),
+      new sfCommandArgument('token', sfCommandArgument::REQUIRED, 'Token'),
     ));
 
     // add your own options here
@@ -29,7 +29,7 @@ EOF;
 
   protected function exec($arguments = array(), $options = array())
   {
-    print_r($this->auth($options));
+    //print_r($this->auth($options));
     //print_r($c->call(new rtOpenStackCommandCheckClient(array(
     //  'client' => 'fred'
     //))));
@@ -40,6 +40,8 @@ EOF;
     //print_r($c->call(new rtOpenStackCommandFlavorList()));
     //$c = new rtOpenStackCommandImageList();
     //print_r($c->execute());
+    $c = new rtOpenStackCommandTokenGet(array('token' => $arguments['token']));
+    print_r($c->execute());
     echo "\n";
   }
 }
