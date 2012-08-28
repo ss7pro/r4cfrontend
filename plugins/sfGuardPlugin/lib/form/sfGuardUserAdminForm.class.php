@@ -59,7 +59,7 @@ class sfGuardUserAdminForm extends BasesfGuardUserForm
       unset($values[$this->getPrimaryKey()]);
 
       $profile->fromArray($values, BasePeer::TYPE_FIELDNAME);
-      $profile->save();
+      //$profile->save();
     }
 
     return $this->object;

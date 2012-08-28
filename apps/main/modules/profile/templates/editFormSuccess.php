@@ -1,5 +1,5 @@
 <h1><?php echo __('Edit profile');?></h1>
-<?php echo $form->renderFormTag(url_for('profile/edit')); ?>
+<?php echo $form->renderFormTag(url_for('profile/editForm')); ?>
 <table>
   <tbody>
     <?php echo $form; ?>

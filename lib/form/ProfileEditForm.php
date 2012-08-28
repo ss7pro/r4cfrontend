@@ -11,27 +11,35 @@ class ProfileEditForm extends BaseForm
       throw new InvalidArgumentException('ProfileEditForm require "user" option as instance of sfGuardUser');
     }
     $profile = $user->getProfile();
+    $tenant  = $profile->getRcTenant();
 
     $profile_fields = array(
-      'username', 'title', 'first_name', 'last_name',
+      'title', 'first_name', 'last_name',
+    );
+    $tenant_fields = array(
       'type', 'company_name', 'nip', 'www'
     );
-    $address_fields = array('street', 'post_code', 'city', 'phone');
-
+    $address_fields = array(
+      'street', 'post_code', 'city', 'phone'
+    );
     
     $profile_form = new UserAdminForm($user);
     $profile_form->useFields($profile_fields);
     $this->embedForm('profile', $profile_form);
 
-    $account_address = new RcAddressForm($profile->getRcAddressRelatedByDefaultAddressId());
+    $tenant_form = new RcTenantForm($tenant);
+    $tenant_form->useFields($tenant_fields);
+    $this->embedForm('tenant', $tenant_form);
+
+    $account_address = new RcAddressForm($tenant->getRcAddressRelatedByDefaultAddressId());
     $account_address->useFields($address_fields);
     $this->embedForm('account_address', $account_address);
 
-    $invoice_address = new RcAddressForm($profile->getRcAddressRelatedByInvoiceAddressId());
+    $invoice_address = new RcAddressForm($tenant->getRcAddressRelatedByInvoiceAddressId());
     $invoice_address->useFields($address_fields);
     $this->embedForm('invoice_address', $invoice_address);
 
-    $this->getWidgetSchema()->setNameFormat('registration[%s]');
+    $this->getWidgetSchema()->setNameFormat('profile[%s]');
     $this->getWidgetSchema()->setFormFormatterName('TableNoEmbeddedLabel');
   }
 
@@ -39,24 +47,23 @@ class ProfileEditForm extends BaseForm
   {
     $values = $this->getValues();
 
-    foreach($this->getEmbeddedForms() as $name => $form) {
-      $form->updateObject($values[$name]);
-    }
-
     $con = $con ? $con : Propel::getConnection();
     try {
       $con->beginTransaction();
 
+      foreach($this->getEmbeddedForms() as $name => $form) {
+        $form->updateObject($values[$name]);
+      }
+
       $user = $this->getEmbeddedForm('profile')->getObject();
+      $profile = $user->getProfile();
+      $tenant = $this->getEmbeddedForm('tenant')->getObject();
       $account_address = $this->getEmbeddedForm('account_address')->getObject();
       $invoice_address = $this->getEmbeddedForm('invoice_address')->getObject();
       
-      $profile = $user->getProfile();
-      $profile->setRcAddressRelatedByDefaultAddressId($account_address);
-      $profile->setRcAddressRelatedByInvoiceAddressId($invoice_address);
-
-      $user->save($con);
       $profile->save($con);
+      $account_address->save($con);
+      $invoice_address->save($con);
 
       $con->commit();
       return $user;

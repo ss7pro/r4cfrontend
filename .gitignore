@@ -21,3 +21,5 @@ plugins/rtPayuPlugin/lib/form/base/*
 plugins/rtPayuPlugin/lib/filter/base/*
 
 web/sf
+
+.*.swp

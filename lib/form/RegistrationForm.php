@@ -28,9 +28,16 @@ class RegistrationForm extends ProfileForm
       'use_ssl' => false,
     )));
 
-    $this->setValidator('captcha', new sfValidatorReCaptcha(array(
-      'private_key' => sfConfig::get('app_recaptcha_private_key', '6LffzNMSAAAAABpqXUCfmyfz6-M4Q71DeEfGHSxo'),
-    )));
+    if(sfConfig::get('app_recaptcha_enabled', true))
+    {
+      $this->setValidator('captcha', new sfValidatorReCaptcha(array(
+        'private_key' => sfConfig::get('app_recaptcha_private_key', '6LffzNMSAAAAABpqXUCfmyfz6-M4Q71DeEfGHSxo'),
+      )));
+    }
+    else
+    {
+      $this->setValidator('captcha', new sfValidatorPass());
+    }
   }
 
   protected function getProfileFields()
@@ -52,19 +59,17 @@ class RegistrationForm extends ProfileForm
     parent::bindRequest($request);
   }
 
-  public function doSave($con = null)
+  protected function update($values)
   {
-    $values = $this->getValues();
-
-    $user = $this->getEmbeddedForm('profile')->getObject();
-    $tenant = $this->getEmbeddedForm('tenant')->getObject();
-    $account_address = $this->getEmbeddedForm('account_address')->getObject();
-    $invoice_address = $this->getEmbeddedForm('invoice_address')->getObject();
+    $user    = parent::update($values);
+    $tenant  = $this->getEmbeddedForm('tenant')->getObject();
+    $account = $this->getEmbeddedForm('account_address')->getObject();
+    $invoice = $this->getEmbeddedForm('invoice_address')->getObject();
 
     $profile = $user->getProfile();
     $profile->setRcTenant($tenant);
-    $tenant->setRcAddressRelatedByDefaultAddressId($account_address);
-    $tenant->setRcAddressRelatedByInvoiceAddressId($invoice_address);
+    $tenant->setRcAddressRelatedByDefaultAddressId($account);
+    $tenant->setRcAddressRelatedByInvoiceAddressId($invoice);
 
     $config = rtOpenStackConfig::getConfiguration();
     $cmd = new rtOpenStackCommandClientCreate(array(
@@ -81,5 +86,7 @@ class RegistrationForm extends ProfileForm
     $profile->setApiId($response['user']['id']);
     $tenant->setApiId($response['user']['tenantId']);
     $tenant->setApiName($response['user']['name']);
+
+    return $user;
   }
 }

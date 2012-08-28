@@ -30,6 +30,7 @@ class RcTenant extends BaseRcTenant
 
   public function preInsert(PropelPDO $con = null)
   {
-    if(!$this->getApiId()) $this->setApiId('invalid_' . time());
+    if(!$this->getApiId()) $this->setApiId(time() . '_tmp_' . mt_rand());
+    return true;
   }
 } // RcTenant

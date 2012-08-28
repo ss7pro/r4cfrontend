@@ -63,9 +63,9 @@ class profileActions extends sfActions
           $this->getUser()->setFlash('notice', 'Profile has ben updated sucessfully.');
         } catch(Exception $e) {
           $this->getLogger()->err(get_class($e) . ': ' . $e->getMessage());
-          $this->getUser()->setFlash('notice', 'An error appear during update process.');
+          $this->getUser()->setFlash('error', 'An error appear during update process.');
         }
-        $this->redirect('@profilepage');
+        $this->redirect('profile/editForm');
       }
     }
   }

@@ -7,5 +7,9 @@ all:
     profile_class:        RcProfile
     profile_field_name:   profile_id
   rt_payu_plugin:
-    route_url: /payment/notify
+    route_url:       /payment/notify
     notify_callback: [ BilingService, notify ]
+  recaptcha:
+    private_key:  6LffzNMSAAAAAGDlUb8oV2G4QceRErUZfXNwGc9A 
+    enabled:      true
+

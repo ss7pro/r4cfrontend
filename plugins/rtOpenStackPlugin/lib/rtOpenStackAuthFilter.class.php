@@ -23,6 +23,7 @@ class rtOpenStackAuthFilter extends sfFilter
    */
   public function execute($filterChain)
   {
+    $user = null;
     if(
       $this->isFirstCall() &&
       $this->context->getUser()->isAnonymous() &&
@@ -38,11 +39,21 @@ class rtOpenStackAuthFilter extends sfFilter
         // TODO: configure model and column in configuration
         if($profile = RcProfileQuery::create()->findOneByApiId($ses->getUserId()))
         {
-          $this->context->getUser()->signIn($profile->getsfGuardUser());
+          $user = $this->context->getUser();
+          //->signIn($profile->getsfGuardUser());
+          $user->setAttribute('user_id', $profile->getProfileId(), 'sfGuardSecurityUser');
+          $user->setAuthenticated(true);
+          $user->clearCredentials();
+          //$user->addCredentials($user->getAllPermissionNames());
         }
       }
     }
 
     $filterChain->execute();
+
+    if($user)
+    {
+      $user->setAuthenticated(false);
+    }
   }
 }
