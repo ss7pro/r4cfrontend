@@ -20,3 +20,4 @@ plugins/rtPayuPlugin/lib/model/om/*
 plugins/rtPayuPlugin/lib/form/base/*
 plugins/rtPayuPlugin/lib/filter/base/*
 
+web/sf
