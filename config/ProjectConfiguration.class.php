@@ -21,5 +21,6 @@ class ProjectConfiguration extends sfProjectConfiguration
     $this->enablePlugins('rtOpenStackPlugin');
     $this->enablePlugins('rtPayuPlugin');
     $this->enablePlugins('sfAdminDashPlugin');
+    $this->enablePlugins('sfTCPDFPlugin');
   }
 }
