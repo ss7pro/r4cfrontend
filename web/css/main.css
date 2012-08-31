@@ -1,23 +1,31 @@
 /* globals */
 html, body { font-family: helvetica,arial,sans; font-size: 10pt; }
 * { padding: 0; margin: 0 }
+h1, h2 { margin: 4px 0; }
+h3, h4 { margin: 2px 0; }
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+li { list-style-type: none; }
+table { border-collapse: collapse; }
+th, td { vertical-align: top; text-align:left; padding: 2px; }
+table.bordered { border: 1px solid #ddd; }
+table.bordered th,
+table.bordered td { border: 1px solid #ddd; }
+/* globals */
+
+/* utils */
 .hidden { display: none; }
 .clear { clear: both; }
 .left { float: left; }
 .right { float: right; }
-.center { text-align: center; }
+.center, .align-center { text-align: center; }
+.align-right { text-align: right; }
+.wide { width: 100%; }
 .error_list { color: red; }
 .error_list li { list-style-type: none; margin: 2px 0 0 0; }
 .notice { margin: 4px 0; padding: 4px 4px 4px 30px; background: url(../images/tick.png) no-repeat 10px 4px; border: 1px solid #ddd; background-color: #ffc; }
 .error { margin: 4px 0; padding: 4px 4px 4px 30px; background: url(../images/error.png) no-repeat 10px 4px; border: 1px solid #ddd; background-color: #f33;  color: #fff; }
-a { text-decoration: none; }
-table { border-collapse: collapse; border: 1px solid #DDDDDD; }
-th, td { vertical-align: top; border: 1px solid #DDDDDD; padding: 4px; }
-form tbody th { text-align: right; }
-form tfoot td { text-align: right; }
-form li { list-style-type: none; }
-form th label { display: block; width: 120px; margin-right: 4px; }
-/* globals */
+/* utils end */
 
 /* layout */
 header { background: #000; color: #FFF; padding: 4px; }
@@ -25,14 +33,18 @@ header a { color: #FFF; }
 #menu li { float: left; padding-right: 20px; }
 #content { padding: 4px; min-height: 400px; }
 footer { padding: 2px 0; font-size: 9pt; color: #666; text-align: center; border-top: 1px solid #DDD; }
-/* layout */
+/* layout end */
 
 /* registration page */
 #register { width: 770px; margin: 10px auto; }
 #register fieldset { padding: 0.2em; margin-bottom: 0.5em; border-color: #F0F0F0; border-radius: 5px; }
-#register th,
-#register td { padding: 2px; }
 #register th { width: 150px; text-align: right; }
 #register table input[type=text],
 #register table input[type=password] { width: 200px; }
-/* registration page */
+/* registration page end */
+
+/* invoice view */
+.invoice-view { width: 700px; border: 1px solid #ddd; margin: 10px auto; padding: 8px; }
+.invoice-view .summary th,
+.invoice-view .summary td { text-align: right; padding: 2px 8px; }
+/* invoice view end */

@@ -82,28 +82,26 @@ DROP TABLE IF EXISTS `rc_invoice`;
 CREATE TABLE `rc_invoice`
 (
 	`invoice_id` INTEGER NOT NULL AUTO_INCREMENT,
-	`profile_id` INTEGER NOT NULL,
-	`type` INTEGER DEFAULT 0 NOT NULL,
-	`number` INTEGER NOT NULL,
-	`pattern` VARCHAR(30) NOT NULL,
-	`message` VARCHAR(30),
+	`tenant_id` INTEGER NOT NULL,
+	`message` VARCHAR(200),
 	`seller_name` VARCHAR(100) NOT NULL,
-	`seller_address` VARCHAR(200) NOT NULL,
-	`seller_nip` VARCHAR(16) NOT NULL,
-	`seller_bank` VARCHAR(32) NOT NULL,
+	`seller_address` VARCHAR(100) NOT NULL,
+	`seller_code` VARCHAR(100) NOT NULL,
+	`seller_nip` VARCHAR(20) NOT NULL,
+	`seller_bank` VARCHAR(40) NOT NULL,
 	`buyer_name` VARCHAR(100) NOT NULL,
-	`buyer_address` VARCHAR(200) NOT NULL,
-	`buyer_nip` VARCHAR(16),
+	`buyer_address` VARCHAR(100) NOT NULL,
+	`buyer_code` VARCHAR(100) NOT NULL,
+	`buyer_nip` VARCHAR(20),
 	`created_at` DATETIME NOT NULL,
 	`issue_at` DATE NOT NULL,
 	`sale_at` DATE NOT NULL,
 	`payment_date` DATE NOT NULL,
-	`payment_type` INTEGER DEFAULT 0 NOT NULL,
 	PRIMARY KEY (`invoice_id`),
-	INDEX `rc_invoice_FI_1` (`profile_id`),
+	INDEX `rc_invoice_FI_1` (`tenant_id`),
 	CONSTRAINT `rc_invoice_FK_1`
-		FOREIGN KEY (`profile_id`)
-		REFERENCES `rc_profile` (`profile_id`)
+		FOREIGN KEY (`tenant_id`)
+		REFERENCES `rc_tenant` (`tenant_id`)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -116,7 +114,7 @@ CREATE TABLE `rc_invoice_item`
 (
 	`item_id` INTEGER NOT NULL AUTO_INCREMENT,
 	`invoice_id` INTEGER NOT NULL,
-	`name` TEXT NOT NULL,
+	`name` VARCHAR(200) NOT NULL,
 	`qty` INTEGER NOT NULL,
 	`tax_rate` INTEGER NOT NULL,
 	`price` DECIMAL(10,2) NOT NULL,

@@ -28,28 +28,26 @@ propel:
 
   rc_invoice:
     invoice_id:     { type: integer, required: true, primaryKey: true, autoIncrement: true }
-    profile_id:     { type: integer, required: true, foreignTable: rc_profile, foreignReference: profile_id }
-    type:           { type: integer, required: true, default: 0 }
-    number:         { type: integer, required: true }
-    pattern:        { type: varchar(30),  required: true }
-    message:        { type: varchar(30),  required: false }
+    tenant_id:      { type: integer, required: true, foreignTable: rc_tenant, foreignReference: tenant_id }
+    message:        { type: varchar(200),  required: false }
     seller_name:    { type: varchar(100), required: true }
-    seller_address: { type: varchar(200), required: true }
-    seller_nip:     { type: varchar(16),  required: true }
-    seller_bank:    { type: varchar(32),  required: true }
+    seller_address: { type: varchar(100), required: true }
+    seller_code:    { type: varchar(100), required: true }
+    seller_nip:     { type: varchar(20),  required: true }
+    seller_bank:    { type: varchar(40),  required: true }
     buyer_name:     { type: varchar(100), required: true }
-    buyer_address:  { type: varchar(200), required: true }
-    buyer_nip:      { type: varchar(16),  required: false }
+    buyer_address:  { type: varchar(100), required: true }
+    buyer_code:     { type: varchar(100), required: true }
+    buyer_nip:      { type: varchar(20),  required: false }
     created_at:     { type: timestamp, required: true }
     issue_at:       { type: date, required: true }
     sale_at:        { type: date, required: true }
     payment_date:   { type: date, required: true }
-    payment_type:   { type: integer, required: true, default: 0 }
 
   rc_invoice_item:
     item_id:     { type: integer, required: true, primaryKey: true, autoIncrement: true }
     invoice_id:  { type: integer, required: true, foreignTable: rc_invoice, foreignReference: invoice_id }
-    name:        { type: longvarchar, required: true }
+    name:        { type: varchar(200), required: true }
     qty:         { type: integer, required: true }
     tax_rate:    { type: integer, required: true }
     price:       { type: decimal, size: 10, scale: 2, required: true }

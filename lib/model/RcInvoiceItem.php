@@ -17,6 +17,25 @@
  *
  * @package    propel.generator.lib.model
  */
-class RcInvoiceItem extends BaseRcInvoiceItem {
+class RcInvoiceItem extends BaseRcInvoiceItem
+{
+  public function getUnitPrice()
+  {
+    return $this->getNetto() / $this->getQty();
+  }
 
+  public function getNetto()
+  {
+    return $this->getCost() - $this->getTax();
+  }
+
+  public function calcCosts()
+  {
+    $cost  = $this->getPrice() * $this->getQty(); 
+    $rate  = (integer)$this->getTaxRate();
+    $netto = $cost * 100 / (100 + $rate);
+    $tax   = $cost - $netto;
+    $this->setTax(sprintf('%.2f', $tax));
+    $this->setCost(sprintf('%.2f', $cost));
+  }
 } // RcInvoiceItem

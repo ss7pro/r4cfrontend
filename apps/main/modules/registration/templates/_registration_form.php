@@ -1,4 +1,5 @@
 <div id="register">
+<h1><?php echo _('Registration page'); ?></h1>
 <?php echo $form->renderFormTag(url_for('@registration')); ?>
 
 <?php echo $form->renderGlobalErrors(); ?>

@@ -17,6 +17,45 @@
  *
  * @package    propel.generator.lib.model
  */
-class RcInvoice extends BaseRcInvoice {
+class RcInvoice extends BaseRcInvoice
+{
+  public function __toString()
+  {
+    return $this->getSimpleName();
+  }
 
+  public function getSimpleName()
+  {
+    return sprintf('#%d %s - %s', $this->getInvoiceId(), $this->getIssueAt(), $this->getBuyerName());
+  }
+
+  public function getTotalNetto()
+  {
+    $total = 0;
+    foreach($this->getRcInvoiceItems() as $it)
+    {
+      $total += $it->getNetto();
+    }
+    return $total;
+  }
+
+  public function getTotalCost()
+  {
+    $total = 0;
+    foreach($this->getRcInvoiceItems() as $it)
+    {
+      $total += $it->getCost();
+    }
+    return $total;
+  }
+
+  public function getTotalTax()
+  {
+    $total = 0;
+    foreach($this->getRcInvoiceItems() as $it)
+    {
+      $total += $it->getTax();
+    }
+    return $total;
+  }
 } // RcInvoice

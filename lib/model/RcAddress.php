@@ -17,6 +17,15 @@
  *
  * @package    propel.generator.lib.model
  */
-class RcAddress extends BaseRcAddress {
+class RcAddress extends BaseRcAddress
+{
+  public function __toString()
+  {
+    return $this->getSimpleName();
+  }
 
+  public function getSimpleName()
+  {
+    return sprintf('%s, %s %s', $this->getStreet(), $this->getPostCode(), $this->getCity());
+  }
 } // RcAddress
