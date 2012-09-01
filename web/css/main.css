@@ -45,6 +45,7 @@ footer { padding: 2px 0; font-size: 9pt; color: #666; text-align: center; border
 
 /* invoice view */
 .invoice-view { width: 700px; border: 1px solid #ddd; margin: 10px auto; padding: 8px; }
-.invoice-view .summary th,
+.invoice-view th { font-weight: normal; }
+.invoice-view .summary th, 
 .invoice-view .summary td { text-align: right; padding: 2px 8px; }
 /* invoice view end */

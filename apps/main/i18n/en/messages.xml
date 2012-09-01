@@ -4,59 +4,59 @@
   <file source-language="EN" target-language="en" datatype="plaintext" original="messages" date="2012-05-19T15:21:42Z" product-name="messages">
     <header/>
     <body>
-      <trans-unit id="1">
+      <trans-unit>
         <source>Ready4Cloud</source>
         <target/>
       </trans-unit>
-      <trans-unit id="2">
+      <trans-unit>
         <source>My Profile</source>
         <target/>
       </trans-unit>
-      <trans-unit id="3">
+      <trans-unit>
         <source>Servers</source>
         <target/>
       </trans-unit>
-      <trans-unit id="4">
+      <trans-unit>
         <source>Disks</source>
         <target/>
       </trans-unit>
-      <trans-unit id="5">
+      <trans-unit>
         <source>Firewall</source>
         <target/>
       </trans-unit>
-      <trans-unit id="6">
+      <trans-unit>
         <source>Load Balancer</source>
         <target/>
       </trans-unit>
-      <trans-unit id="7">
+      <trans-unit>
         <source>Payments</source>
         <target/>
       </trans-unit>
-      <trans-unit id="8">
+      <trans-unit>
         <source>Log out</source>
         <target/>
       </trans-unit>
-      <trans-unit id="9">
+      <trans-unit>
         <source>Register</source>
         <target/>
       </trans-unit>
-      <trans-unit id="10">
+      <trans-unit>
         <source>Log in</source>
         <target/>
       </trans-unit>
-      <trans-unit id="11">
+      <trans-unit>
         <source>Account</source>
         <target/>
       </trans-unit>
-      <trans-unit id="12">
+      <trans-unit>
         <source>Address</source>
         <target/>
       </trans-unit>
-      <trans-unit id="13">
+      <trans-unit>
         <source>Company Details</source>
         <target/>
       </trans-unit>
-      <trans-unit id="14">
+      <trans-unit>
         <source>Company Address</source>
         <target/>
       </trans-unit>

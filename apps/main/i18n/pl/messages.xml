@@ -4,139 +4,139 @@
   <file source-language="EN" target-language="pl" datatype="plaintext" original="messages" date="2012-05-19T15:21:45Z" product-name="messages">
     <header/>
     <body>
-      <trans-unit id="1">
+      <trans-unit>
         <source>Ready4Cloud</source>
         <target/>
       </trans-unit>
-      <trans-unit id="2">
+      <trans-unit>
         <source>My Profile</source>
         <target>Mój Profil</target>
       </trans-unit>
-      <trans-unit id="3">
+      <trans-unit>
         <source>Servers</source>
         <target>Servery</target>
       </trans-unit>
-      <trans-unit id="4">
+      <trans-unit>
         <source>Disks</source>
         <target>Dyski</target>
       </trans-unit>
-      <trans-unit id="5">
+      <trans-unit>
         <source>Firewall</source>
         <target>Firewall</target>
       </trans-unit>
-      <trans-unit id="6">
+      <trans-unit>
         <source>Load Balancer</source>
         <target>Load Balancer</target>
       </trans-unit>
-      <trans-unit id="7">
+      <trans-unit>
         <source>Payments</source>
         <target>Płatności</target>
       </trans-unit>
-      <trans-unit id="8">
+      <trans-unit>
         <source>Log out</source>
         <target>Wyloguj</target>
       </trans-unit>
-      <trans-unit id="9">
+      <trans-unit>
         <source>Register</source>
         <target>Zarejestruj</target>
       </trans-unit>
-      <trans-unit id="10">
+      <trans-unit>
         <source>Log in</source>
         <target>Zaloguj</target>
       </trans-unit>
-      <trans-unit id="11">
+      <trans-unit>
         <source>Account</source>
         <target>Konto</target>
       </trans-unit>
-      <trans-unit id="12">
+      <trans-unit>
         <source>Address</source>
         <target>Adres</target>
       </trans-unit>
-      <trans-unit id="13">
+      <trans-unit>
         <source>Company name</source>
         <target>Nazwa firmy</target>
       </trans-unit>
-      <trans-unit id="13">
+      <trans-unit>
         <source>Company details</source>
         <target>Dane firmy</target>
       </trans-unit>
-      <trans-unit id="14">
+      <trans-unit>
         <source>Company address</source>
         <target>Adres firmy</target>
       </trans-unit>
-      <trans-unit id="15">
+      <trans-unit>
         <source>Login email</source>
         <target>Email</target>
       </trans-unit>
-      <trans-unit id="16">
+      <trans-unit>
         <source>Password</source>
         <target>Hasło</target>
       </trans-unit>
-      <trans-unit id="17">
+      <trans-unit>
         <source>Password again</source>
         <target>Powtórz hasło</target>
       </trans-unit>
-      <trans-unit id="18">
+      <trans-unit>
         <source>Title</source>
         <target>Tytuł</target>
       </trans-unit>
-      <trans-unit id="19">
+      <trans-unit>
         <source>First name</source>
         <target>Imię</target>
       </trans-unit>
-      <trans-unit id="20">
+      <trans-unit>
         <source>Last name</source>
         <target>Nazwisko</target>
       </trans-unit>
-      <trans-unit id="21">
+      <trans-unit>
         <source>Street</source>
         <target>Ulica</target>
       </trans-unit>
-      <trans-unit id="22">
+      <trans-unit>
         <source>Post code</source>
         <target>Kod pocztowy</target>
       </trans-unit>
-      <trans-unit id="23">
+      <trans-unit>
         <source>City</source>
         <target>Miasto</target>
       </trans-unit>
-      <trans-unit id="24">
+      <trans-unit>
         <source>Phone</source>
         <target>Telefon</target>
       </trans-unit>
-      <trans-unit id="25">
+      <trans-unit>
         <source>Name</source>
         <target>Nazwa</target>
       </trans-unit>
-      <trans-unit id="26">
+      <trans-unit>
         <source>Required.</source>
         <target>Pole wymagane</target>
       </trans-unit>
-      <trans-unit id="27">
+      <trans-unit>
         <source>Invalid.</source>
         <target>Niepoprawna wartość</target>
       </trans-unit>
-      <trans-unit id="28">
+      <trans-unit>
         <source>Remember</source>
         <target>Zapamiętaj</target>
       </trans-unit>
-      <trans-unit id="29">
+      <trans-unit>
         <source>Login</source>
         <target>Zaloguj</target>
       </trans-unit>
-      <trans-unit id="30">
+      <trans-unit>
         <source>sign in</source>
         <target>Zaloguj</target>
       </trans-unit>
-      <trans-unit id="30">
+      <trans-unit>
         <source>This is not valid email address</source>
         <target>To nie jest pooprawny adres email</target>
       </trans-unit>
-      <trans-unit id="30">
+      <trans-unit>
         <source>An object with the same "%column%" already exist.</source>
 				<target>Obiekt z takim samym polem "%column%" już istnieje.</target>
       </trans-unit>
-      <trans-unit id="31">
+      <trans-unit>
         <source>Account with this email already exist.</source>
 				<target>Konto z takim adresem już istnieje.</target>
       </trans-unit>
@@ -168,7 +168,127 @@
       </trans-unit>
       <trans-unit>
         <source>The requested page was temporarily disabled.</source>
-        <target>Żądana strona nie została czasowo wyłączona.</target>
+        <target>Żądana strona została czasowo wyłączona.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Seller</source>
+        <target>Sprzedający</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Buyer</source>
+        <target>Nabywca</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Tax ID</source>
+        <target>NIP</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account No.</source>
+        <target>Nr konta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>VAT Invoice</source>
+        <target>Faktura VAT</target>
+      </trans-unit>
+      <trans-unit>
+        <source>ORIGINAL</source>
+        <target>ORYGINAŁ</target>
+      </trans-unit>
+      <trans-unit>
+        <source>COPY</source>
+        <target>KOPIA</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No</source>
+        <target>Nr</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Issue date</source>
+        <target>Data wystawienia</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Sale date</source>
+        <target>Data sprzedaży</target>
+      </trans-unit>
+      <trans-unit>
+        <source>No.</source>
+        <target>L.P.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Description</source>
+        <target>Opis</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Qty</source>
+        <target>Ilość</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Net Price</source>
+        <target>Cena Netto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Gross Price</source>
+        <target>Cena Brutto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Net Cost</source>
+        <target>Kwota Netto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Tax Cost</source>
+        <target>Kwota VAT</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Gross Cost</source>
+        <target>Kwota Brutto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Tax Rate</source>
+        <target>Stawka VAT</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Payment information</source>
+        <target>Informacje o płatności</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Form</source>
+        <target>Forma</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Paid</source>
+        <target>Zapłacono</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Transfer</source>
+        <target>Przelew</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Date</source>
+        <target>Data</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Total</source>
+        <target>Razem</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Total Payment</source>
+        <target>Do zapłaty</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Summary</source>
+        <target>Podsumowanie</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Issued by</source>
+        <target>Wystawił</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Received by</source>
+        <target>Odebrał</target>
       </trans-unit>
     </body>
   </file>

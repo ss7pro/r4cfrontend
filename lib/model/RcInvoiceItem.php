@@ -19,9 +19,11 @@
  */
 class RcInvoiceItem extends BaseRcInvoiceItem
 {
-  public function getUnitPrice()
+  public function getNetPrice()
   {
-    return $this->getNetto() / $this->getQty();
+    $rate  = (integer)$this->getTaxRate();
+    $netto = $this->getPrice() * 100 / (100 + $rate);
+    return sprintf('%.2f', round($netto, 2));
   }
 
   public function getNetto()
@@ -31,11 +33,10 @@ class RcInvoiceItem extends BaseRcInvoiceItem
 
   public function calcCosts()
   {
-    $cost  = $this->getPrice() * $this->getQty(); 
-    $rate  = (integer)$this->getTaxRate();
-    $netto = $cost * 100 / (100 + $rate);
-    $tax   = $cost - $netto;
-    $this->setTax(sprintf('%.2f', $tax));
-    $this->setCost(sprintf('%.2f', $cost));
+    $cost = $this->getPrice() * $this->getQty(); 
+    $rate = (integer)$this->getTaxRate();
+    $tax  = $cost * $rate / (100 + $rate); // metoda "w stu"
+    $this->setTax(sprintf('%.2f', round($tax, 2)));
+    $this->setCost(sprintf('%.2f', round($cost, 2)));
   }
 } // RcInvoiceItem

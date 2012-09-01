@@ -39,7 +39,7 @@ default:
   # footer margin
   PDF_MARGIN_FOOTER: "10"
   # top margin
-  PDF_MARGIN_TOP: "27"
+  PDF_MARGIN_TOP: "25"
   # bottom margin
   PDF_MARGIN_BOTTOM: "25"
   # left margin
@@ -49,7 +49,7 @@ default:
   # default main font name
   PDF_FONT_NAME_MAIN: "dejavusans"
   # default main font size
-  PDF_FONT_SIZE_MAIN: "10"
+  PDF_FONT_SIZE_MAIN: "9"
   # default data font name
   PDF_FONT_NAME_DATA: "dejavusans"
   # default data font size
@@ -70,7 +70,7 @@ default:
   K_THAI_TOPCHARS: true
   # if true allows to call TCPDF methods using HTML syntax
   # IMPORTANT: For security reason, disable this feature if you are printing user HTML content.
-  K_TCPDF_CALLS_IN_HTML: true
+  K_TCPDF_CALLS_IN_HTML: false
 
 # Specific configs (copy this file in your application config directory to ovveride it)
 my_config:

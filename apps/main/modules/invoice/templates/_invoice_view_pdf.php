@@ -1,40 +1,38 @@
 <?php use_helper('Number'); ?>
 <style type="text/css">
-.right { text-align: right; }
+.align-right { text-align: right; }
 .center { text-align: center; }
 .bold { font-weight: bold; }
-.dates th { text-align: right; }
-.dates td { font-weight: bold; }
 </style>
-<table cellpadding="0">
+<table cellpadding="0" class="top wide">
   <tr>
     <td style="width: 50%;">
 
-      <h3><?php echo strtoupper(_('Seller')); ?></h3>
+      <h3><?php echo mb_strtoupper(__('Seller'), sfConfig::get('sf_charset', 'utf-8')); ?></h3>
       <?php echo $invoice->getSellerName();?><br/>
       <?php echo $invoice->getSellerAddress();?><br/>
       <?php echo $invoice->getSellerCode();?><br/>
-      <?php echo _('IDN'); ?>: <?php echo $invoice->getSellerNip();?><br/>
-      <?php echo _('Bank'); ?>: <?php echo $invoice->getSellerBank();?>
-      <h3><?php echo strtoupper(_('Buyer')); ?></h3>
+      <?php echo __('Tax ID'); ?>: <?php echo $invoice->getSellerNip();?><br/>
+      <?php echo __('Account No.'); ?>: <?php echo $invoice->getSellerBank();?>
+      <h3><?php echo mb_strtoupper(__('Buyer'), sfConfig::get('sf_charset', 'utf-8')); ?></h3>
       <?php echo $invoice->getBuyerName();?><br/>
       <?php echo $invoice->getBuyerAddress();?><br/>
       <?php echo $invoice->getBuyerCode();?><br/>
-      <?php echo $invoice->getBuyerNip() ? _('IDN') . ': ' . $invoice->getBuyerNip() : '';?></td>
-    <td class="right" style="width: 50%;">
+      <?php echo $invoice->getBuyerNip() ? __('Tax ID') . ': ' . $invoice->getBuyerNip() : '';?>
 
-      <h1>
-        <?php echo _('VAT Invoice'); ?>
-        <?php echo _('No'); ?>: #<?php echo $invoice->getInvoiceId(); ?>
-      </h1>
-      <table class="dates" cellpadding="2">
+    </td>
+    <td class="align-right" style="width: 50%;">
+
+      <h1><?php echo __('VAT Invoice'); ?> <?php echo __('No'); ?>: #<?php echo $invoice->getInvoiceId(); ?></h1>
+      <b><?php echo __('ORIGINAL'); ?> / <?php echo __('COPY'); ?></b><br/>
+      <table class="wide" cellpadding="2">
         <tr>
-          <th style="width: 70%"><?php echo _('Issue date'); ?>:</th>
-          <td style="width: 30%"><?php echo $invoice->getIssueAt();?> </td>
+          <th style="width: 70%" class="align-right"><?php echo __('Issue date'); ?>:</th>
+          <td style="width: 30%" class="bold"><?php echo $invoice->getIssueAt();?> </td>
         </tr>
         <tr>
-          <th class="right"><?php echo _('Sale date'); ?>: </th>
-          <td><?php echo $invoice->getSaleAt();?></td>
+          <th class="align-right"><?php echo __('Sale date'); ?>: </th>
+          <td class="bold"><?php echo $invoice->getSaleAt();?></td>
         </tr>
       </table>
 
@@ -42,81 +40,98 @@
   </tr>
 </table>
 
-<table border="0.3" cellpadding="2">
+<table border="0.3" cellpadding="2" class="bordered">
 <thead>
   <tr>
-    <th style="width: 5%; text-align: center;"><?php echo _('No.');?></th>
-    <th style="width: 42%;"><?php echo _('Description');?></th>
-    <th style="width: 5%; text-align: center;"><?php echo _('Qty');?></th>
-    <th style="width: 10%; text-align: center;"><?php echo _('Unit Price');?></th>
-    <th style="width: 10%; text-align: center;"><?php echo _('Net');?></th>
-    <th style="width: 7%; text-align: center;"><?php echo _('Tax Rate');?></th>
-    <th style="width: 10%; text-align: center;"><?php echo _('Tax');?></th>
-    <th style="width: 11%; text-align: center;"><?php echo _('Gross');?></th>
+    <th style="width: 4%;" class="center"><?php echo __('No.');?></th>
+    <th style="width: 35%;"><?php echo __('Description');?></th>
+    <th style="width: 6%;" class="center"><?php echo __('Qty');?></th>
+    <th style="width: 9%;" class="center"><?php echo __('Net Price');?></th>
+    <th style="width: 9%;" class="center"><?php echo __('Gross Price');?></th>
+    <th style="width: 9%;" class="center"><?php echo __('Net Cost');?></th>
+    <th style="width: 9%;" class="center"><?php echo __('Tax Rate');?></th>
+    <th style="width: 9%;" class="center"><?php echo __('Tax Cost');?></th>
+    <th style="width: 10%;" class="center"><?php echo __('Gross Cost');?></th>
   </tr>
 </thead>
 <tbody>
   <?php foreach($invoice->getRcInvoiceItems() as $i => $item): ?>
   <tr>
-    <td style="width: 5%; text-align: center;"><?php echo ++$i; ?></td>
-    <td style="width: 42%;"><?php echo $item->getName(); ?></td>
-    <td style="width: 5%; text-align: center;"><?php echo $item->getQty(); ?></td>
-    <td style="width: 10%; text-align: right;"><?php echo format_currency($item->getUnitPrice()); ?></td>
-    <td style="width: 10%; text-align: right;"><?php echo format_currency($item->getNetto()); ?></td>
-    <td style="width: 7%; text-align: right;"><?php echo $item->getTaxRate(); ?>%</td>
-    <td style="width: 10%; text-align: right;"><?php echo format_currency($item->getTax()); ?></td>
-    <td style="width: 11%; text-align: right;"><?php echo format_currency($item->getCost()); ?></td>
+    <td style="width: 4%;" class="center"><?php echo ++$i; ?></td>
+    <td style="width: 35%;"><?php echo $item->getName(); ?></td>
+    <td style="width: 6%;" class="center"><?php echo $item->getQty(); ?></td>
+    <td style="width: 9%;" class="align-right"><?php echo format_currency($item->getNetPrice()); ?></td>
+    <td style="width: 9%;" class="align-right"><?php echo format_currency($item->getPrice()); ?></td>
+    <td style="width: 9%;" class="align-right"><?php echo format_currency($item->getNetto()); ?></td>
+    <td style="width: 9%;" class="align-right"><?php echo $item->getTaxRate(); ?>%</td>
+    <td style="width: 9%;" class="align-right"><?php echo format_currency($item->getTax()); ?></td>
+    <td style="width: 10%;" class="align-right"><?php echo format_currency($item->getCost()); ?></td>
   </tr>
   <?php endforeach; ?>
 </tbody>
 </table>
 
-<table cellpadding="0">
+<br/>&nbsp;<br/>
+
+<table cellpadding="0" class="wide">
   <tr>
     <td style="width: 30%;">
 
-      <h4><?php echo _('Payment Information'); ?></h4>
-      <table cellpadding="2">
+      <h4 class="center"><?php echo __('Payment information'); ?></h4>
+      <table cellpadding="2" class="wide">
         <tr>
-          <th class="right"><?php echo _('Status'); ?>: </th>
-          <td class="bold"><?php echo _('Paid'); ?></td>
+          <th class="align-right"><?php echo __('Status'); ?>: </th>
+          <td class="bold"><?php echo __('Paid'); ?></td>
         </tr>
         <tr>
-          <th class="right"><?php echo _('Form'); ?>: </th>
-          <td class="bold"><?php echo _('Transfer'); ?></td>
+          <th class="align-right"><?php echo __('Form'); ?>: </th>
+          <td class="bold"><?php echo __('Transfer'); ?></td>
         </tr>
         <tr>
-          <th class="right"><?php echo _('Date'); ?>: </th>
+          <th class="align-right"><?php echo __('Date'); ?>: </th>
           <td class="bold"><?php echo $invoice->getPaymentDate();?></td>
         </tr>
         <tr>
-          <th class="right"><?php echo _('Total'); ?>:</th>
+          <th class="align-right"><?php echo __('Total Payment'); ?>:</th>
           <td class="bold"><?php echo format_currency($invoice->getTotalCost()); ?> PLN</td>
         </tr>
       </table>
 
     </td>
-    <td style="width: 50%;">
+    <td style="width: 40%;">
       &nbsp;
     </td>
-    <td style="width: 20%;">
+    <td style="width: 30%;">
 
-      <h4 class="center;"><?php echo _('Summary'); ?></h4>
-      <table cellpadding="2">
+      <h4 class="center"><?php echo __('Summary'); ?></h4>
+      <table cellpadding="2" class="wide">
         <tr>
-          <th class="right"><?php echo _('Net'); ?>:</th>
+          <th class="align-right"><?php echo __('Net Cost'); ?>:</th>
           <td class="bold"><?php echo format_currency($invoice->getTotalNetto()); ?></td>
         </tr>
         <tr>
-          <th class="right"><?php echo _('Tax'); ?>:</th>
+          <th class="align-right"><?php echo __('Tax Cost'); ?>:</th>
           <td class="bold"><?php echo format_currency($invoice->getTotalTax()); ?></td>
         </tr>
         <tr>
-          <th class="right"><?php echo _('Gross'); ?>:</th>
+          <th class="align-right"><?php echo __('Gross Cost'); ?>:</th>
           <td class="bold"><?php echo format_currency($invoice->getTotalCost()); ?></td>
         </tr>
       </table>
 
+    </td>
+  </tr>
+</table>
+
+<h1>&nbsp;</h1>
+
+<table cellpadding="0" class="wide">
+  <tr>
+    <td class="center">
+      <?php echo __('Issued by'); ?>
+    </td>
+    <td class="center">
+      <?php echo __('Received by'); ?>
     </td>
   </tr>
 </table>
