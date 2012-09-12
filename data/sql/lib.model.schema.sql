@@ -159,6 +159,7 @@ CREATE TABLE `rc_payment`
 (
 	`payment_id` INTEGER NOT NULL,
 	`tenant_id` INTEGER NOT NULL,
+	`invoice_id` INTEGER,
 	`tenant_api_id` VARCHAR(50) NOT NULL,
 	`amount` INTEGER NOT NULL,
 	`first_name` VARCHAR(50) NOT NULL,
@@ -176,12 +177,16 @@ CREATE TABLE `rc_payment`
 	`created_at` DATETIME NOT NULL,
 	PRIMARY KEY (`payment_id`),
 	INDEX `rc_payment_FI_2` (`tenant_id`),
+	INDEX `rc_payment_FI_3` (`invoice_id`),
 	CONSTRAINT `rc_payment_FK_1`
 		FOREIGN KEY (`payment_id`)
 		REFERENCES `rt_payu_transaction` (`transaction_id`),
 	CONSTRAINT `rc_payment_FK_2`
 		FOREIGN KEY (`tenant_id`)
-		REFERENCES `rc_tenant` (`tenant_id`)
+		REFERENCES `rc_tenant` (`tenant_id`),
+	CONSTRAINT `rc_payment_FK_3`
+		FOREIGN KEY (`invoice_id`)
+		REFERENCES `rc_invoice` (`invoice_id`)
 ) ENGINE=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier

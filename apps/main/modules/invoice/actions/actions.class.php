@@ -17,7 +17,22 @@ class invoiceActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->tenants = RcTenantQuery::create()->find();
+    //$this->tenants = RcTenantQuery::create()->find();
+
+    $this->getResponse()->setContentType('application/json');
+    $tenant = $this->getUser()->getProfile()->getRcTenant();
+    $payments = RcPaymentQuery::create()
+      ->filterByRcTenant($tenant)
+      ->leftJoinWithRtPayuTransaction()
+      ->leftJoinWithRcInvoice()
+      ->find();
+
+    $data = array();
+    foreach($payments as $pmt) {
+      $p = new PaymentJson($pmt);
+      $data[] = $p->toArray();
+    }
+    return $this->renderText(json_encode($data));
   }
 
   public function executeShow(sfWebRequest $request)

@@ -65,6 +65,7 @@ propel:
   rc_payment:
     payment_id:   { type: integer, required: true, primaryKey: true, foreignTable: rt_payu_transaction, foreignReference: transaction_id }
     tenant_id:    { type: integer, required: true, foreignTable: rc_tenant, foreignReference: tenant_id }
+    invoice_id:   { type: integer, required: false, foreignTable: rc_invoice, foreignReference: invoice_id }
     tenant_api_id: { type: varchar(50), required: true }
     amount:       { type: integer, required: true, min: 50 }
     first_name:   { type: varchar(50), required: true }
