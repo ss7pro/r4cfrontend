@@ -6,6 +6,7 @@ rc_payment:
     prefix_path:          /rc_payment
     column:               payment_id
     with_wildcard_routes: true
+    object_actions:       { invoice: get }
 
 rc_tenant:
   class: sfPropelORMRouteCollection

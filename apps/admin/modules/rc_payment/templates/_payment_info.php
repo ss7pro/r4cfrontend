@@ -1,3 +1,4 @@
+<?php use_helper('Number'); ?>
 <table>
   <thead>
     <tr><th colspan="2"><?php echo __('Payment information');?></td></tr>
@@ -16,12 +17,16 @@
       <td><?php echo $payment->getRcTenant();?></td>
     </tr>
     <tr>
-      <td><?php echo __('Invoice');?></td>
-      <td><?php echo $payment->getRcInvoice();?></td>
+      <td><?php echo __('Invoice request');?></td>
+      <td><?php echo $payment->getInvoice() ? '<span class="label label-important">Y</span>' : '<span class="label label-info">N</span>';?></td>
     </tr>
     <tr>
-      <td><?php echo __('Amount');?></td>
-      <td><?php echo $payment->getAmount();?></td>
+      <td><?php echo __('Invoice');?></td>
+      <td><?php echo $payment->getRcInvoice() ? $payment->getRcInvoice() : '<span class="label label-warning">' . __('Not yet created') . '</span>';?></td>
+    </tr>
+    <tr>
+      <td><?php echo __('Price');?></td>
+      <td><?php echo format_currency($payment->getPrice(), sfConfig::get('app_currency_symbol', 'zł'));?></td>
     </tr>
     <tr>
       <td><?php echo __('First name');?></td>
@@ -36,15 +41,11 @@
       <td><?php echo $payment->getEmail();?></td>
     </tr>
     <tr>
-      <td><?php echo __('Phome');?></td>
+      <td><?php echo __('Phone');?></td>
       <td><?php echo $payment->getPhone();?></td>
     </tr>
     <tr>
-      <td><?php echo __('Invoice request');?></td>
-      <td><?php echo $payment->getInvoice() ? 'Y' : 'N';?></td>
-    </tr>
-    <tr>
-      <td><?php echo __('Company name');?></td>
+      <td><?php echo __('Company');?></td>
       <td><?php echo $payment->getCompanyName();?></td>
     </tr>
     <tr>

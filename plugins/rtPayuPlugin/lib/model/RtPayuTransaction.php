@@ -36,4 +36,12 @@ class RtPayuTransaction extends BaseRtPayuTransaction
       if(!$trans) return $session_id;
     } while(true);
   }
+
+  public function getLogs(PropelPDO $con = null)
+  {
+    return RtPayuTransactionLogQuery::create()
+      ->filterByRtPayuTransaction($this)
+      ->orderByLogId(Criteria::DESC)
+      ->find($con);
+  }
 } // RtPayuTransaction

@@ -17,4 +17,21 @@ class rc_paymentActions extends autoRc_paymentActions
   {
     $this->payment = $this->getRoute()->getObject();
   }
+
+  public function executeInvoice(sfWebRequest $requiest)
+  {
+    $this->payment = $this->getRoute()->getObject();
+    $invoice = $this->payment->getRcInvoice();
+    if(!$invoice)
+    {
+      $service = new InvoiceService();
+      $invoice = $service->fromPayment($this->payment);
+      $this->payment->setRcInvoice($invoice);
+      $this->payment->save();
+    }
+    $service = new PdfService();
+    $pdf = $service->fromInvoice($invoice, 'COPY');
+
+    $service->output($pdf, $invoice->getInvoiceId());
+  }
 }

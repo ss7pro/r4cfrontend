@@ -19,4 +19,13 @@
  */
 class RcPayment extends BaseRcPayment
 {
+  public function getPrice()
+  {
+    return sprintf('%.2f', round($this->getAmount() / 100, 2));
+  }
+
+  public function getBuyerName()
+  {
+    return trim(sprintf('%s %s %s', $this->getCompanyName(), $this->getFirstName(), $this->getLastName()));
+  }
 } // RcPayment

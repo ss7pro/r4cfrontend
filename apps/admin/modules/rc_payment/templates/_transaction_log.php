@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <?php $logs = $transaction->getRtPayuTransactionLogs(); ?>
+    <?php $logs = $transaction->getLogs(); ?>
     <?php foreach($logs as $log): ?>
     <tr>
       <td><?php echo $log->getLogId();?></td>
