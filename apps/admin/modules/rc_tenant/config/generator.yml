@@ -1,0 +1,24 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           RcTenant
+    theme:                 admin15
+    non_verbose_templates: true
+    with_show:             false
+    singular:              RcTenant
+    plural:                RcTenants
+    route_prefix:          rc_tenant
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields: 
+        tenant_id: { label: Id }
+      list:
+        display: [ tenant_id, _company_name, api_name, nip ]
+      filter:  ~
+      form:
+        display: [ company_name, nip, www, type ]
+      edit:    ~
+      new:     ~

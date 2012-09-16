@@ -25,8 +25,8 @@ all:
     login_route:                  @sf_guard_signin
     logout_route:                 @sf_guard_signout
     categories:
-      Companies:
+      Tenants:
         items:
           List:
-            url:    default/index
+            url:    @rc_tenant
             image:  users.png
