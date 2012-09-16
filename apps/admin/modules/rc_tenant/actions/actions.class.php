@@ -13,4 +13,8 @@ require_once dirname(__FILE__).'/../lib/rc_tenantGeneratorHelper.class.php';
  */
 class rc_tenantActions extends autoRc_tenantActions
 {
+  public function executeShow(sfWebRequest $request)
+  {
+    $this->tenant = $this->getRoute()->getObject();
+  }
 }

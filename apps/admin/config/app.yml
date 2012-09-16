@@ -25,8 +25,13 @@ all:
     login_route:                  @sf_guard_signin
     logout_route:                 @sf_guard_signout
     categories:
-      Tenants:
+      Tenant:
         items:
           List:
             url:    @rc_tenant
+            image:  users.png
+      Payment:
+        items:
+          List:
+            url:    @rc_payment
             image:  users.png

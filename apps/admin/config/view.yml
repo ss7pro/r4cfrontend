@@ -12,9 +12,9 @@ default:
     language:     pl
     robots:       noindex, nofollow
 
-  stylesheets:    [ admin.css ]
+  stylesheets:    [ bootstrap.css, /sfPropelORMPlugin/css/global.css, /sfPropelORMPlugin/css/default.css, admin.css ]
 
-  javascripts:    [ ]
+  javascripts:    [ bootstrap.js ]
 
   has_layout:     true
   layout:         layout

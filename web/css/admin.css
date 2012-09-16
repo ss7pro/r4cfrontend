@@ -1,3 +1,16 @@
 body { padding: 0; }
 
+footer { padding: 4px 0; border-top: 1px solid #ddd; }
+
+.left { float: left; }
+.right { float: right; }
+.hidden { display: none; }
+.clear { clear: both; }
+.wide { width: 100%; }
+
 #sf_admin_container { padding: 10px; }
+#sf_admin_container .sf_admin_date td { text-align: right; }
+#sf_admin_container .sf_admin_date select { width: 60px; }
+
+#sf_admin_path { padding: 5px 20px; }
+

@@ -1,3 +1,12 @@
+rc_payment:
+  class: sfPropelORMRouteCollection
+  options:
+    model:                RcPayment
+    module:               rc_payment
+    prefix_path:          /rc_payment
+    column:               payment_id
+    with_wildcard_routes: true
+
 rc_tenant:
   class: sfPropelORMRouteCollection
   options:

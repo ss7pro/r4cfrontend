@@ -1,0 +1,27 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           RcPayment
+    theme:                 admin15
+    non_verbose_templates: true
+    with_show:             false
+    singular:              RcPayment
+    plural:                RcPayments
+    route_prefix:          rc_payment
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:
+        payment_id: { label: Id }
+        rc_tenant:  { label: Tenant }
+      list:
+        display: [ _payment_id, _desc, rc_tenant, amount, created_at ]
+        batch_actions: {}
+        object_actions: {}
+        actions: {}
+      filter:  ~
+      form:    ~
+      edit:    ~
+      new:     ~

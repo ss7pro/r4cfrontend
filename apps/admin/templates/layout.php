@@ -16,6 +16,7 @@
 
     <div id="cs_content">
       <?php echo $sf_content ?>
+      <div class="clear"></div>
     </div>
 
     <footer>
