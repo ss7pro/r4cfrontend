@@ -13,7 +13,7 @@
     <tr>
       <td><?php echo $log->getLogId();?></td>
       <td><?php echo $log->getCreatedAt();?></td>
-      <td><?php echo $log->getStatus();?></td>
+      <td><?php echo __($log->getStatusLabel()) . ' (' . $log->getStatus() . ')';?></td>
       <td><a href="#" rel="tooltip" title="<?php echo $log->getMessage();?>"><?php echo __('View'); ?></a></td>
     </tr>
     <?php endforeach; ?>

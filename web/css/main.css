@@ -4,7 +4,7 @@ html, body { font-family: helvetica,arial,sans; font-size: 10pt; }
 h1, h2 { margin: 4px 0; }
 h3, h4 { margin: 2px 0; }
 a { text-decoration: none; }
-a:hover { text-decoration: underline; }
+a:hover { text-decoration: none; }
 li { list-style-type: none; }
 table { border-collapse: collapse; }
 th, td { vertical-align: top; text-align:left; padding: 2px; }

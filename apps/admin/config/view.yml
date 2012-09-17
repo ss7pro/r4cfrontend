@@ -12,7 +12,7 @@ default:
     language:     pl
     robots:       noindex, nofollow
 
-  stylesheets:    [ bootstrap.css, /sfPropelORMPlugin/css/global.css, /sfPropelORMPlugin/css/default.css, admin.css ]
+  stylesheets:    [ /sfPropelORMPlugin/css/global.css, /sfPropelORMPlugin/css/default.css, bootstrap.css, admin.css ]
 
   javascripts:    [ bootstrap.js ]
 

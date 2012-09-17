@@ -1,1 +1,1 @@
-<?php echo link_to((string)$RcTenant, '@rc_tenant_edit?tenant_id=' . $RcTenant->getTenantId()); ?>
+<?php echo link_to((string)$RcTenant, '@rc_tenant_show?tenant_id=' . $RcTenant->getTenantId()); ?>

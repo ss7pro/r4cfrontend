@@ -17,6 +17,10 @@
  *
  * @package    propel.generator.plugins.rtPayuPlugin.lib.model
  */
-class RtPayuTransactionLog extends BaseRtPayuTransactionLog {
-
+class RtPayuTransactionLog extends BaseRtPayuTransactionLog
+{
+  public function getStatusLabel()
+  {
+    return RtPayuTransactionPeer::getStatusLabel($this->getStatus());
+  }
 } // RtPayuTransactionLog

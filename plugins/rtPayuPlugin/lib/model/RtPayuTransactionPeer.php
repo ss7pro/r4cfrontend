@@ -17,6 +17,23 @@
  *
  * @package    propel.generator.plugins.rtPayuPlugin.lib.model
  */
-class RtPayuTransactionPeer extends BaseRtPayuTransactionPeer {
+class RtPayuTransactionPeer extends BaseRtPayuTransactionPeer
+{
+  private static $status_map = array(
+    0 => 'transaction not started',
+    1 => 'transaction new',
+    2 => 'transaction cancelled',
+    3 => 'transaction rejected',
+    4 => 'transaction started',
+    5 => 'transaction to receive',
+    7 => 'transaction cancelled rejected',
+    99 => 'transaction received',
+    888 => 'incorrect status',
+  );
 
+  public static function getStatusLabel($status)
+  {
+    if(isset(self::$status_map[$status])) return self::$status_map[$status];
+    return self::$status_map[888];
+  }
 } // RtPayuTransactionPeer

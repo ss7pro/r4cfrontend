@@ -40,6 +40,18 @@ class BilingService
         'session_id' => $msg->get('session_id'),
         'trans_id'   => $msg->get('id'),
       ));
+
+      if($payment->getInvoice())
+      {
+        $invoice_service = new InvoiceService();
+        $invoice = $invoice_service->fromPayment($payment);
+        $payment->setRcInvoice($invoice);
+        $payment->save();
+      }
+
+      //TODO: send pdf via email
+      //$service = new PdfService();
+      //$pdf = $service->fromInvoice($invoice, 'ORIGINAL');
     }
   }
 }

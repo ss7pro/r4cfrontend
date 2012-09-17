@@ -44,4 +44,9 @@ class RtPayuTransaction extends BaseRtPayuTransaction
       ->orderByLogId(Criteria::DESC)
       ->find($con);
   }
+
+  public function getStatusLabel()
+  {
+    return RtPayuTransactionPeer::getStatusLabel($this->getStatus());
+  }
 } // RtPayuTransaction

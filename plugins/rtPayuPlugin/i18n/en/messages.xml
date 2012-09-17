@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="EN" target-language="en" datatype="plaintext" original="messages" date="2012-05-19T15:21:42Z" product-name="messages">
+    <header/>
+    <body>
+      <trans-unit>
+        <source>transaction not started</source>
+        <target>not started</target>
+      </trans-unit>
+      <trans-unit>
+        <source>transaction new</source>
+        <target>new</target>
+      </trans-unit>
+      <trans-unit>
+        <source>transaction cancelled</source>
+        <target>cancelled</target>
+      </trans-unit>
+      <trans-unit>
+        <source>transaction rejected</source>
+        <target>rejected</target>
+      </trans-unit>
+      <trans-unit>
+        <source>transaction started</source>
+        <target>started</target>
+      </trans-unit>
+      <trans-unit>
+        <source>transaction to receive</source>
+        <target>to receive</target>
+      </trans-unit>
+      <trans-unit>
+        <source>transaction cancelled and rejected</source>
+        <target>cancelled and rejected</target>
+      </trans-unit>
+      <trans-unit>
+        <source>transaction received</source>
+        <target>received</target>
+      </trans-unit>
+      <trans-unit>
+        <source>incorrect status</source>
+        <target></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

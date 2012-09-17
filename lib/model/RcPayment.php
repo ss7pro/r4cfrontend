@@ -28,4 +28,20 @@ class RcPayment extends BaseRcPayment
   {
     return trim(sprintf('%s %s %s', $this->getCompanyName(), $this->getFirstName(), $this->getLastName()));
   }
+
+  public function getStatus()
+  {
+    $transaction = $this->getRtPayuTransaction();
+    return $transaction ? $transaction->getStatus() : 0;
+  }
+
+  public function getStatusLabel()
+  {
+    return RtPayuTransactionPeer::getStatusLabel($this->getStatus());
+  }
+
+  public function isPaid()
+  {
+    return $this->getStatus() == 99;
+  }
 } // RcPayment

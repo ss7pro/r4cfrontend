@@ -18,20 +18,25 @@ all:
     image_dir:                    /sfAdminDashPlugin/images/icons/
     default_image:                config.png
     resize_mode:                  thumbnail
-    site:                         Cloud Manager
+    site:                         RootBox
     include_path:                 true
     include_jquery_no_conflict:   false
     logout:                       true
     login_route:                  @sf_guard_signin
     logout_route:                 @sf_guard_signout
+    items:
+      'Home page':
+        url: @homepage
     categories:
       Tenant:
         items:
-          List:
+          'Tenant list':
             url:    @rc_tenant
             image:  users.png
       Payment:
+        url:    @rc_payment
+        image:  generic.png
         items:
-          List:
+          'Payment list':
             url:    @rc_payment
-            image:  users.png
+            image:  generic.png

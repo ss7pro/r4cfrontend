@@ -33,4 +33,12 @@ class RcTenant extends BaseRcTenant
     if(!$this->getApiId()) $this->setApiId(time() . '_tmp_' . mt_rand());
     return true;
   }
+
+  public function getPayments(PropelPDO $con = null)
+  {
+    return RcPaymentQuery::create()
+      ->filterByRcTenant($this)
+      ->orderByPaymentId(Criteria::DESC)
+      ->find($con);
+  }
 } // RcTenant

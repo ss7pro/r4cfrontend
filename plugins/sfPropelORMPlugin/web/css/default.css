@@ -1,20 +1,7 @@
-#sf_admin_container a
-{
-  color: #464646;
-  text-decoration: none;
-}
-
-#sf_admin_container a:hover
-{
-  color: #000;
-  text-decoration: underline;
-}
-
 #sf_admin_container h1
 {
-  margin: 0;
+  margin: 0 0 10px 0;
   padding: 0;
-  margin-bottom: 20px;
 }
 
 #sf_admin_container th
@@ -23,7 +10,8 @@
   white-space: nowrap;
 }
 
-#sf_admin_container td, #sf_admin_container th
+#sf_admin_container td, 
+#sf_admin_container th
 {
   border: 0;
   border-bottom: 1px solid #ddd;
@@ -62,23 +50,27 @@
   background-color: #ffe;
 }
 
-#sf_admin_container input, #sf_admin_container textarea
+#sf_admin_container input, 
+#sf_admin_container textarea
 {
   width: auto;
 }
 
-#sf_admin_container .radio_list, #sf_admin_container .checkbox_list
+#sf_admin_container .radio_list, 
+#sf_admin_container .checkbox_list
 {
   margin: 0;
 }
 
-#sf_admin_container .radio_list li, #sf_admin_container .checkbox_list li
+#sf_admin_container .radio_list li, 
+#sf_admin_container .checkbox_list li
 {
   list-style: none;
   display: inline;
 }
 
-#sf_admin_container .double_list_select, #sf_admin_container .double_list_select-selected
+#sf_admin_container .double_list_select, 
+#sf_admin_container .double_list_select-selected
 {
   width: 12em;
 }
@@ -95,7 +87,8 @@
   text-align: right;
 }
 
-#sf_admin_container thead img, #sf_admin_container tfoot img
+#sf_admin_container thead img, 
+#sf_admin_container tfoot img
 {
   vertical-align: middle;
 }
@@ -139,37 +132,50 @@
   margin-right: 10px;
 }
 
-#sf_admin_container ul li a
+#sf_admin_container ul.sf_admin_actions li a,
+#sf_admin_container ul.sf_admin_td_actions li a
 {
   padding-left: 20px;
   background: url(../images/default.png) no-repeat 0 0;
 }
 
-#sf_admin_container ul li.sf_admin_action_new a
+#sf_admin_container ul.sf_admin_actions li.sf_admin_action_new a,
+#sf_admin_container ul.sf_admin_td_actions li.sf_admin_action_new a
 {
   background: url(../images/new.png) no-repeat 0 0;
 }
 
-#sf_admin_container ul li.sf_admin_action_delete a
+#sf_admin_container ul.sf_admin_actions li.sf_admin_action_delete a,
+#sf_admin_container ul.sf_admin_td_actions li.sf_admin_action_delete a
 {
   background: url(../images/delete.png) no-repeat 0 0;
 }
 
-#sf_admin_container ul li.sf_admin_action_list a
+#sf_admin_container ul.sf_admin_actions li.sf_admin_action_list a,
+#sf_admin_container ul.sf_admin_td_actions li.sf_admin_action_list a
 {
   background: url(../images/list.png) no-repeat 0 0;
 }
 
-#sf_admin_container ul li.sf_admin_action_edit a
+#sf_admin_container ul.sf_admin_actions li.sf_admin_action_edit a,
+#sf_admin_container ul.sf_admin_td_actions li.sf_admin_action_edit a
 {
   background: url(../images/edit.png) no-repeat 0 0;
 }
 
-#sf_admin_container ul li.sf_admin_action_moveup a, #sf_admin_container ul li.sf_admin_action_moveup span {
+#sf_admin_container ul.sf_admin_actions li.sf_admin_action_moveup a
+#sf_admin_container ul.sf_admin_td_actions li.sf_admin_action_moveup a, 
+#sf_admin_container ul.sf_admin_actions li.sf_admin_action_moveup span,
+#sf_admin_container ul.sf_admin_td_actions li.sf_admin_action_moveup span
+{
   background: url(../images/arrow_up.png) no-repeat 0 0;
 }
 
-#sf_admin_container ul li.sf_admin_action_movedown a, #sf_admin_container ul li.sf_admin_action_movedown span {
+#sf_admin_container ul.sf_admin_actions li.sf_admin_action_movedown a, 
+#sf_admin_container ul.sf_admin_td_actions li.sf_admin_action_movedown a, 
+#sf_admin_container ul.sf_admin_actions li.sf_admin_action_movedown span,
+#sf_admin_container ul.sf_admin_td_actions li.sf_admin_action_movedown span
+{
   background: url(../images/arrow_down.png) no-repeat 0 0;
 }
 

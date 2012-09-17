@@ -13,7 +13,7 @@ all:
     private_key:  6LffzNMSAAAAAGDlUb8oV2G4QceRErUZfXNwGc9A 
     enabled:      true
   invoice:
-    seller_name:    'Radey4Cloud'
+    seller_name:    'Ready4Cloud'
     seller_address: 'Ulica 123/456'
     seller_post:    '12-345 Miasto'
     seller_nip:     '123-456-78-90'

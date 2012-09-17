@@ -26,18 +26,6 @@
   padding: 10px 30px;
 }
 
-#sf_admin_container a
-{
-  color: #464646;
-  text-decoration: none;
-}
-
-#sf_admin_container a:hover
-{
-  color: #000;
-  text-decoration: underline;
-}
-
 #sf_admin_container h1
 {
   margin: 0;
@@ -195,7 +183,8 @@
   margin-right: 10px;
 }
 
-#sf_admin_container ul li a
+#sf_admin_container ul.sf_admin_actions li a,
+#sf_admin_container ul.sf_admin_td_actions li a
 {
   padding-left: 20px;
   background: url(../images/default.png) no-repeat 0 0;

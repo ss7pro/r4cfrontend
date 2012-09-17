@@ -6,7 +6,7 @@
 </style>
 <table cellpadding="0" class="top wide">
   <tr>
-    <td style="width: 50%;">
+    <td style="width: 40%;">
 
       <h3><?php echo mb_strtoupper(__('Seller'), sfConfig::get('sf_charset', 'utf-8')); ?></h3>
       <?php echo $invoice->getSellerName();?><br/>
@@ -21,10 +21,10 @@
       <?php echo $invoice->getBuyerNip() ? __('Tax ID') . ': ' . $invoice->getBuyerNip() : '';?>
 
     </td>
-    <td class="align-right" style="width: 50%;">
+    <td class="align-right" style="width: 60%;">
 
-      <h1><?php echo __('VAT Invoice'); ?> <?php echo __('No'); ?>: #<?php echo $invoice->getInvoiceId(); ?></h1>
-      <b><?php echo __($version); ?></b><br/>
+      <h1><?php echo __('VAT Invoice'); ?> <?php echo __('No'); ?>: <?php echo $invoice->getInvoiceId(); ?>/<?php echo date('Y'); ?></h1>
+      <b><?php echo __($version); ?></b><br/><br/>
       <table class="wide" cellpadding="2">
         <tr>
           <th style="width: 70%" class="align-right"><?php echo __('Issue date'); ?>:</th>

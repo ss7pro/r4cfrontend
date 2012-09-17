@@ -1,6 +1,8 @@
-body { padding: 0; }
+body { padding: 0; margin: 0; }
 
-footer { padding: 4px 0; border-top: 1px solid #ddd; }
+a { color: #464646; text-decoration: none; }
+a:hover { color: #000; text-decoration: underline; }
+ul li { list-style-type: none; }
 
 .left { float: left; }
 .right { float: right; }
@@ -8,10 +10,23 @@ footer { padding: 4px 0; border-top: 1px solid #ddd; }
 .clear { clear: both; }
 .wide { width: 100%; }
 
+.wide3 { width: 3em; }
+.wide4 { width: 4em; }
+.wide5 { width: 5em; }
+.wide6 { width: 6em; }
+.wide8 { width: 8em; }
+.wide10 { width: 10em; }
+.wide15 { width: 15em; }
+.wide20 { width: 20em; }
+
+.btn-bar { margin: 0 0 15px 0; }
+
 #sf_admin_container { padding: 10px; }
 #sf_admin_container .sf_admin_date td { text-align: right; }
 #sf_admin_container .sf_admin_date select { width: 60px; }
 
 #sf_admin_path { padding: 5px 20px; }
 
-.btn-bar { margin: 0 0 15px 0; }
+footer { padding: 4px 0; border-top: 1px solid #ddd; }
+
+.payment-status-99 td { background-color: #EBFFEB; color: 336600; }

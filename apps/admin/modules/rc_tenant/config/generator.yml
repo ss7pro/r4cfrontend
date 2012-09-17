@@ -16,7 +16,10 @@ generator:
       fields: 
         tenant_id: { label: Id }
       list:
-        display: [ tenant_id, _company_name, api_name, nip ]
+        display: [ _tenant_id, _company_name, api_name, nip ]
+        object_actions: {  _edit: ~ }
+        batch_actions: {}
+        actions: {}
       filter:  ~
       form:
         display: [ company_name, nip, www, type ]

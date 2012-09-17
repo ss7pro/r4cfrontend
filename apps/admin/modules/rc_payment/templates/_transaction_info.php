@@ -25,7 +25,7 @@
     </tr>
     <tr>
       <td><?php echo __('Status');?></td>
-      <td><?php echo $transaction->getStatus();?></td>
+      <td><?php echo __($transaction->getStatusLabel()) . ' (' . $transaction->getStatus() . ')';?></td>
     </tr>
     <tr>
       <td><?php echo __('Created');?></td>

@@ -14,12 +14,12 @@ class PdfService
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetAuthor(PDF_AUTHOR);
 
-    $msg = 'Ready4Cloud #' . $invoice->getInvoiceId();
+    $msg = 'Ready4Cloud Invoice No: #' . $invoice->getInvoiceId() . '/' . date('Y');
     $pdf->SetTitle($msg);
     $pdf->SetSubject($msg);
     $pdf->SetKeywords($msg);
 
-    $title = $i18n->__('VAT Invoice') . ' ' . $i18n->__('No') . ': #' . $invoice->getInvoiceId();
+    $title = $i18n->__('VAT Invoice') . ' ' . $i18n->__('No') . ': ' . $invoice->getInvoiceId() . '/' . date('Y');
 
     // set default header data
     $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, $title, PDF_HEADER_STRING);
