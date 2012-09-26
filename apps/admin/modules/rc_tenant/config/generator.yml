@@ -16,12 +16,15 @@ generator:
       fields: 
         tenant_id: { label: Id }
       list:
+        title: Tenants
         display: [ _tenant_id, _company_name, api_name, nip ]
         object_actions: {  _edit: ~ }
         batch_actions: {}
         actions: {}
       filter:  ~
       form:
-        display: [ company_name, nip, www, type ]
-      edit:    ~
-      new:     ~
+        class: RcTenantAdminForm
+      edit:
+        title: Edit Tenant
+      new:
+        title: New Tenant

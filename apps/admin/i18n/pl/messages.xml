@@ -282,6 +282,30 @@
         <source>Received by</source>
         <target>Odebrał</target>
       </trans-unit>
+      <trans-unit>
+        <source>Show payment details</source>
+        <target>Pokaż szczegóły płatności</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Get invoice copy</source>
+        <target>Pobież kopię faktury</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Get invoice original</source>
+        <target>Pobierz oryginał faktury</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Contact address</source>
+        <target>Adres kontaktowy</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Invoice address</source>
+        <target>Adres do faktury</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Send invoice via email</source>
+        <target>Wyślij fakturę emailem</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

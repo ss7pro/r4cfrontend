@@ -14,10 +14,12 @@ generator:
     config:
       actions: ~
       fields:
-        payment_id: { label: Id }
-        rc_tenant:  { label: Tenant }
+        payment_id:   { label: Id }
+        rc_tenant:    { label: Tenant }
+        status_label: { label: Status }
       list:
-        display: [ _payment_id, _desc, rc_tenant, amount, created_at ]
+        title: Payments
+        display: [ _payment_id, _desc, rc_tenant, price, _status_label, created_at ]
         batch_actions: {}
         object_actions: {}
         actions: {}

@@ -13,7 +13,7 @@ class JSONResponse extends ResponseContent
   public function renderResponse(sfResponse $response)
   {
     $response->setStatusCode($this->code);
-    $response->setContentType('application/json');
+    $response->setContentType('application/json; charset=' . sfConfig::get('sf_charset', 'utf-8'));
     $response->setContent((string)$this);
     return sfView::NONE;
   }

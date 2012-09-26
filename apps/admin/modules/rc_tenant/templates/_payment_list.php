@@ -26,9 +26,9 @@
           <ul class="dropdown-menu">
             <li><?php echo link_to(__('Show payment details'), '@rc_payment_show?payment_id=' . $p->getPaymentId(), array('target' => '_blank')); ?></li>
             <?php if($p->getInvoiceId()): ?>
-              <li><?php echo link_to(__('Get invoice copy'), '@rc_payment_invoice?type=copy&payment_id=' . $p->getPaymentId(), array()); ?></li>
-              <li><?php echo link_to(__('Get invoice original'), '@rc_payment_invoice?payment_id=' . $p->getPaymentId(), array()); ?></li>
-              <li><?php echo link_to(__('Send invoice to customer'), '@rc_payment_invoice_send?payment_id=' . $p->getPaymentId(), array('class' => 'invoice_send', 'data-email' => $p->getEmail())); ?></li>
+              <li><?php echo link_to(__('Get invoice copy'), '@rc_payment_invoice?payment_id=' . $p->getPaymentId(), array()); ?></li>
+              <li><?php echo link_to(__('Get invoice original'), '@rc_payment_invoice?type=original&payment_id=' . $p->getPaymentId(), array()); ?></li>
+              <li><?php echo link_to(__('Send invoice via email') . ' (TODO)', '@rc_payment_invoice_send?payment_id=' . $p->getPaymentId(), array('class' => 'invoice_send', 'data-email' => $p->getEmail())); ?></li>
             <?php elseif($p->isPaid()): ?>
               <li><?php echo link_to(__('Generate invoice'), '@rc_payment_invoice_create?payment_id=' . $p->getPaymentId(), array('class' => 'invoice_create')); ?></li>
             <?php endif; ?>

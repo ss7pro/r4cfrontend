@@ -56,7 +56,7 @@ class rc_paymentActions extends autoRc_paymentActions
     $invoice = $payment->getRcInvoice();
     $this->forward404Unless($invoice);
 
-    $type = trim(strtoupper($request->getParameter('type', 'ORIGINAL')));
+    $type = trim(strtoupper($request->getParameter('type', 'COPY')));
 
     $service = new PdfService();
     $pdf = $service->fromInvoice($invoice, $type);

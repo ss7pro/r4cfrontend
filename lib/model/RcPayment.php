@@ -44,4 +44,25 @@ class RcPayment extends BaseRcPayment
   {
     return $this->getStatus() == 99;
   }
+
+  public function getInvoiceUrl()
+  {
+    if(!$this->getInvoiceId()) return null;
+    return sprintf('/invoice/%d/%s', $this->getPaymentId(), $this->getToken());
+  }
+
+  public function getToken()
+  {
+    return sha1(sprintf('%d:%d:%s:%d', 
+      $this->getPaymentId(), 
+      $this->getTenantId(), 
+      $this->getTenantApiId(), 
+      $this->getInvoiceId()
+    ));
+  }
+
+  public function validateToken($token)
+  {
+    return $this->getToken() == $token;
+  }
 } // RcPayment

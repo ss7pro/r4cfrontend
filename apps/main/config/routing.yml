@@ -21,6 +21,18 @@ profile:
   requirements:
     api_id: '[0-9a-f]+'
 
+invoice_list:
+  url:   /invoice
+  param: { module: invoice, action: index }
+
+invoice_show:
+  url:   /invoice/:payment_id/:token.:sf_format
+  param: { module: invoice, action: show }
+  requirements:
+    payment_id: \d+
+    token: '[0-9a-f]+'
+    sf_format: 'html|pdf'
+
 registration:
   url:   /registration
   param: { module: registration, action: index }

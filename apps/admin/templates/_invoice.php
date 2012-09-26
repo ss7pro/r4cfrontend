@@ -6,7 +6,7 @@
 </style>
 <table cellpadding="0" class="top wide">
   <tr>
-    <td style="width: 40%;">
+    <td style="width: 45%;">
 
       <h3><?php echo mb_strtoupper(__('Seller'), sfConfig::get('sf_charset', 'utf-8')); ?></h3>
       <?php echo $invoice->getSellerName();?><br/>
@@ -21,7 +21,7 @@
       <?php echo $invoice->getBuyerNip() ? __('Tax ID') . ': ' . $invoice->getBuyerNip() : '';?>
 
     </td>
-    <td class="align-right" style="width: 60%;">
+    <td class="align-right" style="width: 55%;">
 
       <h1><?php echo __('VAT Invoice'); ?> <?php echo __('No'); ?>: <?php echo $invoice->getInvoiceId(); ?>/<?php echo date('Y'); ?></h1>
       <b><?php echo __($version); ?></b><br/><br/>
@@ -39,7 +39,7 @@
     </td>
   </tr>
 </table>
-
+<br/>
 <table border="0.3" cellpadding="2" class="bordered">
 <thead>
   <tr>
@@ -107,15 +107,15 @@
       <table cellpadding="2" class="wide">
         <tr>
           <th class="align-right"><?php echo __('Net Cost'); ?>:</th>
-          <td class="bold"><?php echo format_currency($invoice->getTotalNetto()); ?></td>
+          <td class="bold align-right"><?php echo format_currency($invoice->getTotalNetto()); ?> PLN</td>
         </tr>
         <tr>
           <th class="align-right"><?php echo __('Tax Cost'); ?>:</th>
-          <td class="bold"><?php echo format_currency($invoice->getTotalTax()); ?></td>
+          <td class="bold align-right"><?php echo format_currency($invoice->getTotalTax()); ?> PLN</td>
         </tr>
         <tr>
           <th class="align-right"><?php echo __('Gross Cost'); ?>:</th>
-          <td class="bold"><?php echo format_currency($invoice->getTotalCost()); ?></td>
+          <td class="bold align-right"><?php echo format_currency($invoice->getTotalCost()); ?> PLN</td>
         </tr>
       </table>
 

@@ -12,7 +12,7 @@ class InvoiceService
     $invoice->setRcTenant($tenant);
     $invoice->setBuyerName($payment->getBuyerName());
     $invoice->setBuyerAddress($payment->getStreet());
-    $invoice->setBuyerAddress($payment->getPostCode() . ' ' . $payment->getCity());
+    $invoice->setBuyerCode($payment->getPostCode() . ' ' . $payment->getCity());
     $invoice->setBuyerNip($payment->getNip());
 
     $item = new RcInvoiceItem();
@@ -38,7 +38,7 @@ class InvoiceService
     $invoice->setRcTenant($tenant);
     $invoice->setBuyerName((string)$tenant);
     $invoice->setBuyerAddress($addr->getStreet());
-    $invoice->setBuyerAddress($addr->getPostCode() . ' ' . $addr->getCity());
+    $invoice->setBuyerCode($addr->getPostCode() . ' ' . $addr->getCity());
     $invoice->setBuyerNip($tenant->getNip());
 
     return $invoice;
